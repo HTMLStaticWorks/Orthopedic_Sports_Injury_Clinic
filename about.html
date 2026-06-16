@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Our Clinic | AcuraCare Sports Orthopedics</title>
+  <meta name="description" content="Learn about AcuraCare Sports Orthopedics. Our surgeons, physiotherapists, advanced recovery equipment, clinical associations, and athlete success history.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Tailwind Config -->
+  <script src="assets/js/tailwind-config.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-medical-darkBg dark:text-medical-darkText min-h-screen flex flex-col transition-colors duration-300">
+
+  <!-- ================= STICKY HEADER ================= -->
+  <header id="sticky-header" class="sticky top-0 w-full z-50 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Clinic Logo -->
+        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+          <div class="w-10 h-10 rounded-lg bg-medical-blueLight flex items-center justify-center text-white">
+            <i class="fa-solid fa-house-medical text-lg"></i>
+          </div>
+          <span class="strict-heading text-xl tracking-tight text-medical-navy dark:text-white">AcuraCare</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
+          <a href="index.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home</a>
+          <a href="home-2.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home 2</a>
+          <a href="about.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">About</a>
+          <a href="symptom-checker.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Symptom Checker</a>
+          <a href="blog.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Blog</a>
+          <a href="contact.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Contact</a>
+          <a href="dashboard.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Dashboard</a>
+        </nav>
+
+        <!-- Right Side Controls (Theme, RTL, Portal Button) -->
+        <div class="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
+          <button class="rtl-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg text-xs font-semibold uppercase tracking-wider border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
+            RTL
+          </button>
+          
+          <button class="theme-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" aria-label="Toggle Theme">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <!-- Sign Up CTA -->
+          <a href="signup.html" class="px-5 py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading">
+            Sign Up
+          </a>
+        </div>
+
+        <!-- Mobile Hamburg Menu Button -->
+        <div class="flex items-center space-x-2 rtl:space-x-reverse lg:hidden">
+          <button class="rtl-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+            RTL
+          </button>
+          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+          <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle Mobile Menu">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Menu Container -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 pt-2 pb-6 space-y-2">
+      <a href="index.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home</a>
+      <a href="home-2.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home 2</a>
+      <a href="about.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">About</a>
+      <a href="symptom-checker.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Symptom Checker</a>
+      <a href="blog.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Blog</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Contact</a>
+      <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Dashboard</a>
+      <a href="signup.html" class="block w-full text-center px-4 py-2.5 rounded-lg bg-medical-blueLight text-white strict-subheading mt-4">Sign Up</a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+
+    <!-- ================= 1. HERO BANNER ================= -->
+    <section class="relative bg-gradient-to-br from-medical-navy via-slate-900 to-slate-950 text-white overflow-hidden min-h-[520px] flex items-center">
+      <!-- Background dot pattern -->
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+      <!-- Decorative glow -->
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-medical-blueLight/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          <!-- Left: Text Content -->
+          <div class="space-y-6">
+            <span class="inline-block text-xs font-semibold uppercase tracking-widest text-medical-cyan strict-subheading border border-medical-cyan/30 bg-medical-cyan/10 px-3 py-1 rounded-full">
+              About Our Clinic
+            </span>
+            <h1 class="strict-heading text-4xl sm:text-5xl text-white leading-tight">
+              Dedicated to Athletic Mobility &amp; Restoration
+            </h1>
+            <p class="strict-paragraph text-slate-300 text-base leading-relaxed max-w-lg">
+              Combining board-certified orthopedic surgeons with elite sports physiotherapists to offer unified, sport-specific recovery plans that get you back to peak performance.
+            </p>
+
+            <!-- Quick Stats Row -->
+            <div class="flex flex-wrap gap-6 pt-2">
+              <div class="flex items-center space-x-2.5 rtl:space-x-reverse">
+                <div class="w-9 h-9 rounded-lg bg-medical-blueLight/20 text-medical-cyan flex items-center justify-center">
+                  <i class="fa-solid fa-user-injured text-sm"></i>
+                </div>
+                <div>
+                  <span class="block text-lg font-bold text-white strict-heading">12,400+</span>
+                  <span class="text-[10px] text-slate-400 strict-subheading uppercase tracking-wider">Patients Treated</span>
+                </div>
+              </div>
+              <div class="flex items-center space-x-2.5 rtl:space-x-reverse">
+                <div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                  <i class="fa-solid fa-trophy text-sm"></i>
+                </div>
+                <div>
+                  <span class="block text-lg font-bold text-white strict-heading">97%</span>
+                  <span class="text-[10px] text-slate-400 strict-subheading uppercase tracking-wider">Return-to-Sport</span>
+                </div>
+              </div>
+              <div class="flex items-center space-x-2.5 rtl:space-x-reverse">
+                <div class="w-9 h-9 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+                  <i class="fa-solid fa-microscope text-sm"></i>
+                </div>
+                <div>
+                  <span class="block text-lg font-bold text-white strict-heading">20+</span>
+                  <span class="text-[10px] text-slate-400 strict-subheading uppercase tracking-wider">Specialists</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="flex flex-wrap gap-4 pt-2">
+              <a href="contact.html" class="px-6 py-3 rounded-xl bg-medical-blueLight hover:bg-medical-blue text-white text-sm strict-subheading transition-all duration-200 shadow-lg shadow-medical-blueLight/25">
+                Request Consultation
+              </a>
+              <a href="signup.html" class="px-6 py-3 rounded-xl border border-slate-600 hover:border-slate-500 hover:bg-slate-800/60 text-slate-200 text-sm strict-subheading transition-all duration-200">
+                Join as Patient
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Hero Image -->
+          <div class="relative hidden lg:block">
+            <!-- Image glow frame -->
+            <div class="absolute -inset-3 bg-gradient-to-br from-medical-blueLight/20 to-medical-cyan/10 rounded-3xl blur-xl"></div>
+            <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40">
+              <img src="assets/images/about-hero.png"
+                   alt="AcuraCare orthopedic surgeons and physiotherapists in state-of-the-art rehabilitation facility"
+                   class="w-full h-[380px] object-cover object-center">
+              <!-- Bottom gradient fade -->
+              <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/60 to-transparent"></div>
+              <!-- Bottom label badge -->
+              <div class="absolute bottom-4 left-4 flex items-center space-x-2 rtl:space-x-reverse bg-slate-950/70 backdrop-blur-sm border border-slate-700/50 px-3 py-1.5 rounded-full">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs text-slate-200 font-medium">AcuraCare Clinical Center — Boston, MA</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 2. CLINIC OVERVIEW ================= -->
+    <section class="py-20 bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-medical-cyan strict-subheading block mb-2">Our History</span>
+            <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-6">
+              AcuraCare Sports Orthopedics
+            </h2>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 mb-4 leading-relaxed text-sm">
+              Founded in 2014 by physical therapists and orthopedic surgeons, AcuraCare was built to serve active individuals who need specialized, sports-specific medical care. We believed that standard hospital systems lacked the dynamic, exercise-based tracking required to get athletes safely back to their original performance standards.
+            </p>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 mb-6 leading-relaxed text-sm">
+              Today, our clinic features a state-of-the-art diagnostic biomechanics lab, full-scale rehabilitation gyms, and on-site minor surgery consultation suits, hosting over 25 healthcare professionals.
+            </p>
+            
+            <div class="flex items-center space-x-8 rtl:space-x-reverse">
+              <div>
+                <span class="text-3xl strict-heading text-medical-blueLight dark:text-medical-cyan block">12k+</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 strict-paragraph">Athletes Restored</span>
+              </div>
+              <div>
+                <span class="text-3xl strict-heading text-medical-blueLight dark:text-medical-cyan block">25+</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 strict-paragraph">Medical Staff</span>
+              </div>
+              <div>
+                <span class="text-3xl strict-heading text-medical-blueLight dark:text-medical-cyan block">10</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 strict-paragraph">Years of Excellence</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 h-96 flex items-center justify-center">
+            <i class="fa-solid fa-square-h text-9xl text-slate-300 dark:text-slate-800"></i>
+            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl glass-card text-slate-900 dark:text-white flex items-center justify-between">
+              <div>
+                <span class="text-xs font-semibold block uppercase tracking-wider text-medical-blueLight">Boston Medical Campus</span>
+                <p class="strict-paragraph text-xs">Our headquarters housing our motion analysis gyms.</p>
+              </div>
+              <a href="contact.html" class="p-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue"><i class="fa-solid fa-map-location-dot"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 3. MISSION & VISION ================= -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-900/40 border-t border-b border-slate-100 dark:border-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          
+          <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+            <div class="w-12 h-12 rounded-xl bg-medical-blueLight/10 text-medical-blueLight flex items-center justify-center mb-6">
+              <i class="fa-solid fa-bullseye text-xl"></i>
+            </div>
+            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-4">Our Mission</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+              To provide elite, comprehensive joint care and active physical therapy to all levels of athletes, enabling rapid and safe return to active lifestyles through evidence-based medicine, personalized coaching, and advanced technologies.
+            </p>
+          </div>
+
+          <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+            <div class="w-12 h-12 rounded-xl bg-medical-teal/10 text-medical-teal flex items-center justify-center mb-6">
+              <i class="fa-solid fa-eye text-xl"></i>
+            </div>
+            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-4">Our Vision</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+              To be the premier clinical recovery partner for sports injury restoration globally, leading the industry in dynamic joint tracking, minimally invasive arthroscopy, and integrated medical-physical therapy collaboration.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4. MEET THE SURGEONS ================= -->
+    <section class="py-20 bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Surgical Specialists</span>
+          <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-4">
+            Meet Our Board-Certified Surgeons
+          </h2>
+          <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
+            Board-certified experts in arthroscopic joint repair, knee ligament replacement, and corrective spine surgeries.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Doctor 1 -->
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col items-center text-center">
+            <img src="assets/images/profile-sarah.png" alt="Dr. Sarah Jenkins, MD" class="w-32 h-32 rounded-full object-cover mb-6 border-2 border-medical-cyan/20">
+            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-1">Dr. Sarah Jenkins, MD</h3>
+            <span class="text-xs text-medical-cyan strict-subheading uppercase tracking-wider block mb-4">Knee & Shoulder Arthroscopy</span>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs mb-6 max-w-xs flex-grow">
+              Board-certified surgeon with fellowship training at the Mayo Clinic. 18+ years repairing complex ACL and rotator cuff tears.
+            </p>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Mayo Clinic Fellow | AOSSM Member</span>
+          </div>
+
+          <!-- Doctor 2 -->
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col items-center text-center">
+            <img src="assets/images/profile-marcus.png" alt="Dr. Marcus Vance, MD" class="w-32 h-32 rounded-full object-cover mb-6 border-2 border-medical-blueLight/20">
+            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-1">Dr. Marcus Vance, MD</h3>
+            <span class="text-xs text-medical-cyan strict-subheading uppercase tracking-wider block mb-4">Robotic Joint Replacement</span>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs mb-6 max-w-xs flex-grow">
+              Specialist in minimally invasive knee and hip replacements. Directs our clinical research in robotic bone implants.
+            </p>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Harvard Medical School | AAOS Fellow</span>
+          </div>
+
+          <!-- Doctor 3 -->
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col items-center text-center">
+            <img src="assets/images/profile-david.png" alt="Dr. David Cho, MD, PhD" class="w-32 h-32 rounded-full object-cover mb-6 border-2 border-medical-teal/20">
+            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-1">Dr. David Cho, MD, PhD</h3>
+            <span class="text-xs text-medical-cyan strict-subheading uppercase tracking-wider block mb-4">Spine & disc reconstruction</span>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs mb-6 max-w-xs flex-grow">
+              Pioneered several micro-surgical decompression techniques. Expert in correcting athlete lumbar injuries.
+            </p>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Stanford Medicine | NASS Active Member</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 5. PHYSIOTHERAPY TEAM ================= -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-semibold text-medical-teal uppercase tracking-wider strict-subheading block mb-2">Therapy Experts</span>
+          <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-4">
+            Our Sports Physiotherapy Team
+          </h2>
+          <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
+            Board-certified physical therapists specialized in athletic biomechanics, force absorption, and active functional retraining.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Therapist 1 -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col items-center text-center shadow-sm">
+            <img src="assets/images/profile-emma.png" alt="Emma Lawson, DPT" class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-medical-blueLight/20">
+            <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-1">Emma Lawson, DPT</h3>
+            <span class="text-xs text-medical-teal strict-subheading block mb-3">Lead Physical Therapist</span>
+            <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs">
+              Specializes in ACL rehab and quad reactivation. Certified in dry needling and manual joint manipulation.
+            </p>
+          </div>
+
+          <!-- Therapist 2 -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col items-center text-center shadow-sm">
+            <img src="assets/images/profile-robert.png" alt="Robert Diaz, DPT, SCS" class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-medical-teal/20">
+            <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-1">Robert Diaz, DPT, SCS</h3>
+            <span class="text-xs text-medical-teal strict-subheading block mb-3">Sports Biomechanics Expert</span>
+            <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs">
+              Gait and running analyzer. Former collegiate track therapist. Expert in custom foot orthotics.
+            </p>
+          </div>
+
+          <!-- Therapist 3 -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col items-center text-center shadow-sm">
+            <img src="assets/images/profile-jessica.png" alt="Jessica Chen, PT, OCS" class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-emerald-500/20">
+            <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-1">Jessica Chen, PT, OCS</h3>
+            <span class="text-xs text-medical-teal strict-subheading block mb-3">Shoulder & Upper Extremity Specialist</span>
+            <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs">
+              Over 10 years treating baseball pitch shoulder injuries, tennis elbow, and rotator cuff strains.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 6. CERTIFICATIONS ================= -->
+    <section class="py-16 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <span class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider strict-subheading block">Trusted Memberships</span>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-12 opacity-60 dark:opacity-40">
+          <span class="strict-heading text-sm text-slate-600 dark:text-slate-400">AAOS MEMBER</span>
+          <span class="strict-heading text-sm text-slate-600 dark:text-slate-400">AOSSM ACCREDITED</span>
+          <span class="strict-heading text-sm text-slate-600 dark:text-slate-400">APTA CERTIFIED</span>
+          <span class="strict-heading text-sm text-slate-600 dark:text-slate-400">ABPTS BOARD-CERTIFIED</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 7. FACILITY & EQUIPMENT SHOWCASE ================= -->
+    <section class="py-20 bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <div>
+            <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Our Gyms & Labs</span>
+            <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-6">
+              State-of-the-Art Recovery Facilities
+            </h2>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm mb-6 leading-relaxed">
+              We believe rehabilitation requires space and advanced tools. AcuraCare operates over 8,000 square feet of physical therapy space, featuring customized force plates, resistance tracks, and dedicated diagnostic equipment.
+            </p>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800">
+                <h4 class="strict-heading text-sm text-medical-navy dark:text-white mb-1">Dynamic Motion Lab</h4>
+                <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs">Equipped with 3D force plates for joint strain assessments.</p>
+              </div>
+              <div class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800">
+                <h4 class="strict-heading text-sm text-medical-navy dark:text-white mb-1">Hydrotherapy Zone</h4>
+                <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs">Warm resistance pools to reduce joint load during initial recovery.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="h-64 bg-medical-blueLight/10 dark:bg-medical-blueLight/10 rounded-xl border border-medical-blueLight/20 dark:border-medical-blueLight/20 flex items-center justify-center">
+              <i class="fa-solid fa-wheelchair-move text-5xl text-medical-blueLight dark:text-medical-cyan"></i>
+            </div>
+            <div class="h-64 bg-emerald-500/10 dark:bg-emerald-500/10 rounded-xl border border-emerald-500/20 dark:border-emerald-500/20 flex items-center justify-center">
+              <i class="fa-solid fa-heart-pulse text-5xl text-emerald-500"></i>
+            </div>
+            <div class="h-48 bg-medical-teal/10 dark:bg-medical-teal/10 rounded-xl border border-medical-teal/20 dark:border-medical-teal/20 flex items-center justify-center col-span-2">
+              <i class="fa-solid fa-hospital text-5xl text-medical-teal dark:text-medical-cyan"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 8. PATIENT TESTIMONIALS ================= -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Patient Feedback</span>
+          <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-4">
+            Loved By Hundreds of Recovered Athletes
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Review 1 -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-1 text-yellow-400 mb-4">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 italic text-xs mb-6">
+                "The patient portal was super helpful. I could log in and check off my prescribed knee mobility exercises at home, keeping me on track between physical appointments. Excellent clinic."
+              </p>
+            </div>
+            <div class="flex items-center space-x-3 rtl:space-x-reverse border-t border-slate-100 dark:border-slate-800 pt-4">
+              <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400"><i class="fa-solid fa-user text-xs"></i></div>
+              <div>
+                <h4 class="strict-heading text-xs text-medical-navy dark:text-white">Alex Johnson</h4>
+                <span class="text-[10px] text-slate-400 block">Knee Rehab Patient</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-1 text-yellow-400 mb-4">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 italic text-xs mb-6">
+                "Dr. Jenkins and the physical therapy crew are an integrated force. My shoulder rotator cuff surgery was a complete success and the immediate active rehab got my arm moving in no time."
+              </p>
+            </div>
+            <div class="flex items-center space-x-3 rtl:space-x-reverse border-t border-slate-100 dark:border-slate-800 pt-4">
+              <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400"><i class="fa-solid fa-user text-xs"></i></div>
+              <div>
+                <h4 class="strict-heading text-xs text-medical-navy dark:text-white">Marcus Vance Sr.</h4>
+                <span class="text-[10px] text-slate-400 block">Shoulder Surgery Patient</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-1 text-yellow-400 mb-4">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 italic text-xs mb-6">
+                "Their diagnostic gait analysis scanner identified an architectural leg rotation that was causing my runner's knee. Dynamic orthotic inserts fixed my loading stride completely."
+              </p>
+            </div>
+            <div class="flex items-center space-x-3 rtl:space-x-reverse border-t border-slate-100 dark:border-slate-800 pt-4">
+              <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-400"><i class="fa-solid fa-user text-xs"></i></div>
+              <div>
+                <h4 class="strict-heading text-xs text-medical-navy dark:text-white">Chloe Thompson</h4>
+                <span class="text-[10px] text-slate-400 block">Amateur Triathlete</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-sm py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        
+        <!-- Clinic Info -->
+        <div>
+          <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse mb-6">
+            <div class="w-8 h-8 rounded-lg bg-medical-blueLight flex items-center justify-center text-white">
+              <i class="fa-solid fa-house-medical"></i>
+            </div>
+            <span class="strict-heading text-lg text-white">AcuraCare</span>
+          </a>
+          <p class="strict-paragraph text-slate-400 text-xs leading-relaxed mb-6">
+            Expert surgical consultations, orthopedic care, and athletic recovery protocols to heal injury and restore athletic performance.
+          </p>
+          <div class="flex space-x-4 rtl:space-x-reverse">
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-facebook-f text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-twitter text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-instagram text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-linkedin-in text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="strict-heading text-sm text-white mb-6 uppercase tracking-wider">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html" class="hover:text-white transition-colors strict-paragraph text-xs">Home (Surgery)</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph text-xs">Home (Rehab)</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">About Our Clinic</a></li>
+            <li><a href="symptom-checker.html" class="hover:text-white transition-colors strict-paragraph text-xs">Symptom Checker</a></li>
+            <li><a href="blog.html" class="hover:text-white transition-colors strict-paragraph text-xs">Medical Blog</a></li>
+            <li><a href="dashboard.html" class="hover:text-white transition-colors strict-paragraph text-xs">Patient Dashboard</a></li>
+          </ul>
+        </div>
+
+        <!-- Treatment Links -->
+        <div>
+          <h4 class="strict-heading text-sm text-white mb-6 uppercase tracking-wider">Treatments</h4>
+          <ul class="space-y-3">
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">ACL Reconstruction</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">Arthroscopic Shoulder Repair</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">Minimally Invasive Spine Surgery</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph text-xs">Physiotherapy & Exercises</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph text-xs">Orthobiologics & PRP</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info & Emergency -->
+        <div>
+          <h4 class="strict-heading text-sm text-white mb-6 uppercase tracking-wider">Contact & Emergency</h4>
+          <p class="strict-paragraph text-slate-400 text-xs mb-3">
+            104 Sports Rehabilitation Center Way, Suite A, Boston, MA 02115
+          </p>
+          <p class="strict-paragraph text-slate-400 text-xs mb-4">
+            Email: contact@acuracareortho.com
+          </p>
+          <a href="tel:+15559117767" class="block w-full py-3 px-4 bg-rose-950/40 hover:bg-rose-900/40 text-rose-400 border border-rose-800/60 rounded-xl text-center transition-all">
+            <span class="block text-xs strict-heading uppercase tracking-wider">Urgent Ortho Helpline</span>
+            <span class="text-sm font-semibold tracking-wide">+1 (555) 911-7767</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-slate-800/80 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500">
+        <p class="strict-paragraph">&copy; 2026 AcuraCare Sports Orthopedics. All rights reserved.</p>
+        <div class="flex space-x-6 rtl:space-x-reverse mt-4 md:mt-0">
+          <a href="#" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400 transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Shared JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

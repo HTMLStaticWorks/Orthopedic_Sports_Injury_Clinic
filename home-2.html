@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physiotherapy & Rehabilitation | AcuraCare Sports Orthopedics</title>
+  <meta name="description" content="AcuraCare Physiotherapy & Active Rehabilitation Page. High-tech diagnostics, specialized athletic recovery plans, home exercise modules, and expert therapist consultations.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Tailwind Config -->
+  <script src="assets/js/tailwind-config.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-medical-darkBg dark:text-medical-darkText min-h-screen flex flex-col transition-colors duration-300">
+
+  <!-- ================= STICKY HEADER ================= -->
+  <header id="sticky-header" class="sticky top-0 w-full z-50 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Clinic Logo -->
+        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+          <div class="w-10 h-10 rounded-lg bg-medical-blueLight flex items-center justify-center text-white">
+            <i class="fa-solid fa-house-medical text-lg"></i>
+          </div>
+          <span class="strict-heading text-xl tracking-tight text-medical-navy dark:text-white">AcuraCare</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
+          <a href="index.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home</a>
+          <a href="home-2.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home 2</a>
+          <a href="about.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">About</a>
+          <a href="symptom-checker.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Symptom Checker</a>
+          <a href="blog.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Blog</a>
+          <a href="contact.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Contact</a>
+          <a href="dashboard.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Dashboard</a>
+        </nav>
+
+        <!-- Right Side Controls (Theme, RTL, Portal Button) -->
+        <div class="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
+          <button class="rtl-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg text-xs font-semibold uppercase tracking-wider border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
+            RTL
+          </button>
+          
+          <button class="theme-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" aria-label="Toggle Theme">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <!-- Sign Up CTA -->
+          <a href="signup.html" class="px-5 py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading">
+            Sign Up
+          </a>
+        </div>
+
+        <!-- Mobile Hamburg Menu Button -->
+        <div class="flex items-center space-x-2 rtl:space-x-reverse lg:hidden">
+          <button class="rtl-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+            RTL
+          </button>
+          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+          <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle Mobile Menu">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Menu Container -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 pt-2 pb-6 space-y-2">
+      <a href="index.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home</a>
+      <a href="home-2.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home 2</a>
+      <a href="about.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">About</a>
+      <a href="symptom-checker.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Symptom Checker</a>
+      <a href="blog.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Blog</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Contact</a>
+      <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Dashboard</a>
+      <a href="signup.html" class="block w-full text-center px-4 py-2.5 rounded-lg bg-medical-blueLight text-white strict-subheading mt-4">Sign Up</a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+
+    <!-- ================= 1. HERO SECTION ================= -->
+    <section class="relative bg-slate-900 py-20 lg:py-32 flex items-center">
+      <div class="absolute inset-0 bg-gradient-to-r from-medical-navy via-slate-900/90 to-transparent z-10"></div>
+      
+      <!-- Generated Image as Background -->
+      <div class="absolute inset-0 w-full h-full">
+        <img src="assets/images/hero-home-2.png" alt="Sports Injury Rehabilitation Gym" class="w-full h-full object-cover object-center transform scale-105 hover:scale-100 transition-transform duration-[6000ms]">
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+        <div class="max-w-2xl text-left rtl:text-right">
+          <div class="inline-flex items-center space-x-2 rtl:space-x-reverse px-3 py-1.5 rounded-full bg-medical-cyan/15 text-medical-cyan mb-6">
+            <span class="w-2 h-2 rounded-full bg-medical-cyan"></span>
+            <span class="text-xs uppercase tracking-wider strict-subheading">Active Physiotherapy & Athletic Rehab</span>
+          </div>
+          <h1 class="strict-heading text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
+            Recover Faster, Rebuild Stronger
+          </h1>
+          <p class="strict-paragraph text-lg text-slate-300 mb-8 max-w-xl">
+            Our science-backed athletic physiotherapy programs, high-tech motion assessments, and guided home exercises rebuild your body's strength and agility.
+          </p>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+            <a href="contact.html" class="px-8 py-4 rounded-lg bg-medical-blueLight hover:bg-medical-blue text-white text-center transition-all duration-300 shadow-md strict-subheading">
+              Schedule Eval Session
+            </a>
+            <a href="dashboard.html" class="px-8 py-4 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-white text-center border border-slate-700 transition-all duration-300 strict-subheading">
+              Access Patient Exercise Portal
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 2. PHYSIOTHERAPY & REHABILITATION PROGRAMS ================= -->
+    <section class="py-20 bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="strict-heading text-3xl sm:text-4xl text-medical-navy dark:text-white mb-4">
+            Rehabilitation & Physiotherapy Programs
+          </h2>
+          <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-base">
+            Targeted rehabilitation solutions utilizing specialized therapeutic movements, manual care, and clinical exercise templates.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          
+          <!-- Program 1 -->
+          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all duration-300 text-center flex flex-col items-center">
+            <div class="w-12 h-12 rounded-xl bg-medical-blueLight/10 text-medical-blueLight flex items-center justify-center mb-6">
+              <i class="fa-solid fa-person-walking text-xl"></i>
+            </div>
+            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Athletic Physio</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+              Sports-specific biomechanics retraining, targeting fast recovery of competitive sprint speed, agility, and joint torque.
+            </p>
+          </div>
+
+          <!-- Program 2 -->
+          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all duration-300 text-center flex flex-col items-center">
+            <div class="w-12 h-12 rounded-xl bg-medical-teal/10 text-medical-teal flex items-center justify-center mb-6">
+              <i class="fa-solid fa-hand-holding-hand text-xl"></i>
+            </div>
+            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Musculoskeletal Rehab</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+              Manual therapy, joint mobilization, myofascial trigger release, and specialized stretching to reduce chronic back, hip, and neck pain.
+            </p>
+          </div>
+
+          <!-- Program 3 -->
+          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all duration-300 text-center flex flex-col items-center">
+            <div class="w-12 h-12 rounded-xl bg-medical-cyan/10 text-medical-cyan flex items-center justify-center mb-6">
+              <i class="fa-solid fa-dumbbell text-xl"></i>
+            </div>
+            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Post-Operative Strength</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+              Carefully guided range-of-motion increments, isometric contraction drills, and progressive overload schemes after bone/ligament surgeries.
+            </p>
+          </div>
+
+          <!-- Program 4 -->
+          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all duration-300 text-center flex flex-col items-center">
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center mb-6">
+              <i class="fa-solid fa-heart-pulse text-xl"></i>
+            </div>
+            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Cardiorespiratory Fitness</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+              Low-impact conditioning protocols, swimming programs, and stationary biking to support cardiac output during long limb recovery.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 3. INJURY-SPECIFIC TREATMENT PROGRAMS ================= -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-4">
+            Injury-Specific Special Treatments
+          </h2>
+          <p class="strict-paragraph text-slate-600 dark:text-slate-400">
+            Beyond conventional exercise, we offer specialized modalities to speed up cell recovery and reduce joint friction.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Treatment 1 -->
+          <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col">
+            <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Tissue Recovery</span>
+            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">PRP Orthobiologic Therapy</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+              Injecting concentrated platelet-rich plasma extracted from your own blood directly into damaged cartilage, tendons, or ligaments to accelerate deep cellular recovery.
+            </p>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Suitable for: Chronic tendonitis, early osteoarthritis</span>
+          </div>
+
+          <!-- Treatment 2 -->
+          <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col">
+            <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Pain Relief</span>
+            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Targeted Electrotherapy</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+              Using TENS and NMES electrical muscle stimulation devices to interrupt localized pain channels, stimulate nerve fibers, and prevent muscle atrophy.
+            </p>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Suitable for: Post-surgical quadriceps reactivation</span>
+          </div>
+
+          <!-- Treatment 3 -->
+          <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col">
+            <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Biomechanical Support</span>
+            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Custom Orthotic Design</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+              Generating custom foot insoles based on dynamic 3D scanning and pressure metrics to support arch structures and minimize knee impact rotation during runs.
+            </p>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Suitable for: Plantar fasciitis, runner's knee, shin splints</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4. CASE STUDIES & RECOVERY OUTCOMES ================= -->
+    <section class="py-20 bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-medical-cyan strict-subheading block mb-2">Science-Backed Outcomes</span>
+            <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-6">
+              Quantifiable Patient Recovery Outcomes
+            </h2>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 mb-6 leading-relaxed text-sm">
+              We track progress through computerized metrics. Every athlete receives concrete data regarding joint angles, force outputs, and strength symmetry comparison to assure safe athletic clearance.
+            </p>
+
+            <div class="space-y-6">
+              
+              <!-- Metric 1 -->
+              <div>
+                <div class="flex justify-between text-sm mb-2">
+                  <span class="strict-subheading text-slate-700 dark:text-slate-300">Knee Joint Flexion (ACL Recovery - Wk 12 Target)</span>
+                  <span class="font-semibold text-medical-blueLight dark:text-medical-cyan">135° / 140° Achieved</span>
+                </div>
+                <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-medical-blueLight dark:bg-medical-cyan" style="width: 95%"></div>
+                </div>
+              </div>
+
+              <!-- Metric 2 -->
+              <div>
+                <div class="flex justify-between text-sm mb-2">
+                  <span class="strict-subheading text-slate-700 dark:text-slate-300">Quadriceps Strength Symmetry Index</span>
+                  <span class="font-semibold text-medical-blueLight dark:text-medical-cyan">92% Symmetry</span>
+                </div>
+                <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-medical-teal" style="width: 92%"></div>
+                </div>
+              </div>
+
+              <!-- Metric 3 -->
+              <div>
+                <div class="flex justify-between text-sm mb-2">
+                  <span class="strict-subheading text-slate-700 dark:text-slate-300">Rotator Cuff Rotation Range (Shoulder Rehab - Wk 8 Target)</span>
+                  <span class="font-semibold text-medical-blueLight dark:text-medical-cyan">88% Achieved</span>
+                </div>
+                <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-500" style="width: 88%"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Outcome Stats Cards -->
+          <div class="grid grid-cols-2 gap-6 p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+            
+            <div class="p-6 bg-white dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm text-center">
+              <span class="text-4xl strict-heading text-medical-blueLight dark:text-medical-cyan block mb-2">94%</span>
+              <h4 class="strict-heading text-sm text-slate-700 dark:text-slate-300 mb-1">Return to Sport Rate</h4>
+              <p class="strict-paragraph text-slate-400 text-xs">Patients who returned to competitive levels after rehab.</p>
+            </div>
+
+            <div class="p-6 bg-white dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm text-center">
+              <span class="text-4xl strict-heading text-medical-teal block mb-2">14 Days</span>
+              <h4 class="strict-heading text-sm text-slate-700 dark:text-slate-300 mb-1">Faster Healing</h4>
+              <p class="strict-paragraph text-slate-400 text-xs">Reduction in average return time using motion-gait tracking.</p>
+            </div>
+
+            <div class="p-6 bg-white dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm text-center col-span-2">
+              <span class="text-4xl strict-heading text-indigo-500 block mb-2">15,000+</span>
+              <h4 class="strict-heading text-sm text-slate-700 dark:text-slate-300 mb-1">Completed Rehab Sessions</h4>
+              <p class="strict-paragraph text-slate-400 text-xs">Over 15,000 sports-specific therapy routines completed in our gyms since 2018.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 5. ADVANCED DIAGNOSTIC TECHNOLOGIES ================= -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <!-- Showcase Image -->
+          <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-800">
+            <img src="assets/images/facility-equipment.png" alt="Advanced Gait Analysis Equipment" class="w-full h-auto object-cover">
+            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl glass-card text-slate-900 dark:text-white">
+              <span class="text-xs uppercase font-semibold text-medical-blueLight dark:text-medical-cyan block mb-1">Laboratory Highlight</span>
+              <p class="strict-paragraph text-xs text-slate-600 dark:text-slate-300">Our Motion Capture Lab utilizes 12 infrared cameras and pressure sensors to analyze dynamic joint load.</p>
+            </div>
+          </div>
+
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-medical-cyan strict-subheading block mb-2">Advanced Diagnostics</span>
+            <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-6">
+              Precision Diagnostic Technologies
+            </h2>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 mb-6 leading-relaxed text-sm">
+              We identify injury root causes using advanced medical equipment. Standard checkups often miss subtle rotational issues that we capture during real-time load tests.
+            </p>
+            
+            <div class="space-y-4">
+              
+              <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                <div class="w-10 h-10 rounded-lg bg-medical-blueLight/10 text-medical-blueLight flex items-center justify-center flex-shrink-0">
+                  <i class="fa-solid fa-running"></i>
+                </div>
+                <div>
+                  <h4 class="strict-heading text-base text-medical-navy dark:text-white">Dynamic 3D Gait Scan</h4>
+                  <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs mt-1">
+                    Continuous foot-pressure plotting to measure balance imbalances, supination, and knee strain.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                <div class="w-10 h-10 rounded-lg bg-medical-teal/10 text-medical-teal flex items-center justify-center flex-shrink-0">
+                  <i class="fa-solid fa-gauge-high"></i>
+                </div>
+                <div>
+                  <h4 class="strict-heading text-base text-medical-navy dark:text-white">High-Speed Motion Capture</h4>
+                  <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs mt-1">
+                    Infrared tracking markers calculate exact joint rotation degrees during active sport cuts and squats.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-4 rtl:space-x-reverse">
+                <div class="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-500 flex items-center justify-center flex-shrink-0">
+                  <i class="fa-solid fa-wave-square"></i>
+                </div>
+                <div>
+                  <h4 class="strict-heading text-base text-medical-navy dark:text-white">Diagnostic Joint Ultrasound</h4>
+                  <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs mt-1">
+                    Real-time muscle contraction mapping, enabling physical therapists to watch soft tissues move live.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 6. REHABILITATION EXERCISE PROGRAMS ================= -->
+    <section class="py-20 bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-4">
+            Prescribed At-Home Rehabilitation Plans
+          </h2>
+          <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
+            Access sample training instructions prescribed by our medical staff to support joint recovery between clinic visits.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Exercise Plan 1 -->
+          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
+            <span class="text-xs uppercase font-semibold text-medical-blueLight dark:text-medical-cyan strict-subheading block mb-1">Level 1 - Early Mobility</span>
+            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Knee Flexion Restoration</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs mb-6 flex-grow">
+              Low-load stretching exercises, heel slides, quad sets, and passive extension protocols designed for weeks 1-4 post-surgery.
+            </p>
+            <div class="flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800 pt-4">
+              <span class="text-xs text-slate-500 dark:text-slate-400">PDF Manual + Video</span>
+              <a href="dashboard.html" class="px-4 py-2 rounded-lg bg-medical-blueLight text-white text-xs hover:bg-medical-blue strict-subheading transition-colors">
+                View Plan
+              </a>
+            </div>
+          </div>
+
+          <!-- Exercise Plan 2 -->
+          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
+            <span class="text-xs uppercase font-semibold text-medical-teal strict-subheading block mb-1">Level 2 - Hypertrophy</span>
+            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Shoulder Cuff Stabilization</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs mb-6 flex-grow">
+              Scapular retraction, external band rotations, wall climbs, and light isometric holds to build shoulder strength.
+            </p>
+            <div class="flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800 pt-4">
+              <span class="text-xs text-slate-500 dark:text-slate-400">PDF Manual + Video</span>
+              <a href="dashboard.html" class="px-4 py-2 rounded-lg bg-medical-blueLight text-white text-xs hover:bg-medical-blue strict-subheading transition-colors">
+                View Plan
+              </a>
+            </div>
+          </div>
+
+          <!-- Exercise Plan 3 -->
+          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
+            <span class="text-xs uppercase font-semibold text-indigo-500 strict-subheading block mb-1">Level 3 - Return to Play</span>
+            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Lower Limb Agility Track</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs mb-6 flex-grow">
+              Dynamic lateral hops, ladder drills, single-leg stabilization exercises, and rotational force absorb loading.
+            </p>
+            <div class="flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800 pt-4">
+              <span class="text-xs text-slate-500 dark:text-slate-400">PDF Manual + Video</span>
+              <a href="dashboard.html" class="px-4 py-2 rounded-lg bg-medical-blueLight text-white text-xs hover:bg-medical-blue strict-subheading transition-colors">
+                View Plan
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 7. FAQ SECTION ================= -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-900/40">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16">
+          <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
+            Everything you need to know about our athletic physiotherapy and recovery programs.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          
+          <!-- FAQ 1 -->
+          <details class="group bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden" open>
+            <summary class="flex justify-between items-center p-6 cursor-pointer select-none">
+              <span class="strict-heading text-base text-medical-navy dark:text-white">Do I need a physician's referral to start physical therapy?</span>
+              <span class="transition-transform group-open:rotate-180 text-medical-blueLight dark:text-medical-cyan">
+                <i class="fa-solid fa-chevron-down"></i>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800/80 pt-4">
+              <p class="strict-paragraph">
+                In most cases, no. Under direct access laws, you can begin physical therapy without a doctor's script. However, some insurance plans require a referral for billing coverage. Contact our billing specialists to verify your plan constraints.
+              </p>
+            </div>
+          </details>
+
+          <!-- FAQ 2 -->
+          <details class="group bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden">
+            <summary class="flex justify-between items-center p-6 cursor-pointer select-none">
+              <span class="strict-heading text-base text-medical-navy dark:text-white">How long does each physiotherapy session last?</span>
+              <span class="transition-transform group-open:rotate-180 text-medical-blueLight dark:text-medical-cyan">
+                <i class="fa-solid fa-chevron-down"></i>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800/80 pt-4">
+              <p class="strict-paragraph">
+                A standard session is approximately 45 to 60 minutes. Your initial assessment, where we construct your joint strength baseline, will require about 75 minutes.
+              </p>
+            </div>
+          </details>
+
+          <!-- FAQ 3 -->
+          <details class="group bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden">
+            <summary class="flex justify-between items-center p-6 cursor-pointer select-none">
+              <span class="strict-heading text-base text-medical-navy dark:text-white">How many times a week will I need rehabilitation?</span>
+              <span class="transition-transform group-open:rotate-180 text-medical-blueLight dark:text-medical-cyan">
+                <i class="fa-solid fa-chevron-down"></i>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800/80 pt-4">
+              <p class="strict-paragraph">
+                Depending on your injury type and severity, appointments range from 1 to 3 sessions per week. We provide digital home training guides to make sure recovery continues between clinic appointments.
+              </p>
+            </div>
+          </details>
+
+          <!-- FAQ 4 -->
+          <details class="group bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden">
+            <summary class="flex justify-between items-center p-6 cursor-pointer select-none">
+              <span class="strict-heading text-base text-medical-navy dark:text-white">What should I wear to my rehabilitation appointments?</span>
+              <span class="transition-transform group-open:rotate-180 text-medical-blueLight dark:text-medical-cyan">
+                <i class="fa-solid fa-chevron-down"></i>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800/80 pt-4">
+              <p class="strict-paragraph">
+                Wear loose-fitting athletic clothing (shorts, t-shirts, sports shoes) that allows easy access to your treated joint (knee, shoulder, elbow) for motion tracking and manual therapy.
+              </p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 8. APPOINTMENT CTA ================= -->
+    <section class="bg-gradient-to-r from-medical-navyLight to-slate-900 py-16 text-white text-center">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="strict-heading text-3xl sm:text-4xl text-white mb-4">
+          Ready to Regain Peak Performance?
+        </h2>
+        <p class="strict-paragraph text-slate-300 text-base mb-8 max-w-xl mx-auto">
+          Contact our clinic and book your comprehensive diagnostic mobility scan today.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+          <a href="signup.html" class="px-8 py-3.5 rounded-lg bg-medical-blueLight hover:bg-medical-blue text-white transition-all strict-subheading w-full sm:w-auto">
+            Sign Up
+          </a>
+          <a href="about.html" class="px-8 py-3.5 rounded-lg border border-slate-700 bg-transparent hover:bg-slate-800 text-white transition-all strict-subheading w-full sm:w-auto">
+            Meet Our Therapists
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-sm py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        
+        <!-- Clinic Info -->
+        <div>
+          <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse mb-6">
+            <div class="w-8 h-8 rounded-lg bg-medical-blueLight flex items-center justify-center text-white">
+              <i class="fa-solid fa-house-medical"></i>
+            </div>
+            <span class="strict-heading text-lg text-white">AcuraCare</span>
+          </a>
+          <p class="strict-paragraph text-slate-400 text-xs leading-relaxed mb-6">
+            Expert surgical consultations, orthopedic care, and athletic recovery protocols to heal injury and restore athletic performance.
+          </p>
+          <div class="flex space-x-4 rtl:space-x-reverse">
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-facebook-f text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-twitter text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-instagram text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-linkedin-in text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="strict-heading text-sm text-white mb-6 uppercase tracking-wider">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html" class="hover:text-white transition-colors strict-paragraph text-xs">Home (Surgery)</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph text-xs">Home (Rehab)</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">About Our Clinic</a></li>
+            <li><a href="symptom-checker.html" class="hover:text-white transition-colors strict-paragraph text-xs">Symptom Checker</a></li>
+            <li><a href="blog.html" class="hover:text-white transition-colors strict-paragraph text-xs">Medical Blog</a></li>
+            <li><a href="dashboard.html" class="hover:text-white transition-colors strict-paragraph text-xs">Patient Dashboard</a></li>
+          </ul>
+        </div>
+
+        <!-- Treatment Links -->
+        <div>
+          <h4 class="strict-heading text-sm text-white mb-6 uppercase tracking-wider">Treatments</h4>
+          <ul class="space-y-3">
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">ACL Reconstruction</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">Arthroscopic Shoulder Repair</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">Minimally Invasive Spine Surgery</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph text-xs">Physiotherapy & Exercises</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph text-xs">Orthobiologics & PRP</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info & Emergency -->
+        <div>
+          <h4 class="strict-heading text-sm text-white mb-6 uppercase tracking-wider">Contact & Emergency</h4>
+          <p class="strict-paragraph text-slate-400 text-xs mb-3">
+            104 Sports Rehabilitation Center Way, Suite A, Boston, MA 02115
+          </p>
+          <p class="strict-paragraph text-slate-400 text-xs mb-4">
+            Email: contact@acuracareortho.com
+          </p>
+          <a href="tel:+15559117767" class="block w-full py-3 px-4 bg-rose-950/40 hover:bg-rose-900/40 text-rose-400 border border-rose-800/60 rounded-xl text-center transition-all">
+            <span class="block text-xs strict-heading uppercase tracking-wider">Urgent Ortho Helpline</span>
+            <span class="text-sm font-semibold tracking-wide">+1 (555) 911-7767</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-slate-800/80 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500">
+        <p class="strict-paragraph">&copy; 2026 AcuraCare Sports Orthopedics. All rights reserved.</p>
+        <div class="flex space-x-6 rtl:space-x-reverse mt-4 md:mt-0">
+          <a href="#" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400 transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Shared JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

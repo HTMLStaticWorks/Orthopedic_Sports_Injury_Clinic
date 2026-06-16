@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports Recovery Blog | AcuraCare Sports Orthopedics</title>
+  <meta name="description" content="AcuraCare Clinical Blog. Insights on sports orthopedic surgery, injury prevention tips, active physiotherapy advice, and athlete recovery guides.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Tailwind Config -->
+  <script src="assets/js/tailwind-config.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-medical-darkBg dark:text-medical-darkText min-h-screen flex flex-col transition-colors duration-300">
+
+  <!-- ================= STICKY HEADER ================= -->
+  <header id="sticky-header" class="sticky top-0 w-full z-50 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Clinic Logo -->
+        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+          <div class="w-10 h-10 rounded-lg bg-medical-blueLight flex items-center justify-center text-white">
+            <i class="fa-solid fa-house-medical text-lg"></i>
+          </div>
+          <span class="strict-heading text-xl tracking-tight text-medical-navy dark:text-white">AcuraCare</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
+          <a href="index.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home</a>
+          <a href="home-2.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home 2</a>
+          <a href="about.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">About</a>
+          <a href="symptom-checker.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Symptom Checker</a>
+          <a href="blog.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Blog</a>
+          <a href="contact.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Contact</a>
+          <a href="dashboard.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Dashboard</a>
+        </nav>
+
+        <!-- Right Side Controls -->
+        <div class="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
+          <button class="rtl-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg text-xs font-semibold uppercase tracking-wider border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
+            RTL
+          </button>
+          
+          <button class="theme-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" aria-label="Toggle Theme">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <!-- Sign Up CTA -->
+          <a href="signup.html" class="px-5 py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading">
+            Sign Up
+          </a>
+        </div>
+
+        <!-- Mobile Hamburg Menu Button -->
+        <div class="flex items-center space-x-2 rtl:space-x-reverse lg:hidden">
+          <button class="rtl-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+            RTL
+          </button>
+          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+          <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle Mobile Menu">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Menu Container -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 pt-2 pb-6 space-y-2">
+      <a href="index.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home</a>
+      <a href="home-2.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home 2</a>
+      <a href="about.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">About</a>
+      <a href="symptom-checker.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Symptom Checker</a>
+      <a href="blog.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Blog</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Contact</a>
+      <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Dashboard</a>
+      <a href="signup.html" class="block w-full text-center px-4 py-2.5 rounded-lg bg-medical-blueLight text-white strict-subheading mt-4">Sign Up</a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+
+    <!-- ================= 1. HERO SECTION ================= -->
+    <section class="relative bg-gradient-to-br from-medical-navy via-slate-900 to-slate-950 text-white overflow-hidden min-h-[460px] flex items-center">
+      <!-- Background dot pattern -->
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+      <!-- Decorative glow top-right -->
+      <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          <!-- Left: Text Content -->
+          <div class="space-y-6">
+            <!-- Label badge -->
+            <span class="inline-flex items-center space-x-2 rtl:space-x-reverse px-3 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-500/25 text-indigo-300">
+              <i class="fa-solid fa-newspaper text-xs"></i>
+              <span class="text-xs uppercase tracking-wider strict-subheading">Clinical Knowledge Hub</span>
+            </span>
+
+            <h1 class="strict-heading text-4xl sm:text-5xl text-white leading-tight">
+              Clinical Recovery &amp; Prevention Blog
+            </h1>
+            <p class="strict-paragraph text-slate-300 text-base leading-relaxed max-w-lg">
+              Access evidence-based insights, athlete recovery case guides, surgical breakdowns, and exercise instructions curated by AcuraCare's medical team.
+            </p>
+
+            <!-- Topic category pills -->
+            <div class="flex flex-wrap gap-3 pt-1">
+              <span class="inline-flex items-center space-x-1.5 rtl:space-x-reverse bg-slate-800/60 border border-slate-700/50 text-slate-300 px-3 py-1.5 rounded-lg text-xs strict-subheading">
+                <i class="fa-solid fa-scalpel text-indigo-400 text-xs"></i>
+                <span>Surgery &amp; Recovery</span>
+              </span>
+              <span class="inline-flex items-center space-x-1.5 rtl:space-x-reverse bg-slate-800/60 border border-slate-700/50 text-slate-300 px-3 py-1.5 rounded-lg text-xs strict-subheading">
+                <i class="fa-solid fa-person-running text-indigo-400 text-xs"></i>
+                <span>Sports Rehabilitation</span>
+              </span>
+              <span class="inline-flex items-center space-x-1.5 rtl:space-x-reverse bg-slate-800/60 border border-slate-700/50 text-slate-300 px-3 py-1.5 rounded-lg text-xs strict-subheading">
+                <i class="fa-solid fa-shield-halved text-indigo-400 text-xs"></i>
+                <span>Injury Prevention</span>
+              </span>
+            </div>
+
+            <!-- Search hint CTA row -->
+            <div class="flex flex-wrap gap-4 pt-1">
+              <a href="#blog-articles" class="px-6 py-3 rounded-xl bg-medical-blueLight hover:bg-medical-blue text-white text-sm strict-subheading transition-all duration-200 shadow-lg shadow-medical-blueLight/25">
+                <i class="fa-solid fa-book-open mr-2"></i>Browse Articles
+              </a>
+              <a href="contact.html" class="px-6 py-3 rounded-xl border border-slate-600 hover:border-slate-500 hover:bg-slate-800/60 text-slate-200 text-sm strict-subheading transition-all duration-200">
+                Ask Our Experts
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Hero Image -->
+          <div class="relative hidden lg:block">
+            <!-- Glow frame -->
+            <div class="absolute -inset-3 bg-gradient-to-br from-indigo-500/15 to-medical-blueLight/10 rounded-3xl blur-xl"></div>
+            <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40">
+              <img src="assets/images/blog-hero.png"
+                   alt="AcuraCare medical professional writing clinical sports medicine blog content"
+                   class="w-full h-[360px] object-cover object-center">
+              <!-- Bottom gradient fade -->
+              <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/70 to-transparent"></div>
+              <!-- Floating badge -->
+              <div class="absolute bottom-4 left-4 flex items-center space-x-2 rtl:space-x-reverse bg-slate-950/75 backdrop-blur-sm border border-slate-700/50 px-3 py-1.5 rounded-full">
+                <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+                <span class="text-xs text-slate-200 font-medium">Written &amp; reviewed by orthopedic specialists</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MAIN BLOG LAYOUT ================= -->
+    <section class="py-12 bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Search and Global Categories Bar -->
+        <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-10 border-b border-slate-100 dark:border-slate-800 pb-6">
+          <!-- Search Bar -->
+          <div class="relative w-full md:w-96">
+            <span class="absolute inset-y-0 left-0 rtl:right-0 rtl:left-auto flex items-center pl-3 rtl:pr-3 text-slate-400">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input type="text" id="search-input" placeholder="Search articles..." class="w-full pl-10 pr-4 rtl:pl-4 rtl:pr-10 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:outline-none focus:border-medical-blueLight text-slate-800 dark:text-slate-100">
+          </div>
+          
+          <!-- Fast Category Buttons -->
+          <div class="flex flex-wrap gap-2" id="category-filters">
+            <button data-cat="all" class="cat-filter-btn px-4 py-2 rounded-lg bg-medical-blueLight text-white text-xs strict-subheading transition-colors">All Articles</button>
+            <button data-cat="prevention" class="cat-filter-btn px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs strict-subheading transition-colors">Prevention</button>
+            <button data-cat="recovery" class="cat-filter-btn px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs strict-subheading transition-colors">Athlete Guides</button>
+            <button data-cat="surgery" class="cat-filter-btn px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs strict-subheading transition-colors">Surgery Insights</button>
+            <button data-cat="physio" class="cat-filter-btn px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs strict-subheading transition-colors">Physiotherapy</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          
+          <!-- Articles Grid (Cols 1-3) -->
+          <div class="lg:col-span-3 space-y-8">
+            
+            <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              
+              <!-- Article 1 -->
+              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow" data-category="prevention">
+                <div class="h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                  <i class="fa-solid fa-shield-halved text-5xl"></i>
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse mb-3">
+                    <span class="px-2 py-1 bg-medical-cyan/10 text-medical-cyan rounded text-[10px] uppercase font-semibold strict-subheading">Injury Prevention</span>
+                    <span class="text-slate-400 text-[10px]">5 Min Read</span>
+                  </div>
+                  <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2 article-title">
+                    5 Keys to Preventing ACL Injuries in Youth Athletes
+                  </h3>
+                  <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-4">
+                    Knee ligament strains are rising. Discover biomechanical landing adjustments and strengthening moves designed to shield the knees from dynamic rotation load.
+                  </p>
+                  <div class="flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800 pt-4">
+                    <span class="text-xs text-slate-500">By Dr. Sarah Jenkins</span>
+                    <a href="#" class="text-xs text-medical-blueLight dark:text-medical-cyan hover:underline strict-subheading">Read Article</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Article 2 -->
+              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow" data-category="recovery">
+                <div class="h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                  <i class="fa-solid fa-person-running text-5xl"></i>
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse mb-3">
+                    <span class="px-2 py-1 bg-medical-teal/10 text-medical-teal rounded text-[10px] uppercase font-semibold strict-subheading">Athlete Recovery</span>
+                    <span class="text-slate-400 text-[10px]">8 Min Read</span>
+                  </div>
+                  <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2 article-title">
+                    The Ultimate Athlete Guide to Post-Op Ligament Healing
+                  </h3>
+                  <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-4">
+                    A comprehensive walkthrough detailing weeks 1-8 following arthroscopy: managing swelling, safe tissue overload, and active cardiovascular maintenance.
+                  </p>
+                  <div class="flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800 pt-4">
+                    <span class="text-xs text-slate-500">By Emma Lawson, DPT</span>
+                    <a href="#" class="text-xs text-medical-blueLight dark:text-medical-cyan hover:underline strict-subheading">Read Article</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Article 3 -->
+              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow" data-category="surgery">
+                <div class="h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                  <i class="fa-solid fa-stethoscope text-5xl"></i>
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse mb-3">
+                    <span class="px-2 py-1 bg-indigo-500/10 text-indigo-500 rounded text-[10px] uppercase font-semibold strict-subheading">Surgery Insights</span>
+                    <span class="text-slate-400 text-[10px]">10 Min Read</span>
+                  </div>
+                  <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2 article-title">
+                    Understanding Minimally Invasive Spine Decompression
+                  </h3>
+                  <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-4">
+                    Demystifying disc decompression surgeries. Learn how tiny surgical channels resolve pressure without damaging muscle networks.
+                  </p>
+                  <div class="flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800 pt-4">
+                    <span class="text-xs text-slate-500">By Dr. David Cho</span>
+                    <a href="#" class="text-xs text-medical-blueLight dark:text-medical-cyan hover:underline strict-subheading">Read Article</a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Article 4 -->
+              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow" data-category="physio">
+                <div class="h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                  <i class="fa-solid fa-dumbbell text-5xl"></i>
+                </div>
+                <div class="p-6">
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse mb-3">
+                    <span class="px-2 py-1 bg-teal-500/10 text-teal-600 rounded text-[10px] uppercase font-semibold strict-subheading">Physiotherapy</span>
+                    <span class="text-slate-400 text-[10px]">6 Min Read</span>
+                  </div>
+                  <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2 article-title">
+                    Rotator Cuff Rehabilitation: Active Band Exercises
+                  </h3>
+                  <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-4">
+                    Rebuild shoulder socket safety. Learn targeted external rotation and posture correction habits that relieve subacromial pressure.
+                  </p>
+                  <div class="flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800 pt-4">
+                    <span class="text-xs text-slate-500">By Robert Diaz, DPT</span>
+                    <a href="#" class="text-xs text-medical-blueLight dark:text-medical-cyan hover:underline strict-subheading">Read Article</a>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+
+            <!-- No articles matching placeholder -->
+            <div id="no-results" class="hidden text-center py-16 text-slate-500">
+              <i class="fa-solid fa-folder-open text-4xl block mb-4 text-slate-300"></i>
+              <p class="strict-paragraph">No medical articles match your current filters or search query.</p>
+            </div>
+
+            <!-- Pagination Grid -->
+            <div class="flex items-center justify-center space-x-2 rtl:space-x-reverse pt-6">
+              <a href="#" class="w-10 h-10 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"><i class="fa-solid fa-chevron-left text-xs rtl:rotate-180"></i></a>
+              <a href="#" class="w-10 h-10 rounded-lg bg-medical-blueLight text-white flex items-center justify-center text-xs font-semibold">1</a>
+              <a href="#" class="w-10 h-10 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-xs text-slate-600 dark:text-slate-300">2</a>
+              <a href="#" class="w-10 h-10 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"><i class="fa-solid fa-chevron-right text-xs rtl:rotate-180"></i></a>
+            </div>
+
+          </div>
+
+          <!-- Blog Categories Sidebar (Col 4) -->
+          <div class="space-y-8">
+            
+            <!-- Category Box -->
+            <div class="p-6 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl">
+              <h4 class="strict-heading text-sm text-medical-navy dark:text-white mb-4 uppercase tracking-wider">Education Categories</h4>
+              <ul class="space-y-3">
+                <li>
+                  <a href="#" data-sidebar="all" class="sidebar-cat-btn flex items-center justify-between text-xs text-medical-blueLight dark:text-medical-cyan font-semibold">
+                    <span>All Articles</span>
+                    <span class="px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-400">4</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" data-sidebar="prevention" class="sidebar-cat-btn flex items-center justify-between text-xs text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan">
+                    <span>Injury Prevention Tips</span>
+                    <span class="px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-400">1</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" data-sidebar="recovery" class="sidebar-cat-btn flex items-center justify-between text-xs text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan">
+                    <span>Athlete Recovery Guides</span>
+                    <span class="px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-400">1</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" data-sidebar="surgery" class="sidebar-cat-btn flex items-center justify-between text-xs text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan">
+                    <span>Orthopedic Surgery Insights</span>
+                    <span class="px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-400">1</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" data-sidebar="physio" class="sidebar-cat-btn flex items-center justify-between text-xs text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan">
+                    <span>Physiotherapy Advice</span>
+                    <span class="px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-400">1</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Newsletter Subscription -->
+            <div class="p-6 bg-slate-900 text-white rounded-2xl text-center relative overflow-hidden">
+              <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:15px_15px]"></div>
+              <div class="relative z-10">
+                <i class="fa-regular fa-paper-plane text-2xl text-medical-cyan mb-4 block"></i>
+                <h4 class="strict-heading text-sm text-white mb-2 uppercase tracking-wider">Weekly Recovery Tips</h4>
+                <p class="strict-paragraph text-slate-400 text-xs mb-6">
+                  Subscribe to receive surgical research and physiotherapy exercise lists directly to your inbox.
+                </p>
+                <form id="newsletter-form" class="space-y-3">
+                  <input type="email" id="newsletter-email" required placeholder="Your email address" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-700 bg-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-medical-cyan">
+                  <button type="submit" class="w-full py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue text-xs strict-subheading transition-colors">
+                    Subscribe
+                  </button>
+                  <p id="newsletter-msg" class="hidden text-xs strict-paragraph mt-2"></p>
+                </form>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURED ATHLETE RECOVERY JOURNEYS ================= -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-900/40 border-t border-b border-slate-100 dark:border-slate-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Patient Spotlights</span>
+          <h2 class="strict-heading text-3xl sm:text-4xl text-medical-navy dark:text-white mb-4">
+            Athlete Recovery Journeys
+          </h2>
+          <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
+            Read inspiring stories of real athletes returning to their sports after complex orthopedic surgery and rehabilitation at AcuraCare.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <!-- Story 1 -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col md:flex-row gap-6 hover:shadow-md transition-shadow">
+            <div class="w-full md:w-48 h-48 rounded-2xl overflow-hidden shrink-0 relative bg-slate-100 dark:bg-slate-950">
+              <img src="assets/images/profile-marcus.png" alt="Athlete Recovery Portrait" class="w-full h-full object-cover">
+              <span class="absolute top-3 left-3 px-2 py-1 bg-medical-cyan text-white text-[9px] font-bold rounded uppercase tracking-wider">ACL post-op</span>
+            </div>
+            <div class="flex flex-col justify-between flex-grow">
+              <div>
+                <span class="text-[10px] text-medical-teal font-semibold strict-subheading block mb-1">Soccer Forward</span>
+                <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">Marcus Vance: Back to the Field in 7 Months</h3>
+                <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-4">
+                  "After my ACL reconstruction, I didn't think I'd recover my original sprint speed. But the movement assessments and targeted loading drills got me cleared to play safely."
+                </p>
+              </div>
+              <div class="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-4 text-xs">
+                <span class="text-slate-500"><strong class="text-slate-700 dark:text-slate-300">Surgeon:</strong> Dr. Sarah Jenkins</span>
+                <span class="font-bold text-medical-cyan">100% Retrained</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story 2 -->
+          <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col md:flex-row gap-6 hover:shadow-md transition-shadow">
+            <div class="w-full md:w-48 h-48 rounded-2xl overflow-hidden shrink-0 relative bg-slate-100 dark:bg-slate-950">
+              <img src="assets/images/profile-jessica.png" alt="Athlete Recovery Portrait" class="w-full h-full object-cover">
+              <span class="absolute top-3 left-3 px-2 py-1 bg-indigo-500 text-white text-[9px] font-bold rounded uppercase tracking-wider">Shoulder Labrum</span>
+            </div>
+            <div class="flex flex-col justify-between flex-grow">
+              <div>
+                <span class="text-[10px] text-medical-teal font-semibold strict-subheading block mb-1">Baseball Pitcher</span>
+                <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">Elena Rostova: Overcoming Shoulder Labrum Tears</h3>
+                <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-4">
+                  "Repetitive overhead pitching tore my labrum cartilage. AcuraCare's arthroscopic repair and post-op scapular stability work restored my throwing power completely."
+                </p>
+              </div>
+              <div class="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-4 text-xs">
+                <span class="text-slate-500"><strong class="text-slate-700 dark:text-slate-300">Surgeon:</strong> Dr. Marcus Evans</span>
+                <span class="font-bold text-indigo-400">Back in Rotation</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CLINICAL VIDEO LECTURES ================= -->
+    <section class="py-20 bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-semibold text-medical-blueLight dark:text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Video Library</span>
+          <h2 class="strict-heading text-3xl sm:text-4xl text-medical-navy dark:text-white mb-4">
+            Orthopedic Video Lectures &amp; Rehab Demos
+          </h2>
+          <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
+            Watch our orthopedic surgeons and physical therapists explain surgical procedures and demonstrate rehab exercises.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Video Lecture 1 -->
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 overflow-hidden flex flex-col group hover:shadow-lg transition-all duration-300">
+            <div class="aspect-video w-full bg-slate-950 relative flex items-center justify-center text-indigo-400 overflow-hidden border-b border-slate-100 dark:border-slate-800">
+              <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-transparent pointer-events-none"></div>
+              <i class="fa-solid fa-play-circle text-4xl text-blue-500 group-hover:scale-110 transition-transform duration-350 z-10"></i>
+              <button onclick="playBlogVideo('ACL Reconstruction Graft Choices')" class="absolute inset-0 w-full h-full z-0 cursor-pointer focus:outline-none"></button>
+              <span class="absolute bottom-3 left-3 bg-slate-950/80 px-2 py-0.5 rounded text-[9px] text-slate-300 font-semibold tracking-wider uppercase z-10">8:15 Mins</span>
+            </div>
+            <div class="p-6 flex-grow flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] text-indigo-500 font-semibold block uppercase mb-1 strict-subheading">Surgical Lecture</span>
+                <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-2">ACL Reconstruction: Graft Selection Pros &amp; Cons</h3>
+                <p class="strict-paragraph text-slate-655 dark:text-slate-455 text-xs leading-relaxed mb-4">
+                  Dr. Sarah Jenkins explains the differences between patellar tendon, hamstring tendon, and quad tendon autografts.
+                </p>
+              </div>
+              <span class="text-[10px] text-slate-500 block pt-4 border-t border-slate-200/50 dark:border-slate-800/80 font-medium">Dr. Sarah Jenkins, MD</span>
+            </div>
+          </div>
+
+          <!-- Video Lecture 2 -->
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 overflow-hidden flex flex-col group hover:shadow-lg transition-all duration-300">
+            <div class="aspect-video w-full bg-slate-950 relative flex items-center justify-center text-indigo-400 overflow-hidden border-b border-slate-100 dark:border-slate-800">
+              <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-transparent pointer-events-none"></div>
+              <i class="fa-solid fa-play-circle text-4xl text-blue-500 group-hover:scale-110 transition-transform duration-350 z-10"></i>
+              <button onclick="playBlogVideo('Knee Proprioception & Balance Drills')" class="absolute inset-0 w-full h-full z-0 cursor-pointer focus:outline-none"></button>
+              <span class="absolute bottom-3 left-3 bg-slate-950/80 px-2 py-0.5 rounded text-[9px] text-slate-300 font-semibold tracking-wider uppercase z-10">5:40 Mins</span>
+            </div>
+            <div class="p-6 flex-grow flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] text-indigo-500 font-semibold block uppercase mb-1 strict-subheading">Rehab Demo</span>
+                <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-2">Knee Balance &amp; Proprioception Drills</h3>
+                <p class="strict-paragraph text-slate-655 dark:text-slate-455 text-xs leading-relaxed mb-4">
+                  Lead physical therapist Emma Lawson demonstrates foam pad balance and dynamic lateral plate weight transfers.
+                </p>
+              </div>
+              <span class="text-[10px] text-slate-500 block pt-4 border-t border-slate-200/50 dark:border-slate-800/80 font-medium">Emma Lawson, DPT</span>
+            </div>
+          </div>
+
+          <!-- Video Lecture 3 -->
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 overflow-hidden flex flex-col group hover:shadow-lg transition-all duration-300">
+            <div class="aspect-video w-full bg-slate-950 relative flex items-center justify-center text-indigo-400 overflow-hidden border-b border-slate-100 dark:border-slate-800">
+              <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-transparent pointer-events-none"></div>
+              <i class="fa-solid fa-play-circle text-4xl text-blue-500 group-hover:scale-110 transition-transform duration-350 z-10"></i>
+              <button onclick="playBlogVideo('Spine Ergonomics & Disc Safety')" class="absolute inset-0 w-full h-full z-0 cursor-pointer focus:outline-none"></button>
+              <span class="absolute bottom-3 left-3 bg-slate-950/80 px-2 py-0.5 rounded text-[9px] text-slate-300 font-semibold tracking-wider uppercase z-10">12:20 Mins</span>
+            </div>
+            <div class="p-6 flex-grow flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] text-indigo-500 font-semibold block uppercase mb-1 strict-subheading">Prevention Lecture</span>
+                <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-2">Spine Ergonomics &amp; Lower Back Injury Safety</h3>
+                <p class="strict-paragraph text-slate-655 dark:text-slate-455 text-xs leading-relaxed mb-4">
+                  Dr. David Cho shares sitting habits, lumbar supports, and deadlift biomechanics to prevent herniated lumbar discs.
+                </p>
+              </div>
+              <span class="text-[10px] text-slate-500 block pt-4 border-t border-slate-200/50 dark:border-slate-800/80 font-medium">Dr. David Cho, MD, PhD</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Video Player Modal Overlay -->
+    <div id="blog-video-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-800 rounded-3xl w-full max-w-xl p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <h4 id="blog-video-modal-title" class="strict-heading text-base text-medical-navy dark:text-white font-semibold">Video Lecture</h4>
+          <button onclick="closeBlogVideo()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+        <div class="aspect-video w-full rounded-2xl bg-slate-950 flex flex-col items-center justify-center border border-slate-850 relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-transparent z-0"></div>
+          <i class="fa-solid fa-circle-play text-5xl text-blue-500 animate-pulse z-10"></i>
+          <span class="text-xs text-slate-450 mt-3 z-10 font-medium">Video Lecture Reference Playing...</span>
+          <div class="absolute bottom-2 left-2 right-2 flex items-center space-x-2.5 rtl:space-x-reverse z-10 text-[10px] text-slate-550">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            <span>AcuraCare Clinical Education Video</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-sm py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        
+        <!-- Clinic Info -->
+        <div>
+          <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse mb-6">
+            <div class="w-8 h-8 rounded-lg bg-medical-blueLight flex items-center justify-center text-white">
+              <i class="fa-solid fa-house-medical"></i>
+            </div>
+            <span class="strict-heading text-lg text-white">AcuraCare</span>
+          </a>
+          <p class="strict-paragraph text-slate-400 text-xs leading-relaxed mb-6">
+            Expert surgical consultations, orthopedic care, and athletic recovery protocols to heal injury and restore athletic performance.
+          </p>
+          <div class="flex space-x-4 rtl:space-x-reverse">
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-facebook-f text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-twitter text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-instagram text-xs"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-medical-blueLight text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-linkedin-in text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="strict-heading text-sm text-white mb-6 uppercase tracking-wider">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html" class="hover:text-white transition-colors strict-paragraph text-xs">Home (Surgery)</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph text-xs">Home (Rehab)</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">About Our Clinic</a></li>
+            <li><a href="symptom-checker.html" class="hover:text-white transition-colors strict-paragraph text-xs">Symptom Checker</a></li>
+            <li><a href="blog.html" class="hover:text-white transition-colors strict-paragraph text-xs">Medical Blog</a></li>
+            <li><a href="dashboard.html" class="hover:text-white transition-colors strict-paragraph text-xs">Patient Dashboard</a></li>
+          </ul>
+        </div>
+
+        <!-- Treatment Links -->
+        <div>
+          <h4 class="strict-heading text-sm text-white mb-6 uppercase tracking-wider">Treatments</h4>
+          <ul class="space-y-3">
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">ACL Reconstruction</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">Arthroscopic Shoulder Repair</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph text-xs">Minimally Invasive Spine Surgery</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph text-xs">Physiotherapy & Exercises</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph text-xs">Orthobiologics & PRP</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info & Emergency -->
+        <div>
+          <h4 class="strict-heading text-sm text-white mb-6 uppercase tracking-wider">Contact & Emergency</h4>
+          <p class="strict-paragraph text-slate-400 text-xs mb-3">
+            104 Sports Rehabilitation Center Way, Suite A, Boston, MA 02115
+          </p>
+          <p class="strict-paragraph text-slate-400 text-xs mb-4">
+            Email: contact@acuracareortho.com
+          </p>
+          <a href="tel:+15559117767" class="block w-full py-3 px-4 bg-rose-950/40 hover:bg-rose-900/40 text-rose-400 border border-rose-800/60 rounded-xl text-center transition-all">
+            <span class="block text-xs strict-heading uppercase tracking-wider">Urgent Ortho Helpline</span>
+            <span class="text-sm font-semibold tracking-wide">+1 (555) 911-7767</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-slate-800/80 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500">
+        <p class="strict-paragraph">&copy; 2026 AcuraCare Sports Orthopedics. All rights reserved.</p>
+        <div class="flex space-x-6 rtl:space-x-reverse mt-4 md:mt-0">
+          <a href="#" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400 transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Search & Filter Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('search-input');
+      const catButtons = document.querySelectorAll('.cat-filter-btn');
+      const sidebarButtons = document.querySelectorAll('.sidebar-cat-btn');
+      const articles = document.querySelectorAll('.article-card');
+      const noResults = document.getElementById('no-results');
+      
+      let activeCategory = 'all';
+      let searchQuery = '';
+
+      const filterArticles = () => {
+        let count = 0;
+        
+        articles.forEach(article => {
+          const title = article.querySelector('.article-title').textContent.toLowerCase();
+          const category = article.getAttribute('data-category');
+          
+          const matchCategory = activeCategory === 'all' || category === activeCategory;
+          const matchSearch = title.includes(searchQuery.toLowerCase());
+          
+          if (matchCategory && matchSearch) {
+            article.classList.remove('hidden');
+            count++;
+          } else {
+            article.classList.add('hidden');
+          }
+        });
+
+        if (count === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      };
+
+      // Search Listener
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        filterArticles();
+      });
+
+      // Filter Buttons Click
+      const handleCategoryClick = (cat) => {
+        activeCategory = cat;
+        
+        // Update top filters active style
+        catButtons.forEach(btn => {
+          if (btn.getAttribute('data-cat') === cat) {
+            btn.classList.add('bg-medical-blueLight', 'text-white');
+            btn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+          } else {
+            btn.classList.remove('bg-medical-blueLight', 'text-white');
+            btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+          }
+        });
+
+        // Update sidebar active style
+        sidebarButtons.forEach(btn => {
+          const sidebarCat = btn.getAttribute('data-sidebar');
+          if (sidebarCat === cat) {
+            btn.classList.add('text-medical-blueLight', 'dark:text-medical-cyan', 'font-semibold');
+            btn.classList.remove('text-slate-600', 'dark:text-slate-300');
+          } else {
+            btn.classList.remove('text-medical-blueLight', 'dark:text-medical-cyan', 'font-semibold');
+            btn.classList.add('text-slate-600', 'dark:text-slate-300');
+          }
+        });
+
+        filterArticles();
+      };
+
+      catButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          handleCategoryClick(btn.getAttribute('data-cat'));
+        });
+      });
+
+      sidebarButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          handleCategoryClick(btn.getAttribute('data-sidebar'));
+        });
+      });
+
+      // Newsletter form submission
+      const newsletterForm = document.getElementById('newsletter-form');
+      const newsletterMsg = document.getElementById('newsletter-msg');
+      
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('newsletter-email').value;
+        newsletterMsg.classList.remove('hidden', 'text-rose-500', 'text-emerald-400');
+        
+        if (email.includes('@')) {
+          newsletterMsg.textContent = 'Subscribed successfully! Thank you.';
+          newsletterMsg.classList.add('text-emerald-400');
+          document.getElementById('newsletter-email').value = '';
+        } else {
+          newsletterMsg.textContent = 'Invalid email address.';
+          newsletterMsg.classList.add('text-rose-500');
+        }
+      });
+
+      // Video modal handlers for blog
+      window.playBlogVideo = (title) => {
+        const modal = document.getElementById('blog-video-modal');
+        const modalTitle = document.getElementById('blog-video-modal-title');
+        if (modal && modalTitle) {
+          modalTitle.textContent = title;
+          modal.classList.remove('hidden');
+        }
+      };
+
+      window.closeBlogVideo = () => {
+        const modal = document.getElementById('blog-video-modal');
+        if (modal) {
+          modal.classList.add('hidden');
+        }
+      };
+    });
+  </script>
+  <!-- Global Shared JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

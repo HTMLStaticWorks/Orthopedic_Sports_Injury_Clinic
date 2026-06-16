@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Portal Signup | AcuraCare Sports Orthopedics</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Tailwind Config -->
+  <script src="assets/js/tailwind-config.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-medical-darkBg dark:text-medical-darkText min-h-screen flex items-center justify-center transition-colors duration-300 relative py-12 px-4">
+
+  <!-- Symmetrical Floating Controls (Theme & RTL) -->
+  <div class="fixed top-6 right-6 flex items-center space-x-3 rtl:space-x-reverse z-50">
+    <!-- Direction Mode Toggle -->
+    <button class="rtl-toggle-btn w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow border border-slate-200 dark:border-slate-700 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+      RTL
+    </button>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle-btn w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Theme">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+  </div>
+
+  <div class="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-800 shadow-xl rounded-3xl overflow-hidden p-8 md:p-10 flex flex-col justify-center animate-fadeInUp">
+    
+    <!-- Clinic logo (Centered) -->
+    <div class="flex justify-center mb-6">
+      <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+        <div class="w-10 h-10 rounded-lg bg-medical-blueLight flex items-center justify-center text-white shadow-sm">
+          <i class="fa-solid fa-house-medical text-lg"></i>
+        </div>
+        <span class="strict-heading text-xl text-slate-900 dark:text-white">AcuraCare</span>
+      </a>
+    </div>
+
+    <h3 class="strict-heading text-2xl text-slate-900 dark:text-white text-center mb-2">Create Patient Account</h3>
+    <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-center text-sm mb-6">Register to track your physical therapy, view exercises, and message your care team.</p>
+
+    <!-- Error alert -->
+    <div id="signup-error" class="hidden mb-6 p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 flex items-start space-x-3 rtl:space-x-reverse text-red-700 dark:text-red-300 text-xs">
+      <i class="fa-solid fa-triangle-exclamation mt-0.5 text-sm flex-shrink-0"></i>
+      <span id="error-text">Please resolve the validation errors marked below.</span>
+    </div>
+
+    <!-- Registration Form -->
+    <form id="signup-form" class="space-y-4" novalidate>
+      
+      <!-- Full Name -->
+      <div>
+        <label for="name" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1.5 strict-subheading">Full Name</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 dark:text-slate-500 rtl:left-auto rtl:right-0 rtl:pr-3.5">
+            <i class="fa-solid fa-user text-sm"></i>
+          </span>
+          <input type="text" id="name" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="John Doe">
+        </div>
+        <p id="name-error-msg" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Please enter your full name.</p>
+      </div>
+
+      <!-- Email Address -->
+      <div>
+        <label for="email" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1.5 strict-subheading">Email Address</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 dark:text-slate-500 rtl:left-auto rtl:right-0 rtl:pr-3.5">
+            <i class="fa-solid fa-envelope text-sm"></i>
+          </span>
+          <input type="email" id="email" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="name@example.com">
+        </div>
+        <p id="email-error-msg" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Please enter a valid email address.</p>
+      </div>
+
+      <!-- Phone Number -->
+      <div>
+        <label for="phone" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1.5 strict-subheading">Phone Number</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 dark:text-slate-500 rtl:left-auto rtl:right-0 rtl:pr-3.5">
+            <i class="fa-solid fa-phone text-sm"></i>
+          </span>
+          <input type="tel" id="phone" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="+1 (555) 019-2834">
+        </div>
+        <p id="phone-error-msg" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Please enter a valid phone number (at least 7 digits).</p>
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1.5 strict-subheading">Password</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 dark:text-slate-500 rtl:left-auto rtl:right-0 rtl:pr-3.5">
+            <i class="fa-solid fa-lock text-sm"></i>
+          </span>
+          <input type="password" id="password" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="••••••••">
+        </div>
+        <p id="password-error-msg" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Password must be at least 6 characters.</p>
+      </div>
+
+      <!-- Confirm Password -->
+      <div>
+        <label for="confirm" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1.5 strict-subheading">Confirm Password</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 dark:text-slate-500 rtl:left-auto rtl:right-0 rtl:pr-3.5">
+            <i class="fa-solid fa-shield-halved text-sm"></i>
+          </span>
+          <input type="password" id="confirm" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="••••••••">
+        </div>
+        <p id="confirm-error-msg" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Passwords do not match.</p>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="w-full py-3 mt-2 rounded-xl bg-medical-blueLight text-white font-semibold strict-subheading hover:bg-medical-blue active:scale-[0.98] transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-medical-blueLight">
+        Create Account
+      </button>
+    </form>
+
+    <!-- Sign In Link -->
+    <div class="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">
+      Already have an account? 
+      <a href="login.html" class="text-medical-blueLight dark:text-medical-cyan font-semibold hover:underline">Sign In</a>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('signup-form');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const phoneInput = document.getElementById('phone');
+      const passwordInput = document.getElementById('password');
+      const confirmInput = document.getElementById('confirm');
+      const errorAlert = document.getElementById('signup-error');
+      const errorText = document.getElementById('error-text');
+
+      const validateEmail = (email) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      };
+
+      const validatePhone = (phone) => {
+        return /^\+?[0-9\s\-()]{7,20}$/.test(phone);
+      };
+
+      const showError = (input, show, msgId) => {
+        const borderClass = show ? 'border-red-500' : 'border-slate-200';
+        const darkBorderClass = show ? 'dark:border-red-500' : 'dark:border-slate-700';
+        input.classList.remove('border-slate-200', 'dark:border-slate-700', 'border-red-500', 'dark:border-red-500');
+        input.classList.add(show ? 'border-red-500' : 'border-slate-200');
+        input.classList.add(show ? 'dark:border-red-500' : 'dark:border-slate-700');
+        
+        const errorMsg = document.getElementById(msgId);
+        if (errorMsg) {
+          if (show) {
+            errorMsg.classList.remove('hidden');
+          } else {
+            errorMsg.classList.add('hidden');
+          }
+        }
+      };
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const password = passwordInput.value;
+        const confirm = confirmInput.value;
+
+        let isValid = true;
+        errorAlert.classList.add('hidden');
+
+        // Name Check
+        if (name.length === 0) {
+          showError(nameInput, true, 'name-error-msg');
+          isValid = false;
+        } else {
+          showError(nameInput, false, 'name-error-msg');
+        }
+
+        // Email Check
+        if (!validateEmail(email)) {
+          showError(emailInput, true, 'email-error-msg');
+          isValid = false;
+        } else {
+          showError(emailInput, false, 'email-error-msg');
+        }
+
+        // Phone Check
+        if (!validatePhone(phone)) {
+          showError(phoneInput, true, 'phone-error-msg');
+          isValid = false;
+        } else {
+          showError(phoneInput, false, 'phone-error-msg');
+        }
+
+        // Password Check
+        if (password.length < 6) {
+          showError(passwordInput, true, 'password-error-msg');
+          isValid = false;
+        } else {
+          showError(passwordInput, false, 'password-error-msg');
+        }
+
+        // Confirm Password Check
+        if (password !== confirm || confirm.length === 0) {
+          showError(confirmInput, true, 'confirm-error-msg');
+          isValid = false;
+        } else {
+          showError(confirmInput, false, 'confirm-error-msg');
+        }
+
+        if (isValid) {
+          // Register User by saving to localStorage (simulating database registration)
+          const newUser = {
+            fullName: name,
+            email: email,
+            phone: phone,
+            injuryType: 'Post-Traumatic Rehabilitation',
+            rehabStage: 'Initial Evaluation Pending',
+            recoveryProgress: 10,
+            weeksCompleted: 0,
+            weeksTotal: 8
+          };
+          
+          localStorage.setItem('currentUser', JSON.stringify(newUser));
+          localStorage.setItem('currentUserActive', JSON.stringify(newUser));
+          
+          // Redirect straight to dashboard for seamless UX
+          window.location.href = 'dashboard.html';
+        } else {
+          errorAlert.classList.remove('hidden');
+          errorText.textContent = 'Please resolve the validation errors marked below.';
+        }
+      });
+    });
+  </script>
+  <!-- Global Shared JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

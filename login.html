@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Portal Login | AcuraCare Sports Orthopedics</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Tailwind Config -->
+  <script src="assets/js/tailwind-config.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-medical-darkBg dark:text-medical-darkText min-h-screen flex items-center justify-center transition-colors duration-300 relative py-12 px-4">
+
+  <!-- Symmetrical Floating Controls (Theme & RTL) -->
+  <div class="fixed top-6 right-6 flex items-center space-x-3 rtl:space-x-reverse z-50">
+    <!-- Direction Mode Toggle -->
+    <button class="rtl-toggle-btn w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow border border-slate-200 dark:border-slate-700 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+      RTL
+    </button>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle-btn w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Theme">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+  </div>
+
+  <div class="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-800 shadow-xl rounded-3xl overflow-hidden p-8 md:p-10 flex flex-col justify-center animate-fadeInUp">
+    
+    <!-- Clinic logo (Centered) -->
+    <div class="flex justify-center mb-6">
+      <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+        <div class="w-10 h-10 rounded-lg bg-medical-blueLight flex items-center justify-center text-white shadow-sm">
+          <i class="fa-solid fa-house-medical text-lg"></i>
+        </div>
+        <span class="strict-heading text-xl text-slate-900 dark:text-white">AcuraCare</span>
+      </a>
+    </div>
+
+    <h3 class="strict-heading text-2xl text-slate-900 dark:text-white text-center mb-2">Patient Portal Login</h3>
+    <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-center text-sm mb-6">Enter your email and password to access your recovery portal.</p>
+
+    <!-- Error alert -->
+    <div id="login-error" class="hidden mb-6 p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 flex items-start space-x-3 rtl:space-x-reverse text-red-700 dark:text-red-300 text-xs">
+      <i class="fa-solid fa-triangle-exclamation mt-0.5 text-sm flex-shrink-0"></i>
+      <span id="error-text">Please resolve the validation errors marked below.</span>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" class="space-y-4" novalidate>
+      
+      <!-- Email Address -->
+      <div>
+        <label for="email" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1.5 strict-subheading">Email Address</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 dark:text-slate-500 rtl:left-auto rtl:right-0 rtl:pr-3.5">
+            <i class="fa-solid fa-envelope text-sm"></i>
+          </span>
+          <input type="email" id="email" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="name@example.com">
+        </div>
+        <p id="email-error-msg" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Please enter a valid email address.</p>
+      </div>
+
+      <!-- Password -->
+      <div>
+        <div class="flex justify-between items-center mb-1.5">
+          <label for="password" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold strict-subheading">Password</label>
+          <a href="#" onclick="alert('Demo Mode: Please use email alex.johnson@athlete.com or register a new account.')" class="text-xs text-medical-blueLight dark:text-medical-cyan hover:underline">Forgot Password?</a>
+        </div>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 dark:text-slate-500 rtl:left-auto rtl:right-0 rtl:pr-3.5">
+            <i class="fa-solid fa-lock text-sm"></i>
+          </span>
+          <input type="password" id="password" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="••••••••">
+        </div>
+        <p id="password-error-msg" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Password must be at least 6 characters.</p>
+      </div>
+
+      <!-- Remember me Checkbox -->
+      <div class="flex items-center">
+        <input type="checkbox" id="remember" class="w-4 h-4 rounded border-slate-300 dark:border-slate-700 bg-transparent text-medical-blueLight focus:ring-medical-blueLight cursor-pointer">
+        <label for="remember" class="ml-2 text-xs text-slate-500 dark:text-slate-400 cursor-pointer strict-paragraph select-none">Remember this device</label>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="w-full py-3 mt-2 rounded-xl bg-medical-blueLight text-white font-semibold strict-subheading hover:bg-medical-blue active:scale-[0.98] transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-medical-blueLight">
+        Sign In
+      </button>
+    </form>
+
+    <!-- Sign Up Link -->
+    <div class="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">
+      Don't have an account? 
+      <a href="signup.html" class="text-medical-blueLight dark:text-medical-cyan font-semibold hover:underline">Sign Up</a>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('login-form');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const errorAlert = document.getElementById('login-error');
+      const errorText = document.getElementById('error-text');
+
+      const validateEmail = (email) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      };
+
+      const showError = (input, show, msgId) => {
+        const borderClass = show ? 'border-red-500' : 'border-slate-200';
+        const darkBorderClass = show ? 'dark:border-red-500' : 'dark:border-slate-700';
+        input.classList.remove('border-slate-200', 'dark:border-slate-700', 'border-red-500', 'dark:border-red-500');
+        input.classList.add(show ? 'border-red-500' : 'border-slate-200');
+        input.classList.add(show ? 'dark:border-red-500' : 'dark:border-slate-700');
+        
+        const errorMsg = document.getElementById(msgId);
+        if (errorMsg) {
+          if (show) {
+            errorMsg.classList.remove('hidden');
+          } else {
+            errorMsg.classList.add('hidden');
+          }
+        }
+      };
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        let isValid = true;
+        errorAlert.classList.add('hidden');
+
+        // Email Check
+        if (!validateEmail(email)) {
+          showError(emailInput, true, 'email-error-msg');
+          isValid = false;
+        } else {
+          showError(emailInput, false, 'email-error-msg');
+        }
+
+        // Password Check
+        if (password.length < 6) {
+          showError(passwordInput, true, 'password-error-msg');
+          isValid = false;
+        } else {
+          showError(passwordInput, false, 'password-error-msg');
+        }
+
+        if (isValid) {
+          // Check if there is a matching user in localStorage
+          const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+          
+          if (storedUser && storedUser.email.toLowerCase() === email.toLowerCase()) {
+            localStorage.setItem('currentUserActive', JSON.stringify(storedUser));
+            window.location.href = 'dashboard.html';
+          } else if (email === 'alex.johnson@athlete.com') {
+            // Auto log in for default mock user
+            const mockUser = {
+              fullName: 'Alex Johnson',
+              email: 'alex.johnson@athlete.com',
+              phone: '+1 (555) 019-2834',
+              injuryType: 'ACL Tear Recovery (Left Knee)',
+              rehabStage: 'Active Agility & Strengthening',
+              recoveryProgress: 72,
+              weeksCompleted: 8,
+              weeksTotal: 12
+            };
+            localStorage.setItem('currentUser', JSON.stringify(mockUser));
+            localStorage.setItem('currentUserActive', JSON.stringify(mockUser));
+            window.location.href = 'dashboard.html';
+          } else {
+            errorAlert.classList.remove('hidden');
+            errorText.textContent = 'Invalid credentials. Please register or use email alex.johnson@athlete.com.';
+          }
+        }
+      });
+    });
+  </script>
+  <!-- Global Shared JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Recovery Portal | AcuraCare Sports Orthopedics</title>
+  <meta name="description" content="Manage your recovery program, book physical therapy sessions, complete daily exercises, and securely contact your clinical team.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Tailwind Config -->
+  <script src="assets/js/tailwind-config.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Styling to match clinical portal app-shell */
+    .nav-btn {
+      transition: all 0.2s ease-in-out;
+    }
+    .nav-btn.active {
+      background-color: rgba(59, 130, 246, 0.12);
+      color: #3b82f6;
+      border-left: 3px solid #3b82f6;
+    }
+    .dark .nav-btn.active {
+      background-color: rgba(6, 182, 212, 0.08);
+      color: #06b6d4;
+      border-left: 3px solid #06b6d4;
+    }
+    html[dir="rtl"] .nav-btn.active {
+      border-left: 0;
+      border-right: 3px solid #3b82f6;
+    }
+    html[dir="rtl"] .dark .nav-btn.active {
+      border-left: 0;
+      border-right: 3px solid #06b6d4;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-medical-darkBg dark:text-slate-100 min-h-screen transition-colors duration-300 overflow-hidden font-sans">
+
+  <!-- Authentication Guard Script (Runs immediately to prevent FOUC / flashes of private page) -->
+  <script>
+    (function() {
+      const activeUser = localStorage.getItem('currentUserActive');
+      if (!activeUser) {
+        window.location.href = 'login.html';
+      }
+    })();
+  </script>
+
+  <!-- ================= PORTAL APP SHELL ================= -->
+  <div class="h-screen w-screen overflow-hidden flex flex-row relative">
+    
+    <!-- Mobile Sidebar Drawer Overlay -->
+    <div id="mobile-sidebar-overlay" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-30 transition-opacity duration-300 md:hidden"></div>
+
+    <!-- Left Sidebar (Desktop View / Mobile Drawer) -->
+    <aside id="portal-sidebar" class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 h-full flex flex-col p-6 z-40 transition-transform duration-300 transform -translate-x-full md:relative md:translate-x-0 flex-shrink-0">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center space-x-2.5 rtl:space-x-reverse mb-8">
+        <div class="w-10 h-10 rounded-lg bg-medical-blueLight flex items-center justify-center text-white shadow-sm">
+          <i class="fa-solid fa-house-medical text-lg"></i>
+        </div>
+        <span class="strict-heading text-lg tracking-tight text-slate-900 dark:text-white font-semibold">AcuraCare</span>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex-grow space-y-1">
+        <button data-tab="tab-overview" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white active">
+          <i class="fa-solid fa-chart-line text-base w-5 text-center"></i>
+          <span>Overview</span>
+        </button>
+        
+        <button data-tab="tab-exercises" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
+          <i class="fa-solid fa-person-running text-base w-5 text-center"></i>
+          <span>Rehab Exercises</span>
+        </button>
+
+        <button data-tab="tab-appointments" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
+          <i class="fa-solid fa-calendar-check text-base w-5 text-center"></i>
+          <span>Schedule Session</span>
+        </button>
+
+        <button data-tab="tab-therapists" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
+          <i class="fa-solid fa-user-doctor text-base w-5 text-center"></i>
+          <span>My Specialists</span>
+        </button>
+
+        <button data-tab="tab-messaging" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white relative">
+          <i class="fa-solid fa-comment-medical text-base w-5 text-center"></i>
+          <span>Secure Message</span>
+          <span id="unread-badge" class="absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-red-500"></span>
+        </button>
+
+        <button data-tab="tab-settings" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
+          <i class="fa-solid fa-sliders text-base w-5 text-center"></i>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer (User Sign Out) -->
+      <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
+        <button id="signout-btn" class="w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 active:scale-[0.98] transition-all">
+          <i class="fa-solid fa-right-from-bracket text-base w-5 text-center"></i>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Right Side Main Content Wrapper -->
+    <div class="flex-grow h-full overflow-hidden flex flex-col relative">
+      
+      <!-- Top Action Bar -->
+      <header class="h-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between flex-shrink-0 z-10 transition-colors duration-300">
+        <!-- Left: Mobile Menu Toggle / Panel Title -->
+        <div class="flex items-center space-x-3 rtl:space-x-reverse">
+          <button id="mobile-sidebar-toggle" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 md:hidden" aria-label="Toggle Navigation Drawer">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+          <h2 id="panel-title" class="strict-heading text-xl md:text-2xl text-slate-900 dark:text-white">Dashboard Overview</h2>
+        </div>
+
+        <!-- Right: Action Toggles & User Widget -->
+        <div class="flex items-center space-x-3 md:space-x-4 rtl:space-x-reverse">
+          
+          <!-- RTL Switcher -->
+          <button class="rtl-toggle-btn w-9 h-9 flex items-center justify-center rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow-sm border border-slate-200 dark:border-slate-700 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-350">
+            RTL
+          </button>
+
+          <!-- Theme Toggle -->
+          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-350" aria-label="Toggle Theme">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <!-- User Widget -->
+          <div class="flex items-center space-x-3 rtl:space-x-reverse pl-3 border-l border-slate-200 dark:border-slate-800 rtl:border-l-0 rtl:border-r rtl:pl-0 rtl:pr-3">
+            <div class="hidden sm:block text-right">
+              <p id="user-display-name" class="text-sm font-semibold text-slate-900 dark:text-white strict-subheading">Alex Johnson</p>
+              <p id="user-display-stage" class="text-[10px] text-slate-500 dark:text-slate-400 strict-paragraph">ACL Tear Recovery</p>
+            </div>
+            <img id="user-display-avatar" src="assets/images/profile-robert.png" alt="Patient Avatar" class="w-10 h-10 rounded-xl object-cover bg-slate-100 dark:bg-slate-800 shadow-sm">
+          </div>
+        </div>
+      </header>
+
+      <!-- Scrollable Main Container -->
+      <main id="portal-content" class="flex-grow p-6 md:p-8 overflow-y-auto space-y-8 bg-slate-50 dark:bg-medical-darkBg transition-colors duration-300">
+        
+        <!-- ================= PANEL 1: DASHBOARD OVERVIEW ================= -->
+        <div id="tab-overview" class="tab-panel animate-fadeInUp space-y-6 md:space-y-8">
+          
+          <!-- Welcome Banner Card -->
+          <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-medical-navy to-slate-900 text-white shadow-xl min-h-[160px] flex items-center p-6 md:p-8">
+            <!-- Background Rehab Artwork Overlay -->
+            <div class="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-30" style="background-image: url('assets/images/dashboard-rehab.png');"></div>
+            <div class="relative z-10 max-w-xl space-y-2">
+              <h3 class="strict-heading text-2xl md:text-3xl">Welcome back, <span class="patient-name">Alex</span>!</h3>
+              <p class="strict-paragraph text-slate-300 text-sm md:text-base leading-relaxed">
+                You are currently on Week <span class="completed-weeks-num">8</span> of your <span class="total-weeks-num">12</span>-week postoperative athletic recovery program. Keep up the high consistency!
+              </p>
+            </div>
+          </div>
+
+          <!-- Status & Metrics Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Card 1: Upcoming Session -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex items-start space-x-4 rtl:space-x-reverse hover:shadow-md transition-shadow">
+              <div class="p-3.5 bg-blue-50 dark:bg-blue-900/20 text-medical-blueLight dark:text-medical-cyan rounded-2xl flex-shrink-0">
+                <i class="fa-solid fa-calendar-check text-xl"></i>
+              </div>
+              <div class="space-y-1">
+                <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase strict-subheading tracking-wider">Next Session</p>
+                <h4 id="next-session-title" class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Physiotherapy Drill</h4>
+                <p id="next-session-time" class="strict-paragraph text-xs text-slate-600 dark:text-slate-300">Tomorrow at 10:00 AM</p>
+                <p id="next-session-staff" class="strict-paragraph text-[10px] text-slate-400 dark:text-slate-500">with Sarah Jenkins</p>
+              </div>
+            </div>
+
+            <!-- Card 2: SVG Recovery Progress -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex items-center space-x-4 rtl:space-x-reverse hover:shadow-md transition-shadow">
+              <!-- Circular Progress SVG -->
+              <div class="relative w-16 h-16 flex-shrink-0 flex items-center justify-center">
+                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                  <path class="text-slate-100 dark:text-slate-800" stroke-width="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path id="radial-progress-bar" class="text-medical-blueLight dark:text-medical-cyan transition-all duration-500" stroke-dasharray="72, 100" stroke-width="3.5" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                </svg>
+                <span id="radial-progress-text" class="absolute text-xs font-bold text-slate-900 dark:text-white strict-heading">72%</span>
+              </div>
+              <div class="space-y-1">
+                <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase strict-subheading tracking-wider">Recovery Index</p>
+                <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Active Extension Range</h4>
+                <p class="strict-paragraph text-xs text-slate-600 dark:text-slate-300">Grade II Joint Stability Status</p>
+              </div>
+            </div>
+
+            <!-- Card 3: Rehab Phase Weeks -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex items-start space-x-4 rtl:space-x-reverse hover:shadow-md transition-shadow">
+              <div class="p-3.5 bg-teal-50 dark:bg-teal-900/20 text-medical-teal rounded-2xl flex-shrink-0">
+                <i class="fa-solid fa-clock-rotate-left text-xl"></i>
+              </div>
+              <div class="space-y-1">
+                <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase strict-subheading tracking-wider">Timeline Completion</p>
+                <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Phase III: Agility Phase</h4>
+                <p class="strict-paragraph text-xs text-slate-600 dark:text-slate-300"><span class="completed-weeks-num">8</span> of <span class="total-weeks-num">12</span> Weeks Done</p>
+                <!-- Horizontal Progress Mini Bar -->
+                <div class="w-28 bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 mt-1.5 overflow-hidden">
+                  <div id="weeks-progress-bar" class="bg-medical-teal h-full transition-all duration-500" style="width: 66.6%;"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Treatment Summary & Checklist Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+            
+            <!-- Left 2 Columns: Treatment Details & Badges -->
+            <div class="lg:col-span-2 space-y-6 md:space-y-8">
+              
+              <!-- Treatment Summary Widget -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+                <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+                  <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Clinical Treatment Summary</h4>
+                  <span class="px-2.5 py-1 rounded-lg bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider">Post-op Care Plan</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-4">
+                    <div>
+                      <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Injury Profile</p>
+                      <p id="summary-injury-type" class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-paragraph">ACL Tear Recovery (Left Knee)</p>
+                    </div>
+                    <div>
+                      <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Surgical Consultant</p>
+                      <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-paragraph">Dr. Marcus Evans, MD (Orthopedics)</p>
+                    </div>
+                  </div>
+                  <div class="space-y-4">
+                    <div>
+                      <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Lead Physical Therapist</p>
+                      <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-paragraph">Sarah Jenkins, DPT</p>
+                    </div>
+                    <div>
+                      <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Prescribed Program Frequency</p>
+                      <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-paragraph">3x Weekly Sessions + Daily Home Exercises</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Achievements & Badges Card -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4">
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Earned Recovery Badges</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  
+                  <!-- Badge 1 -->
+                  <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 text-center space-y-2 border border-slate-100 dark:border-slate-800/50 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-yellow-50 dark:bg-yellow-950/20 text-yellow-500 flex items-center justify-center text-xl shadow-inner">
+                      <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Consistency Champ</p>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">15 Days Streak</p>
+                  </div>
+
+                  <!-- Badge 2 -->
+                  <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 text-center space-y-2 border border-slate-100 dark:border-slate-800/50 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-950/20 text-blue-500 flex items-center justify-center text-xl shadow-inner">
+                      <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Flexibility Master</p>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">Full Extension</p>
+                  </div>
+
+                  <!-- Badge 3 -->
+                  <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 text-center space-y-2 border border-slate-100 dark:border-slate-800/50 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-teal-50 dark:bg-teal-950/20 text-teal-500 flex items-center justify-center text-xl shadow-inner">
+                      <i class="fa-solid fa-calendar-day"></i>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Perfect Attender</p>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">June Sessions Completed</p>
+                  </div>
+
+                  <!-- Badge 4 -->
+                  <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 text-center space-y-2 border border-slate-100 dark:border-slate-800/50 flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-red-50 dark:bg-red-950/20 text-red-500 flex items-center justify-center text-xl shadow-inner">
+                      <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Active Resolute</p>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">Health Goals Aligned</p>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Column: Healing Timeline / Milestones -->
+            <div class="space-y-6 md:space-y-8">
+              
+              <!-- Milestones Checklist -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Active Healing Milestones</h4>
+                <ul class="space-y-4">
+                  
+                  <!-- Milestone 1 -->
+                  <li class="flex items-start space-x-3 rtl:space-x-reverse text-xs">
+                    <span class="w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px]">
+                      <i class="fa-solid fa-check"></i>
+                    </span>
+                    <div class="space-y-0.5">
+                      <p class="font-semibold text-slate-900 dark:text-slate-200 strict-subheading">Full passive joint extension (0°)</p>
+                      <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">Achieved in Week 3</p>
+                    </div>
+                  </li>
+
+                  <!-- Milestone 2 -->
+                  <li class="flex items-start space-x-3 rtl:space-x-reverse text-xs">
+                    <span class="w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px]">
+                      <i class="fa-solid fa-check"></i>
+                    </span>
+                    <div class="space-y-0.5">
+                      <p class="font-semibold text-slate-900 dark:text-slate-200 strict-subheading">Wean off knee braces completely</p>
+                      <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">Achieved in Week 6</p>
+                    </div>
+                  </li>
+
+                  <!-- Milestone 3 -->
+                  <li class="flex items-start space-x-3 rtl:space-x-reverse text-xs">
+                    <span class="w-5 h-5 rounded-full bg-blue-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px]">
+                      <i class="fa-solid fa-ellipsis"></i>
+                    </span>
+                    <div class="space-y-0.5">
+                      <p class="font-semibold text-slate-900 dark:text-slate-200 strict-subheading">Quad strength symmetry (>80%)</p>
+                      <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">Active Phase - Targeted for Week 10</p>
+                    </div>
+                  </li>
+
+                  <!-- Milestone 4 -->
+                  <li class="flex items-start space-x-3 rtl:space-x-reverse text-xs opacity-50">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px]">
+                      <i class="fa-solid fa-circle"></i>
+                    </span>
+                    <div class="space-y-0.5">
+                      <p class="font-semibold text-slate-900 dark:text-slate-200 strict-subheading">Return to running drills</p>
+                      <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">Goal target - Week 12</p>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+
+              <!-- Recent Activity Feed -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Recent Activities</h4>
+                <div class="relative border-l border-slate-200 dark:border-slate-800 pl-4 rtl:border-l-0 rtl:border-r rtl:pl-0 rtl:pr-4 space-y-5 text-xs">
+                  
+                  <!-- Activity 1 -->
+                  <div class="relative">
+                    <span class="absolute -left-[22px] top-1 rtl:-right-[22px] w-3 h-3 rounded-full bg-medical-blueLight border-2 border-white dark:border-slate-900"></span>
+                    <p class="font-semibold text-slate-900 dark:text-slate-200 strict-subheading">Home Exercises Completed</p>
+                    <p class="text-[10px] text-slate-400 dark:text-slate-500 strict-paragraph">Checked off Quad Sets & Cycling • Today, 8:42 AM</p>
+                  </div>
+
+                  <!-- Activity 2 -->
+                  <div class="relative">
+                    <span class="absolute -left-[22px] top-1 rtl:-right-[22px] w-3 h-3 rounded-full bg-medical-teal border-2 border-white dark:border-slate-900"></span>
+                    <p class="font-semibold text-slate-900 dark:text-slate-200 strict-subheading">Appointment Scheduled</p>
+                    <p class="text-[10px] text-slate-400 dark:text-slate-500 strict-paragraph">Rehab Clinic Drill Booked • Yesterday, 2:15 PM</p>
+                  </div>
+
+                  <!-- Activity 3 -->
+                  <div class="relative">
+                    <span class="absolute -left-[22px] top-1 rtl:-right-[22px] w-3 h-3 rounded-full bg-slate-400 border-2 border-white dark:border-slate-900"></span>
+                    <p class="font-semibold text-slate-900 dark:text-slate-200 strict-subheading">Emergency Contacts Synced</p>
+                    <p class="text-[10px] text-slate-400 dark:text-slate-500 strict-paragraph">Profile settings updated successfully • Jun 14, 2026</p>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================= PANEL 2: REHAB EXERCISES ================= -->
+        <div id="tab-exercises" class="tab-panel animate-fadeInUp hidden space-y-6 md:space-y-8">
+          
+          <!-- Exercises Header Dashboard -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Checklist Completion Progress Math -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm md:col-span-2 space-y-4">
+              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Daily Workout Progress Checklist</h4>
+              <div class="space-y-2">
+                <div class="flex justify-between text-xs font-semibold strict-subheading text-slate-600 dark:text-slate-400">
+                  <span>Exercise Sets Completed</span>
+                  <span id="workout-percentage-text">40% (2 of 5 sets)</span>
+                </div>
+                <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-3 overflow-hidden">
+                  <div id="workout-progress-bar" class="bg-medical-blueLight dark:text-medical-cyan h-full transition-all duration-350" style="width: 40%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PDF guides downloads link -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-center text-center space-y-3">
+              <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Need Offline Exercises?</h4>
+              <button onclick="alert('PDF downloaded successfully! (Simulated)')" class="w-full py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                <i class="fa-solid fa-file-pdf text-red-500 text-sm"></i>
+                <span>Download Exercise Guide</span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Exercises Grid List -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+            
+            <!-- Checkboxes column -->
+            <div class="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Today's Prescribed Sets</h4>
+              
+              <div class="space-y-4">
+                <!-- Exercise Checkbox 1 -->
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all">
+                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+                    <input type="checkbox" id="ex-1" class="exercise-checkbox w-5 h-5 rounded text-medical-blueLight dark:text-medical-cyan focus:ring-medical-blueLight dark:focus:ring-medical-cyan cursor-pointer mt-0.5" checked>
+                    <label for="ex-1" class="cursor-pointer select-none">
+                      <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Heel Slides</p>
+                      <p class="text-xs text-slate-500 dark:text-slate-400 strict-paragraph">3 sets x 10 repetitions • Knee extension range</p>
+                    </label>
+                  </div>
+                  <button onclick="playExerciseVideo('Heel Slides Demonstration', 'Instructional: Flex your hip and knee slowly. Draw your heel toward your buttocks. Keep opposite leg straight. Repeat 10 times.')" class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 text-medical-blueLight shadow-sm flex items-center justify-center hover:scale-105 transition-all" aria-label="Play video">
+                    <i class="fa-solid fa-play text-xs pl-0.5 rtl:pl-0 rtl:pr-0.5"></i>
+                  </button>
+                </div>
+
+                <!-- Exercise Checkbox 2 -->
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all">
+                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+                    <input type="checkbox" id="ex-2" class="exercise-checkbox w-5 h-5 rounded text-medical-blueLight dark:text-medical-cyan focus:ring-medical-blueLight dark:focus:ring-medical-cyan cursor-pointer mt-0.5" checked>
+                    <label for="ex-2" class="cursor-pointer select-none">
+                      <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Quad Sets (Isometric Contractions)</p>
+                      <p class="text-xs text-slate-500 dark:text-slate-400 strict-paragraph">3 sets x 15 repetitions • Hold contraction 5s</p>
+                    </label>
+                  </div>
+                  <button onclick="playExerciseVideo('Quad Sets Demonstration', 'Instructional: Tighten your front thigh muscles (quadriceps). Push the back of your knee down into the mat. Hold 5s. Repeat.')" class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 text-medical-blueLight shadow-sm flex items-center justify-center hover:scale-105 transition-all" aria-label="Play video">
+                    <i class="fa-solid fa-play text-xs pl-0.5 rtl:pl-0 rtl:pr-0.5"></i>
+                  </button>
+                </div>
+
+                <!-- Exercise Checkbox 3 -->
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all">
+                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+                    <input type="checkbox" id="ex-3" class="exercise-checkbox w-5 h-5 rounded text-medical-blueLight dark:text-medical-cyan focus:ring-medical-blueLight dark:focus:ring-medical-cyan cursor-pointer mt-0.5">
+                    <label for="ex-3" class="cursor-pointer select-none">
+                      <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Straight Leg Raises</p>
+                      <p class="text-xs text-slate-500 dark:text-slate-400 strict-paragraph">3 sets x 10 repetitions • Maintain locking knee</p>
+                    </label>
+                  </div>
+                  <button onclick="playExerciseVideo('Straight Leg Raises Demonstration', 'Instructional: Lie on your back. Bend one knee. Keep target leg straight and lift it to 45°. Hold 2s, lower slowly. Repeat.')" class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 text-medical-blueLight shadow-sm flex items-center justify-center hover:scale-105 transition-all" aria-label="Play video">
+                    <i class="fa-solid fa-play text-xs pl-0.5 rtl:pl-0 rtl:pr-0.5"></i>
+                  </button>
+                </div>
+
+                <!-- Exercise Checkbox 4 -->
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all">
+                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+                    <input type="checkbox" id="ex-4" class="exercise-checkbox w-5 h-5 rounded text-medical-blueLight dark:text-medical-cyan focus:ring-medical-blueLight dark:focus:ring-medical-cyan cursor-pointer mt-0.5">
+                    <label for="ex-4" class="cursor-pointer select-none">
+                      <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Stationary Cycling (Light Load)</p>
+                      <p class="text-xs text-slate-500 dark:text-slate-400 strict-paragraph">15 Minutes • Maintain comfortable pace (80 RPM)</p>
+                    </label>
+                  </div>
+                  <button onclick="playExerciseVideo('Stationary Cycling Tips', 'Instructional: Adjust bike seat height so knee has slight bend at the bottom stroke. Cycle forward with minimal resistance.')" class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 text-medical-blueLight shadow-sm flex items-center justify-center hover:scale-105 transition-all" aria-label="Play video">
+                    <i class="fa-solid fa-play text-xs pl-0.5 rtl:pl-0 rtl:pr-0.5"></i>
+                  </button>
+                </div>
+
+                <!-- Exercise Checkbox 5 -->
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all">
+                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+                    <input type="checkbox" id="ex-5" class="exercise-checkbox w-5 h-5 rounded text-medical-blueLight dark:text-medical-cyan focus:ring-medical-blueLight dark:focus:ring-medical-cyan cursor-pointer mt-0.5">
+                    <label for="ex-5" class="cursor-pointer select-none">
+                      <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Balance Board Training</p>
+                      <p class="text-xs text-slate-500 dark:text-slate-400 strict-paragraph">5 Minutes • Single leg focus (Left Knee)</p>
+                    </label>
+                  </div>
+                  <button onclick="playExerciseVideo('Balance Board Drills', 'Instructional: Stand with feet shoulder-width on balance board. Gently rock board side-to-side. Transition to single leg hold when stable.')" class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 text-medical-blueLight shadow-sm flex items-center justify-center hover:scale-105 transition-all" aria-label="Play video">
+                    <i class="fa-solid fa-play text-xs pl-0.5 rtl:pl-0 rtl:pr-0.5"></i>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Video thumbnails / reference playlist -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4">
+              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Instructional Videos</h4>
+              <div class="space-y-4">
+                
+                <!-- Video Item 1 -->
+                <div onclick="playExerciseVideo('Flexibility & Heel Slides', 'Demonstrating proper posture and heel slip angles.')" class="group relative rounded-2xl overflow-hidden aspect-video cursor-pointer border border-slate-100 dark:border-slate-800">
+                  <img src="assets/images/dashboard-rehab.png" alt="Video cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                  <div class="absolute inset-0 bg-slate-900/40 flex items-center justify-center group-hover:bg-slate-900/50 transition-colors">
+                    <span class="w-10 h-10 rounded-full bg-white text-medical-blueLight flex items-center justify-center shadow-lg"><i class="fa-solid fa-play text-sm pl-0.5"></i></span>
+                  </div>
+                  <div class="absolute bottom-3 left-3 bg-slate-950/70 text-white text-[9px] px-2 py-0.5 rounded font-semibold">2:45 Mins</div>
+                </div>
+
+                <!-- Video Item 2 -->
+                <div onclick="playExerciseVideo('Straight Leg Raise Guide', 'Focusing on quadriceps engagement techniques.')" class="group relative rounded-2xl overflow-hidden aspect-video cursor-pointer border border-slate-100 dark:border-slate-800">
+                  <img src="assets/images/dashboard-rehab.png" alt="Video cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                  <div class="absolute inset-0 bg-slate-900/40 flex items-center justify-center group-hover:bg-slate-900/50 transition-colors">
+                    <span class="w-10 h-10 rounded-full bg-white text-medical-blueLight flex items-center justify-center shadow-lg"><i class="fa-solid fa-play text-sm pl-0.5"></i></span>
+                  </div>
+                  <div class="absolute bottom-3 left-3 bg-slate-950/70 text-white text-[9px] px-2 py-0.5 rounded font-semibold">3:12 Mins</div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================= PANEL 3: SCHEDULE SESSION ================= -->
+        <div id="tab-appointments" class="tab-panel animate-fadeInUp hidden space-y-6 md:space-y-8">
+          
+          <!-- Reminders Alert banner -->
+          <div class="bg-blue-50 dark:bg-blue-950/25 border border-blue-200 dark:border-blue-800/80 rounded-3xl p-5 flex items-start space-x-4 rtl:space-x-reverse">
+            <div class="p-3 bg-blue-100 dark:bg-blue-900/40 text-medical-blueLight dark:text-medical-cyan rounded-2xl flex-shrink-0">
+              <i class="fa-solid fa-bell text-lg"></i>
+            </div>
+            <div class="space-y-1 text-xs text-blue-900 dark:text-blue-200">
+              <h4 class="strict-heading font-semibold text-sm">Upcoming Session Reminder</h4>
+              <p class="strict-paragraph leading-relaxed">
+                You have a clinical rehab session scheduled for tomorrow at 10:00 AM with PT Sarah Jenkins. Please wear comfortable athletic clothing and bring your postoperative braces.
+              </p>
+            </div>
+          </div>
+
+          <!-- Appointments scheduler & log grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+            
+            <!-- Booking Form -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
+              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Book Clinic Consultation</h4>
+              
+              <form id="book-appt-form" class="space-y-4" novalidate>
+                
+                <!-- Date -->
+                <div>
+                  <label for="book-date" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Select Date</label>
+                  <input type="date" id="book-date" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm">
+                </div>
+
+                <!-- Time -->
+                <div>
+                  <label for="book-time" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Select Time</label>
+                  <input type="time" id="book-time" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm">
+                </div>
+
+                <!-- Therapist select -->
+                <div>
+                  <label for="book-staff" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Specialist Team Member</label>
+                  <select id="book-staff" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:bg-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm">
+                    <option value="Sarah Jenkins" class="dark:bg-slate-900">Sarah Jenkins, DPT (Physical Therapist)</option>
+                    <option value="Dr. Marcus Evans" class="dark:bg-slate-900">Dr. Marcus Evans, MD (Orthopedic Surgeon)</option>
+                  </select>
+                </div>
+
+                <!-- Session Type -->
+                <div>
+                  <label for="book-type" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Consultation Type</label>
+                  <select id="book-type" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:bg-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm">
+                    <option value="In-Clinic Visit" class="dark:bg-slate-900">In-Clinic Rehab Visit</option>
+                    <option value="Telehealth Call" class="dark:bg-slate-900">Telehealth Video Call</option>
+                  </select>
+                </div>
+
+                <!-- Notes -->
+                <div>
+                  <label for="book-notes" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Symptoms or Notes</label>
+                  <textarea id="book-notes" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm strict-paragraph" placeholder="E.g., Feeling stiffness during slides..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-2.5 rounded-xl bg-medical-blueLight text-white font-semibold hover:bg-medical-blue active:scale-[0.98] transition-all text-xs shadow-sm">
+                  Schedule Consultation
+                </button>
+
+              </form>
+            </div>
+
+            <!-- List and logs columns -->
+            <div class="lg:col-span-2 space-y-6 md:space-y-8">
+              
+              <!-- Upcoming Sessions List -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white font-semibold">Scheduled Appointments</h4>
+                
+                <div id="appointments-list-container" class="space-y-4">
+                  <!-- Appointment items are dynamically injected here. Fallback template below is initialized by script. -->
+                </div>
+              </div>
+
+              <!-- Past Visit Log Table -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 overflow-hidden">
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Past Consultations & Visits</h4>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-xs text-left rtl:text-right border-collapse">
+                    <thead>
+                      <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                        <th class="pb-3 font-semibold strict-subheading">Date & Time</th>
+                        <th class="pb-3 font-semibold strict-subheading">Attending Specialist</th>
+                        <th class="pb-3 font-semibold strict-subheading">Session Type</th>
+                        <th class="pb-3 font-semibold strict-subheading">Diagnosis/Notes</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-250">
+                      
+                      <!-- Row 1 -->
+                      <tr>
+                        <td class="py-3.5 strict-paragraph">Jun 10, 2026 • 10:00 AM</td>
+                        <td class="py-3.5 strict-paragraph">Sarah Jenkins, PT</td>
+                        <td class="py-3.5 strict-paragraph">In-Clinic Visit</td>
+                        <td class="py-3.5 text-slate-400 dark:text-slate-500 strict-paragraph">Knee brace adjustment; joint mobility drill.</td>
+                      </tr>
+
+                      <!-- Row 2 -->
+                      <tr>
+                        <td class="py-3.5 strict-paragraph">Jun 03, 2026 • 02:30 PM</td>
+                        <td class="py-3.5 strict-paragraph">Dr. Marcus Evans</td>
+                        <td class="py-3.5 strict-paragraph">Telehealth Check</td>
+                        <td class="py-3.5 text-slate-400 dark:text-slate-500 strict-paragraph">Post-op Week 6 evaluation. Joint flexion cleared.</td>
+                      </tr>
+
+                      <!-- Row 3 -->
+                      <tr>
+                        <td class="py-3.5 strict-paragraph">May 20, 2026 • 11:15 AM</td>
+                        <td class="py-3.5 strict-paragraph">Sarah Jenkins, PT</td>
+                        <td class="py-3.5 strict-paragraph">In-Clinic Visit</td>
+                        <td class="py-3.5 text-slate-400 dark:text-slate-500 strict-paragraph">Initial extension test. Quad sets introduced.</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================= PANEL 4: MY THERAPISTS ================= -->
+        <div id="tab-therapists" class="tab-panel animate-fadeInUp hidden space-y-6 md:space-y-8">
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            
+            <!-- Surgeon Card (Marcus Evans) -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6 hover:shadow-md transition-shadow">
+              <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                <img src="assets/images/profile-marcus.png" alt="Dr. Marcus Evans" class="w-16 h-16 rounded-2xl object-cover bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+                <div>
+                  <h3 class="strict-heading text-lg font-semibold text-slate-900 dark:text-white">Dr. Marcus Evans, MD</h3>
+                  <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400">Chief Orthopedic Surgeon • Joint Reconstruction</p>
+                  <!-- Star Rating -->
+                  <div class="flex space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <span class="text-slate-400 dark:text-slate-500 text-[10px] ml-1 select-none font-semibold strict-paragraph">(98 reviews)</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="space-y-3 text-xs">
+                <p class="strict-paragraph leading-relaxed text-slate-600 dark:text-slate-300">
+                  Dr. Evans specializes in athletic knee and shoulder arthroscopy, ligament reconstruction (ACL/MCL), and articular cartilage restoration. He performed your surgery on April 12, 2026.
+                </p>
+                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                  <span>Room 302, Clinic Tower</span>
+                  <span class="text-medical-blueLight dark:text-medical-cyan">Mon, Wed Visits</span>
+                </div>
+              </div>
+
+              <button onclick="switchToChatPanel()" class="w-full py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                <i class="fa-solid fa-comment-medical text-sm"></i>
+                <span>Message Surgeon</span>
+              </button>
+            </div>
+
+            <!-- Physical Therapist Card (Sarah Jenkins) -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6 hover:shadow-md transition-shadow">
+              <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                <img src="assets/images/profile-sarah.png" alt="Sarah Jenkins" class="w-16 h-16 rounded-2xl object-cover bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+                <div>
+                  <h3 class="strict-heading text-lg font-semibold text-slate-900 dark:text-white">Sarah Jenkins, DPT</h3>
+                  <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400">Lead Physical Therapist • Sports Rehab Expert</p>
+                  <!-- Star Rating -->
+                  <div class="flex space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                    <span class="text-slate-400 dark:text-slate-500 text-[10px] ml-1 select-none font-semibold strict-paragraph">(142 reviews)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-3 text-xs">
+                <p class="strict-paragraph leading-relaxed text-slate-600 dark:text-slate-300">
+                  Sarah leads our athletic injury rehabilitation, motion analysis diagnostic program, and strength conditioning phase transitions. She oversees your daily active progression tracking.
+                </p>
+                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                  <span>Rehab Wing, Ground Floor</span>
+                  <span class="text-medical-teal font-semibold">Daily Consultation</span>
+                </div>
+              </div>
+
+              <button onclick="switchToChatPanel()" class="w-full py-2.5 rounded-xl bg-medical-blueLight text-white hover:bg-medical-blue text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                <i class="fa-solid fa-comment-medical text-sm"></i>
+                <span>Message Therapist</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================= PANEL 5: SECURE MESSAGE ================= -->
+        <div id="tab-messaging" class="tab-panel animate-fadeInUp hidden h-[calc(100vh-250px)] min-h-[400px] flex flex-col bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm">
+          
+          <!-- Messaging Panel Header -->
+          <div class="p-4 border-b border-slate-250 dark:border-slate-800 flex items-center justify-between flex-shrink-0 bg-slate-50/50 dark:bg-slate-900/50">
+            <div class="flex items-center space-x-3.5 rtl:space-x-reverse">
+              <div class="relative">
+                <img src="assets/images/profile-sarah.png" alt="Sarah Jenkins" class="w-10 h-10 rounded-xl object-cover">
+                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+              </div>
+              <div>
+                <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Sarah Jenkins, DPT</h4>
+                <p class="strict-paragraph text-[10px] text-slate-400 dark:text-slate-500">Active • Attending Therapist</p>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/20 text-medical-blueLight dark:text-medical-cyan text-[9px] font-bold uppercase tracking-wider select-none">HIPAA Compliant Secure</span>
+          </div>
+
+          <!-- Chat bubble boxes area -->
+          <div id="chat-box" class="flex-grow p-6 overflow-y-auto space-y-4 bg-slate-50/20 dark:bg-slate-950/10">
+            
+            <!-- Message received -->
+            <div class="flex items-start space-x-3 rtl:space-x-reverse max-w-[80%]">
+              <img src="assets/images/profile-sarah.png" alt="Sarah avatar" class="w-8 h-8 rounded-lg object-cover flex-shrink-0 mt-1">
+              <div class="p-3.5 rounded-2xl rounded-tl-none bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-750 text-xs shadow-sm space-y-1">
+                <p class="strict-paragraph leading-relaxed text-slate-800 dark:text-slate-200">
+                  Hi Alex, I checked your daily checklist logs. Your heel slides look very consistent. Are you still experiencing stiffness in the left knee during morning straight leg raises?
+                </p>
+                <p class="text-[9px] text-slate-400 dark:text-slate-500 text-right select-none strict-paragraph">Yesterday, 4:12 PM</p>
+              </div>
+            </div>
+
+            <!-- Message sent -->
+            <div class="flex items-start justify-end space-x-3 rtl:space-x-reverse">
+              <div class="max-w-[80%] flex flex-col items-end">
+                <div class="p-3.5 rounded-2xl rounded-tr-none bg-medical-blueLight text-white text-xs shadow-sm space-y-1">
+                  <p class="strict-paragraph leading-relaxed">
+                    Hi Sarah! The knee stiffness is gone after 5 minutes of light warming cycles. Heel extension feels much smoother today.
+                  </p>
+                  <p class="text-[9px] text-blue-100 text-right select-none strict-paragraph">Yesterday, 4:30 PM</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Message received -->
+            <div class="flex items-start space-x-3 rtl:space-x-reverse max-w-[80%]">
+              <img src="assets/images/profile-sarah.png" alt="Sarah avatar" class="w-8 h-8 rounded-lg object-cover flex-shrink-0 mt-1">
+              <div class="p-3.5 rounded-2xl rounded-tl-none bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-750 text-xs shadow-sm space-y-1">
+                <p class="strict-paragraph leading-relaxed text-slate-800 dark:text-slate-200">
+                  That is wonderful to hear! Just remember not to force extension beyond the comfort range during heel slides. Let's run a joint flexion mobility check tomorrow at the clinic.
+                </p>
+                <p class="text-[9px] text-slate-400 dark:text-slate-500 text-right select-none strict-paragraph">Yesterday, 4:32 PM</p>
+              </div>
+            </div>
+
+            <!-- Inner target content container for custom injections -->
+            <div id="chat-injections" class="space-y-4"></div>
+
+            <!-- Typing indicator -->
+            <div id="chat-typing-indicator" class="hidden flex items-start space-x-3 rtl:space-x-reverse">
+              <img src="assets/images/profile-sarah.png" alt="Sarah avatar" class="w-8 h-8 rounded-lg object-cover flex-shrink-0 mt-1">
+              <div class="p-3 py-2.5 rounded-2xl rounded-tl-none bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-750 flex items-center space-x-1 shadow-sm">
+                <span class="w-1.5 h-1.5 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce"></span>
+                <span class="w-1.5 h-1.5 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                <span class="w-1.5 h-1.5 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Message Input area -->
+          <div class="p-4 border-t border-slate-250 dark:border-slate-800 flex items-center space-x-3 rtl:space-x-reverse flex-shrink-0 bg-slate-50/50 dark:bg-slate-900/50">
+            <input type="text" id="chat-input" class="flex-grow px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm strict-paragraph" placeholder="Type a secure message...">
+            <button id="chat-send-btn" class="w-10 h-10 rounded-xl bg-medical-blueLight text-white flex items-center justify-center hover:bg-medical-blue hover:scale-105 active:scale-95 transition-all shadow-sm">
+              <i class="fa-solid fa-paper-plane text-sm"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- ================= PANEL 6: ACCOUNT SETTINGS ================= -->
+        <div id="tab-settings" class="tab-panel animate-fadeInUp hidden space-y-6 md:space-y-8">
+          
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+            
+            <!-- Left 2 cols form layout -->
+            <div class="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white mb-6">Patient Portal Preferences</h4>
+              
+              <form id="settings-form" class="space-y-6" novalidate>
+                
+                <!-- Account details section -->
+                <div class="space-y-4">
+                  <h5 class="strict-subheading text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider pb-1.5 border-b border-slate-100 dark:border-slate-800">1. Account Details</h5>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label for="settings-name" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Full Name</label>
+                      <input type="text" id="settings-name" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm strict-paragraph">
+                    </div>
+                    <div>
+                      <label for="settings-email" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Email Address</label>
+                      <input type="email" id="settings-email" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm strict-paragraph">
+                    </div>
+                    <div>
+                      <label for="settings-phone" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Phone Number</label>
+                      <input type="tel" id="settings-phone" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm strict-paragraph">
+                    </div>
+                    <div>
+                      <label for="settings-injury" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Injury Type Status</label>
+                      <input type="text" id="settings-injury" disabled class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-sm strict-paragraph">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Emergency Contacts -->
+                <div class="space-y-4">
+                  <h5 class="strict-subheading text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider pb-1.5 border-b border-slate-100 dark:border-slate-800">2. Emergency Contact</h5>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label for="settings-emergency-name" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Contact Name</label>
+                      <input type="text" id="settings-emergency-name" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm strict-paragraph" placeholder="E.g., Jane Johnson">
+                    </div>
+                    <div>
+                      <label for="settings-emergency-phone" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Contact Phone</label>
+                      <input type="tel" id="settings-emergency-phone" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm strict-paragraph" placeholder="E.g., +1 (555) 012-3456">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Notification preferences -->
+                <div class="space-y-4">
+                  <h5 class="strict-subheading text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider pb-1.5 border-b border-slate-100 dark:border-slate-800">3. Portal Notifications</h5>
+                  <div class="flex flex-wrap gap-6 text-xs text-slate-600 dark:text-slate-300">
+                    <label class="flex items-center space-x-2.5 rtl:space-x-reverse cursor-pointer select-none strict-paragraph">
+                      <input type="checkbox" id="settings-notify-email" class="w-4 h-4 rounded border-slate-300 dark:border-slate-700 text-medical-blueLight focus:ring-medical-blueLight" checked>
+                      <span>Email session reminders</span>
+                    </label>
+                    <label class="flex items-center space-x-2.5 rtl:space-x-reverse cursor-pointer select-none strict-paragraph">
+                      <input type="checkbox" id="settings-notify-sms" class="w-4 h-4 rounded border-slate-300 dark:border-slate-700 text-medical-blueLight focus:ring-medical-blueLight" checked>
+                      <span>SMS daily workout checklists</span>
+                    </label>
+                    <label class="flex items-center space-x-2.5 rtl:space-x-reverse cursor-pointer select-none strict-paragraph">
+                      <input type="checkbox" id="settings-notify-push" class="w-4 h-4 rounded border-slate-300 dark:border-slate-700 text-medical-blueLight focus:ring-medical-blueLight">
+                      <span>In-app alert banners</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Goals settings -->
+                <div class="space-y-4">
+                  <h5 class="strict-subheading text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider pb-1.5 border-b border-slate-100 dark:border-slate-800">4. Recovery Goals</h5>
+                  <div>
+                    <label for="settings-goals" class="block text-slate-700 dark:text-slate-300 text-xs font-semibold mb-1 strict-subheading">Personal Objectives</label>
+                    <textarea id="settings-goals" rows="3" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm strict-paragraph" placeholder="E.g., Complete post-op recovery. Safely return to college soccer matches. Maintain consistent quad strength symmetry..."></textarea>
+                  </div>
+                </div>
+
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-medical-blueLight text-white font-semibold hover:bg-medical-blue active:scale-95 transition-all text-xs shadow-sm">
+                  Save Changes
+                </button>
+
+              </form>
+            </div>
+
+            <!-- Right col details widget -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4">
+              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Active Portal Status</h4>
+              <div class="space-y-4 text-xs">
+                
+                <div class="flex items-start space-x-3 rtl:space-x-reverse">
+                  <div class="p-2.5 bg-green-50 dark:bg-green-950/20 text-green-500 rounded-xl flex-shrink-0"><i class="fa-solid fa-shield-halved text-sm"></i></div>
+                  <div>
+                    <p class="font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Security Profile</p>
+                    <p class="text-[10px] text-slate-400 dark:text-slate-500 strict-paragraph">Portal connection encrypted via SSL/TLS. Patient data compliance sync active.</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3 rtl:space-x-reverse">
+                  <div class="p-2.5 bg-blue-50 dark:bg-blue-950/20 text-medical-blueLight dark:text-medical-cyan rounded-xl flex-shrink-0"><i class="fa-solid fa-server text-sm"></i></div>
+                  <div>
+                    <p class="font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Local Data Sync</p>
+                    <p class="text-[10px] text-slate-400 dark:text-slate-500 strict-paragraph">All exercises, scheduled slots, and contact info saved persistently.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- ================= OVERLAY: VIDEO PLAYBACK SIMULATOR MODAL ================= -->
+  <div id="video-modal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl animate-fadeInUp">
+      <!-- Modal Title -->
+      <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <h4 id="video-modal-title" class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Exercise Demonstration</h4>
+        <button id="video-modal-close" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <!-- Video Simulator Canvas -->
+      <div class="relative bg-slate-950 aspect-video flex flex-col justify-between p-4 text-white">
+        <!-- Overlay controls simulation -->
+        <div class="flex justify-between items-center text-[10px] bg-slate-950/40 p-2 rounded-xl backdrop-blur-sm">
+          <span class="font-bold flex items-center space-x-1.5"><i class="fa-solid fa-house-medical text-medical-cyan"></i> <span>AcuraCare Demo Channel</span></span>
+          <span class="px-2 py-0.5 rounded bg-red-500 uppercase font-semibold">Simulated Stream</span>
+        </div>
+        
+        <!-- Center play action visual -->
+        <div class="flex flex-col items-center justify-center space-y-3">
+          <div class="w-16 h-16 rounded-full bg-medical-blueLight/90 text-white flex items-center justify-center text-xl shadow-lg border border-white/20 animate-pulse">
+            <i class="fa-solid fa-circle-notch animate-spin text-lg"></i>
+          </div>
+          <p class="text-xs text-slate-300 font-medium strict-paragraph">Streaming clinical drill details...</p>
+        </div>
+
+        <!-- Timeline control slider -->
+        <div class="space-y-1">
+          <div class="w-full bg-white/25 rounded-full h-1 relative overflow-hidden">
+            <div class="bg-medical-cyan absolute left-0 top-0 h-full w-[35%]"></div>
+          </div>
+          <div class="flex justify-between items-center text-[9px] text-slate-400">
+            <span>0:48 / 2:30 Mins</span>
+            <span>HD 1080p</span>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Description / Therapist advice -->
+      <div class="p-5 space-y-2 text-xs">
+        <p class="font-bold text-slate-900 dark:text-white strict-subheading"><i class="fa-solid fa-comment-medical text-medical-blueLight dark:text-medical-cyan mr-1.5"></i>Therapist Safety Tip:</p>
+        <p id="video-modal-desc" class="strict-paragraph leading-relaxed text-slate-600 dark:text-slate-300">
+          Flex your joint slowly. Stop immediately if you feel pain. Keep breathing regularly.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= OVERLAY: APPOINTMENT CANCELLATION WARNING ================= -->
+  <div id="cancel-modal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-5 animate-fadeInUp">
+      <div class="flex items-center space-x-3.5 rtl:space-x-reverse text-red-500">
+        <div class="w-10 h-10 rounded-full bg-red-50 dark:bg-red-950/20 flex items-center justify-center text-lg shadow-inner"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <h4 class="strict-heading text-base font-semibold">Cancel Appointment?</h4>
+      </div>
+      <p class="strict-paragraph text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+        Are you sure you want to cancel this physiotherapy rehab session? Please make sure to reschedule as consistent workouts are critical for knee joint extension stability.
+      </p>
+      <div class="flex space-x-3 rtl:space-x-reverse justify-end text-xs font-semibold">
+        <button id="cancel-modal-dismiss" class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">Close</button>
+        <button id="cancel-modal-confirm" class="px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 shadow-sm">Confirm Cancellation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CLIENT JAVASCRIPT CONTROLLERS ================= -->
+  <script>
+    // --- Global states ---
+    let currentUserActive = null;
+    let appointments = [];
+    let selectedCancelId = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Fetch user status & settings sync
+      currentUserActive = JSON.parse(localStorage.getItem('currentUserActive'));
+      if (!currentUserActive) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Sync settings fields and placeholders
+      document.getElementById('settings-name').value = currentUserActive.fullName || '';
+      document.getElementById('settings-email').value = currentUserActive.email || '';
+      document.getElementById('settings-phone').value = currentUserActive.phone || '';
+      document.getElementById('settings-injury').value = currentUserActive.injuryType || '';
+      document.getElementById('summary-injury-type').textContent = currentUserActive.injuryType || '';
+      
+      const pNames = document.querySelectorAll('.patient-name');
+      pNames.forEach(p => p.textContent = currentUserActive.fullName || 'Alex');
+
+      // Refresh upper text widget values
+      document.getElementById('user-display-name').textContent = currentUserActive.fullName || 'Alex Johnson';
+      document.getElementById('user-display-stage').textContent = currentUserActive.injuryType || 'ACL Tear Recovery';
+
+      // 2. Initialize appointments list
+      const savedAppts = localStorage.getItem('appointments');
+      if (savedAppts) {
+        appointments = JSON.parse(savedAppts);
+      } else {
+        // Mock default seed
+        appointments = [
+          {
+            id: 'appt-default',
+            date: getTomorrowDateString(),
+            time: '10:00',
+            staff: 'Sarah Jenkins',
+            type: 'In-Clinic Visit',
+            notes: 'Wear comfortable athletic attire.'
+          }
+        ];
+        localStorage.setItem('appointments', JSON.stringify(appointments));
+      }
+      renderAppointments();
+
+      // 3. Tab switching listeners
+      const tabs = document.querySelectorAll('[data-tab]');
+      tabs.forEach(tabBtn => {
+        tabBtn.addEventListener('click', () => {
+          const tabId = tabBtn.getAttribute('data-tab');
+          
+          // Switch active tabs menu classes
+          tabs.forEach(t => t.classList.remove('active'));
+          tabBtn.classList.add('active');
+
+          // Switch panel display
+          const panels = document.querySelectorAll('.tab-panel');
+          panels.forEach(p => p.classList.add('hidden'));
+          
+          const activePanel = document.getElementById(tabId);
+          if (activePanel) {
+            activePanel.classList.remove('hidden');
+          }
+
+          // Modify header title
+          const panelTitlesMap = {
+            'tab-overview': 'Dashboard Overview',
+            'tab-exercises': 'Rehab Exercise Center',
+            'tab-appointments': 'Schedule Session',
+            'tab-therapists': 'My Recovery Specialists',
+            'tab-messaging': 'Secure Messaging',
+            'tab-settings': 'Patient Profile Settings'
+          };
+          
+          document.getElementById('panel-title').textContent = panelTitlesMap[tabId] || 'Portal Dashboard';
+
+          // Close mobile drawer on tab select
+          closeMobileDrawer();
+        });
+      });
+
+      // 4. Mobile side drawer toggle controllers
+      const sidebar = document.getElementById('portal-sidebar');
+      const overlay = document.getElementById('mobile-sidebar-overlay');
+      const toggleBtn = document.getElementById('mobile-sidebar-toggle');
+
+      const openMobileDrawer = () => {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+      };
+
+      const closeMobileDrawer = () => {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      };
+
+      if (toggleBtn) toggleBtn.addEventListener('click', openMobileDrawer);
+      if (overlay) overlay.addEventListener('click', closeMobileDrawer);
+
+      // 5. Checkbox progress math calculations
+      const checklist = document.querySelectorAll('.exercise-checkbox');
+      checklist.forEach(chk => {
+        chk.addEventListener('change', updateExerciseProgress);
+      });
+      updateExerciseProgress(); // Run once at load
+
+      // 6. Secure Message Client Controllers
+      const chatInput = document.getElementById('chat-input');
+      const chatSendBtn = document.getElementById('chat-send-btn');
+      const chatBox = document.getElementById('chat-box');
+      const typingIndicator = document.getElementById('chat-typing-indicator');
+
+      const sendMessage = () => {
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        // Hide unread badge if messaging active
+        document.getElementById('unread-badge').classList.add('hidden');
+
+        // Append user speech bubble
+        const userBubble = document.createElement('div');
+        userBubble.className = 'flex items-start justify-end space-x-3 rtl:space-x-reverse';
+        userBubble.innerHTML = `
+          <div class="max-w-[80%] flex flex-col items-end">
+            <div class="p-3.5 rounded-2xl rounded-tr-none bg-medical-blueLight text-white text-xs shadow-sm space-y-1">
+              <p class="strict-paragraph leading-relaxed">${escapeHtml(text)}</p>
+              <p class="text-[9px] text-blue-100 text-right select-none strict-paragraph">Just Now</p>
+            </div>
+          </div>
+        `;
+        document.getElementById('chat-injections').appendChild(userBubble);
+        chatInput.value = '';
+        scrollChatToBottom();
+
+        // Trigger therapist automated reply delay (1.5 seconds)
+        typingIndicator.classList.remove('hidden');
+        scrollChatToBottom();
+
+        setTimeout(() => {
+          typingIndicator.classList.add('hidden');
+          
+          let responseText = "Thank you for the update, Alex! Keep working on the extension ranges. Let me check your joint mobility tomorrow.";
+          
+          const lowerText = text.toLowerCase();
+          if (lowerText.includes('pain') || lowerText.includes('stiff') || lowerText.includes('hurt')) {
+            responseText = "If you feel a sharp pain or swelling, please stop the exercises immediately, apply ice for 15 minutes, and keep the leg elevated. We will review this tomorrow.";
+          } else if (lowerText.includes('exercise') || lowerText.includes('sets') || lowerText.includes('reps')) {
+            responseText = "Excellent progress on your prescribed sets! Focus on contracting your quadriceps completely, and do not rush through the cycles.";
+          } else if (lowerText.includes('appointment') || lowerText.includes('schedule') || lowerText.includes('time')) {
+            responseText = "I see your scheduled slot. I look forward to checking your left knee flexion stability tomorrow.";
+          }
+
+          const ptBubble = document.createElement('div');
+          ptBubble.className = 'flex items-start space-x-3 rtl:space-x-reverse max-w-[80%]';
+          ptBubble.innerHTML = `
+            <img src="assets/images/profile-sarah.png" alt="Sarah avatar" class="w-8 h-8 rounded-lg object-cover flex-shrink-0 mt-1">
+            <div class="p-3.5 rounded-2xl rounded-tl-none bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-750 text-xs shadow-sm space-y-1">
+              <p class="strict-paragraph leading-relaxed text-slate-800 dark:text-slate-200">${responseText}</p>
+              <p class="text-[9px] text-slate-400 dark:text-slate-500 text-right select-none strict-paragraph">Just Now</p>
+            </div>
+          `;
+          document.getElementById('chat-injections').appendChild(ptBubble);
+          scrollChatToBottom();
+        }, 1500);
+      };
+
+      if (chatSendBtn) chatSendBtn.addEventListener('click', sendMessage);
+      if (chatInput) chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') sendMessage();
+      });
+
+      // 7. Schedule Session Appointment creation form submit
+      const apptForm = document.getElementById('book-appt-form');
+      if (apptForm) {
+        // Set default minimum date limit to today
+        document.getElementById('book-date').min = new Date().toISOString().split('T')[0];
+
+        apptForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const date = document.getElementById('book-date').value;
+          const time = document.getElementById('book-time').value;
+          const staff = document.getElementById('book-staff').value;
+          const type = document.getElementById('book-type').value;
+          const notes = document.getElementById('book-notes').value.trim();
+
+          if (!date || !time || !staff || !type) {
+            alert('Please select date, time, specialist and consultation type.');
+            return;
+          }
+
+          const newAppt = {
+            id: 'appt-' + Date.now(),
+            date,
+            time,
+            staff,
+            type,
+            notes: notes || 'Daily active recovery drills.'
+          };
+
+          appointments.push(newAppt);
+          localStorage.setItem('appointments', JSON.stringify(appointments));
+          renderAppointments();
+          apptForm.reset();
+
+          alert('Appointment booked successfully!');
+        });
+      }
+
+      // 8. Settings Form submit controller
+      const settingsForm = document.getElementById('settings-form');
+      if (settingsForm) {
+        settingsForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('settings-name').value.trim();
+          const email = document.getElementById('settings-email').value.trim();
+          const phone = document.getElementById('settings-phone').value.trim();
+          
+          if (!name || !email || !phone) {
+            alert('Name, email, and phone number are required.');
+            return;
+          }
+
+          // Save settings changes
+          currentUserActive.fullName = name;
+          currentUserActive.email = email;
+          currentUserActive.phone = phone;
+
+          // Save emergency contacts, notification preferences and goals to localStorage
+          currentUserActive.emergencyName = document.getElementById('settings-emergency-name').value.trim();
+          currentUserActive.emergencyPhone = document.getElementById('settings-emergency-phone').value.trim();
+          currentUserActive.emailNotifications = document.getElementById('settings-notify-email').checked;
+          currentUserActive.smsNotifications = document.getElementById('settings-notify-sms').checked;
+          currentUserActive.pushNotifications = document.getElementById('settings-notify-push').checked;
+          currentUserActive.personalGoals = document.getElementById('settings-goals').value.trim();
+
+          localStorage.setItem('currentUserActive', JSON.stringify(currentUserActive));
+          localStorage.setItem('currentUser', JSON.stringify(currentUserActive)); // Sync primary db
+
+          // Update header profile display
+          document.getElementById('user-display-name').textContent = name;
+          const pNames = document.querySelectorAll('.patient-name');
+          pNames.forEach(p => p.textContent = name);
+
+          alert('Settings updated successfully!');
+        });
+      }
+
+      // 9. Video modal play/close controllers
+      document.getElementById('video-modal-close').addEventListener('click', closeVideoPlayer);
+      document.getElementById('video-modal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('video-modal')) closeVideoPlayer();
+      });
+
+      // 10. Cancellation Confirm Modals
+      document.getElementById('cancel-modal-dismiss').addEventListener('click', closeCancelModal);
+      document.getElementById('cancel-modal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('cancel-modal')) closeCancelModal();
+      });
+      document.getElementById('cancel-modal-confirm').addEventListener('click', confirmApptCancellation);
+
+      // 11. Sign Out Event
+      document.getElementById('signout-btn').addEventListener('click', () => {
+        localStorage.removeItem('currentUserActive');
+        window.location.href = 'login.html';
+      });
+
+    });
+
+    // --- Switch tab panels ---
+    function switchToChatPanel() {
+      const chatTabBtn = document.querySelector('[data-tab="tab-messaging"]');
+      if (chatTabBtn) chatTabBtn.click();
+    }
+
+    // --- Helper date math ---
+    function getTomorrowDateString() {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      return tomorrow.toISOString().split('T')[0];
+    }
+
+    function formatDisplayDate(dateStr) {
+      if (!dateStr) return '';
+      const parts = dateStr.split('-');
+      if (parts.length !== 3) return dateStr;
+      
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const year = parts[0];
+      const month = months[parseInt(parts[1], 10) - 1];
+      const day = parts[2];
+      
+      return `${month} ${day}, ${year}`;
+    }
+
+    function formatDisplayTime(timeStr) {
+      if (!timeStr) return '';
+      const parts = timeStr.split(':');
+      if (parts.length < 2) return timeStr;
+      
+      let hour = parseInt(parts[0], 10);
+      const min = parts[1];
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      
+      hour = hour % 12;
+      hour = hour ? hour : 12; // the hour '0' should be '12'
+      
+      return `${hour}:${min} ${ampm}`;
+    }
+
+    // --- Update exercise checklist progress bar & metrics ---
+    function updateExerciseProgress() {
+      const checklist = document.querySelectorAll('.exercise-checkbox');
+      const total = checklist.length;
+      let checkedCount = 0;
+
+      checklist.forEach(chk => {
+        if (chk.checked) checkedCount++;
+      });
+
+      const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+      
+      // Update exercises progress widget elements
+      document.getElementById('workout-percentage-text').textContent = `${percentage}% (${checkedCount} of ${total} sets)`;
+      document.getElementById('workout-progress-bar').style.width = `${percentage}%`;
+
+      // Synchronize index cards values
+      // We start with 72% basic index. Let's adjust slightly:
+      // Base progress (e.g. 70%) + workout completed offset (e.g., up to 4%)
+      const calculatedIndex = 70 + Math.round((checkedCount / total) * 4);
+      
+      const radialProgressText = document.getElementById('radial-progress-text');
+      if (radialProgressText) {
+        radialProgressText.textContent = `${calculatedIndex}%`;
+      }
+      
+      const radialProgressCircle = document.getElementById('radial-progress-bar');
+      if (radialProgressCircle) {
+        // dashoffset values calculated for dasharray 100
+        radialProgressCircle.setAttribute('stroke-dasharray', `${calculatedIndex}, 100`);
+      }
+    }
+
+    // --- Video Reference Modal Visual trigger ---
+    function playExerciseVideo(title, desc) {
+      const modal = document.getElementById('video-modal');
+      const modalTitle = document.getElementById('video-modal-title');
+      const modalDesc = document.getElementById('video-modal-desc');
+
+      if (modal && modalTitle && modalDesc) {
+        modalTitle.textContent = title;
+        modalDesc.textContent = desc;
+        modal.classList.remove('hidden');
+      }
+    }
+
+    function closeVideoPlayer() {
+      document.getElementById('video-modal').classList.add('hidden');
+    }
+
+    // --- Render list elements dynamically ---
+    function renderAppointments() {
+      const container = document.getElementById('appointments-list-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      if (appointments.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-6 text-slate-400 dark:text-slate-500 text-xs strict-paragraph">
+            <i class="fa-solid fa-calendar-xmark text-lg mb-2 block"></i>
+            <span>No scheduled sessions found. Book a consultation above.</span>
+          </div>
+        `;
+        return;
+      }
+
+      // Sort appointments by date
+      appointments.sort((a, b) => new Date(a.date + 'T' + a.time) - new Date(b.date + 'T' + b.time));
+
+      appointments.forEach((appt, index) => {
+        const dateStr = formatDisplayDate(appt.date);
+        const timeStr = formatDisplayTime(appt.time);
+        
+        // Dynamic card markup
+        const apptCard = document.createElement('div');
+        apptCard.className = `p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border ${index === 0 ? 'border-medical-blueLight dark:border-medical-cyan/50 shadow-sm relative overflow-hidden' : 'border-slate-100 dark:border-slate-800/50'} text-xs flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0`;
+        
+        // Indigo glowing badge for nearest session
+        const badge = index === 0 ? '<span class="absolute top-0 right-0 bg-medical-blueLight text-white px-2 py-0.5 rounded-bl text-[8px] font-bold uppercase tracking-wider select-none">Next Visit</span>' : '';
+        
+        apptCard.innerHTML = `
+          ${badge}
+          <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+            <div class="p-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl flex-shrink-0 shadow-inner">
+              <i class="fa-solid fa-laptop-medical text-base"></i>
+            </div>
+            <div class="space-y-1">
+              <h5 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">${appt.staff}</h5>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-300 font-medium">${appt.type} • ${dateStr} at ${timeStr}</p>
+              <p class="strict-paragraph text-[10px] text-slate-400 dark:text-slate-500 italic">"${appt.notes}"</p>
+            </div>
+          </div>
+          <div class="flex space-x-2.5 rtl:space-x-reverse justify-end flex-shrink-0">
+            <button onclick="rescheduleApptAnchor()" class="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-350 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold transition-all">Reschedule</button>
+            <button onclick="triggerCancelModal('${appt.id}')" class="px-3.5 py-1.5 rounded-xl bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 hover:bg-red-100/60 dark:hover:bg-red-950/45 font-semibold transition-all">Cancel</button>
+          </div>
+        `;
+        container.appendChild(apptCard);
+      });
+
+      // Update next session overview stats details
+      const nearest = appointments[0];
+      if (nearest) {
+        document.getElementById('next-session-title').textContent = nearest.type;
+        document.getElementById('next-session-time').textContent = `${formatDisplayDate(nearest.date)} at ${formatDisplayTime(nearest.time)}`;
+        document.getElementById('next-session-staff').textContent = `with ${nearest.staff}`;
+      } else {
+        document.getElementById('next-session-title').textContent = 'No Sessions Scheduled';
+        document.getElementById('next-session-time').textContent = 'Book a visit above';
+        document.getElementById('next-session-staff').textContent = '';
+      }
+    }
+
+    // --- Reschedule event anchor ---
+    function rescheduleApptAnchor() {
+      // Scroll to the book appt form container
+      const form = document.getElementById('book-appt-form');
+      if (form) {
+        form.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('book-date').focus();
+      }
+    }
+
+    // --- Cancellation Flow ---
+    function triggerCancelModal(id) {
+      selectedCancelId = id;
+      document.getElementById('cancel-modal').classList.remove('hidden');
+    }
+
+    function closeCancelModal() {
+      document.getElementById('cancel-modal').classList.add('hidden');
+      selectedCancelId = null;
+    }
+
+    function confirmApptCancellation() {
+      if (!selectedCancelId) return;
+      
+      appointments = appointments.filter(a => a.id !== selectedCancelId);
+      localStorage.setItem('appointments', JSON.stringify(appointments));
+      
+      renderAppointments();
+      closeCancelModal();
+      alert('Appointment cancelled successfully!');
+    }
+
+    // --- Scroll secure chat ---
+    function scrollChatToBottom() {
+      const box = document.getElementById('chat-box');
+      if (box) {
+        box.scrollTop = box.scrollHeight;
+      }
+    }
+
+    // --- Utilities escapes ---
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+  <!-- Global Shared JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anatomical Symptom Checker | AcuraCare Sports Orthopedics</title>
+  <meta name="description" content="Use AcuraCare's interactive joint checker to explore sports injuries, ligament tears, diagnostic pathways, and recovery periods.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Tailwind Config -->
+  <script src="assets/js/tailwind-config.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/index.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-medical-darkBg dark:text-medical-darkText min-h-screen flex flex-col transition-colors duration-300">
+
+  <!-- ================= STICKY HEADER ================= -->
+  <header id="sticky-header" class="sticky top-0 w-full z-50 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Clinic Logo -->
+        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+          <div class="w-10 h-10 rounded-lg bg-medical-blueLight flex items-center justify-center text-white">
+            <i class="fa-solid fa-house-medical text-lg"></i>
+          </div>
+          <span class="strict-heading text-xl tracking-tight text-medical-navy dark:text-white">AcuraCare</span>
+        </a>
+
+        <!-- Desktop Navigation Header (Updated to include Symptom Checker) -->
+        <nav class="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
+          <a href="index.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home</a>
+          <a href="home-2.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home 2</a>
+          <a href="about.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">About</a>
+          <a href="symptom-checker.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Symptom Checker</a>
+          <a href="blog.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Blog</a>
+          <a href="contact.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Contact</a>
+          <a href="dashboard.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Dashboard</a>
+        </nav>
+
+        <!-- Header Right side Controls -->
+        <div class="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
+          <button class="rtl-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg text-xs font-semibold uppercase tracking-wider border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
+            RTL
+          </button>
+          
+          <button class="theme-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" aria-label="Toggle Theme">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <!-- Sign Up CTA -->
+          <a href="signup.html" class="px-5 py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue transition-all duration-300 shadow-sm text-sm strict-subheading">
+            Sign Up
+          </a>
+        </div>
+
+        <!-- Mobile Hamburg Trigger -->
+        <div class="flex items-center space-x-2 rtl:space-x-reverse lg:hidden">
+          <button class="rtl-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+            RTL
+          </button>
+          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+          <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle Mobile Menu">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Drawer menu container -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 pt-2 pb-6 space-y-2">
+      <a href="index.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home</a>
+      <a href="home-2.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home 2</a>
+      <a href="about.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">About</a>
+      <a href="symptom-checker.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Symptom Checker</a>
+      <a href="blog.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Blog</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Contact</a>
+      <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Dashboard</a>
+      <a href="signup.html" class="block w-full text-center px-4 py-2.5 rounded-lg bg-medical-blueLight text-white strict-subheading mt-4">Sign Up</a>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTAINER ================= -->
+  <main class="flex-grow">
+    
+    <!-- Hero Banner section -->
+    <section class="relative bg-gradient-to-br from-medical-navy via-slate-900 to-slate-950 text-white overflow-hidden min-h-[480px] flex items-center">
+      <!-- Background dot pattern -->
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+      <!-- Decorative glow -->
+      <div class="absolute bottom-0 right-1/3 w-80 h-80 bg-medical-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          <!-- Left: Text Content -->
+          <div class="space-y-6">
+            <!-- Pulse badge -->
+            <div class="inline-flex items-center space-x-2 rtl:space-x-reverse px-3 py-1.5 rounded-full bg-medical-cyan/15 border border-medical-cyan/25 text-medical-cyan">
+              <span class="w-2 h-2 rounded-full bg-medical-cyan animate-pulse"></span>
+              <span class="text-xs uppercase tracking-wider strict-subheading">Self-Diagnostic Joint Guide</span>
+            </div>
+
+            <h1 class="strict-heading text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">
+              Interactive Symptom &amp; Injury Checker
+            </h1>
+            <p class="strict-paragraph text-slate-300 text-base leading-relaxed max-w-lg">
+              Select key joints on the anatomical body map to understand ligament damage, joint inflammation, physical therapy options, and standard clinical recovery timelines.
+            </p>
+
+            <!-- Feature pills -->
+            <div class="flex flex-wrap gap-3 pt-1">
+              <span class="inline-flex items-center space-x-1.5 rtl:space-x-reverse bg-slate-800/60 border border-slate-700/50 text-slate-300 px-3 py-1.5 rounded-lg text-xs strict-subheading">
+                <i class="fa-solid fa-bone text-medical-cyan text-xs"></i>
+                <span>8 Clickable Joint Zones</span>
+              </span>
+              <span class="inline-flex items-center space-x-1.5 rtl:space-x-reverse bg-slate-800/60 border border-slate-700/50 text-slate-300 px-3 py-1.5 rounded-lg text-xs strict-subheading">
+                <i class="fa-solid fa-stethoscope text-medical-cyan text-xs"></i>
+                <span>Clinical Symptom Guides</span>
+              </span>
+              <span class="inline-flex items-center space-x-1.5 rtl:space-x-reverse bg-slate-800/60 border border-slate-700/50 text-slate-300 px-3 py-1.5 rounded-lg text-xs strict-subheading">
+                <i class="fa-solid fa-clock text-medical-cyan text-xs"></i>
+                <span>Recovery Timelines</span>
+              </span>
+            </div>
+
+            <!-- CTA buttons -->
+            <div class="flex flex-wrap gap-4 pt-1">
+              <a href="#symptom-checker-tool" class="px-6 py-3 rounded-xl bg-medical-blueLight hover:bg-medical-blue text-white text-sm strict-subheading transition-all duration-200 shadow-lg shadow-medical-blueLight/25">
+                <i class="fa-solid fa-magnifying-glass mr-2"></i>Start Symptom Check
+              </a>
+              <a href="contact.html" class="px-6 py-3 rounded-xl border border-slate-600 hover:border-slate-500 hover:bg-slate-800/60 text-slate-200 text-sm strict-subheading transition-all duration-200">
+                Book a Consultation
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Hero Image -->
+          <div class="relative hidden lg:block">
+            <!-- Glow frame -->
+            <div class="absolute -inset-3 bg-gradient-to-br from-medical-cyan/15 to-medical-blueLight/10 rounded-3xl blur-xl"></div>
+            <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40">
+              <img src="assets/images/symptom-checker-hero.png"
+                   alt="Medical professional using a digital anatomical body map tool for joint symptom diagnosis"
+                   class="w-full h-[360px] object-cover object-center">
+              <!-- Bottom gradient fade -->
+              <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/70 to-transparent"></div>
+              <!-- Floating info badge -->
+              <div class="absolute bottom-4 left-4 flex items-center space-x-2 rtl:space-x-reverse bg-slate-950/75 backdrop-blur-sm border border-slate-700/50 px-3 py-1.5 rounded-full">
+                <i class="fa-solid fa-shield-halved text-medical-cyan text-xs"></i>
+                <span class="text-xs text-slate-200 font-medium">Clinically reviewed diagnostic guide</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Symptom Checker Section -->
+    <section class="py-16 bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          <!-- LEFT COLUMN: Body Map Joint Selector Nodes (Col 1-5) -->
+          <div class="lg:col-span-5 p-6 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl flex flex-col items-center justify-center relative">
+            
+            <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-6 text-center">Click highlighted joints to inspect:</h3>
+            
+            <!-- Anatomical Map Diagram -->
+            <div class="relative w-64 h-[420px] bg-slate-100 dark:bg-slate-950 rounded-2xl flex items-center justify-center border border-slate-200/50 dark:border-slate-800">
+              
+              <!-- Human Body Outline Silhouette SVG -->
+              <svg class="w-full h-5/6 text-slate-300/60 dark:text-slate-800/80 drop-shadow-[0_2px_8px_rgba(0,0,0,0.04)]" fill="currentColor" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Head -->
+                <circle cx="50" cy="16" r="8.5" />
+                <!-- Neck, Torso & Limbs -->
+                <path d="M 47 24 L 47 30 C 47 30, 36 31, 31 35 C 28 37, 26 43, 25 55 C 24 62, 23 70, 22 82 C 21.5 86, 21 91, 23.5 91 C 25.5 91, 26 86, 27 82 C 28.5 70, 29.5 62, 30.5 55 C 31.5 49, 34 46, 34 46 C 34 46, 36 58, 36 72 C 36 78, 35 84, 35 92 C 35 106, 36 122, 37 136 C 37.5 146, 37 162, 36.5 174 C 36.3 180, 35.5 186, 33 189 C 31 191, 31 193, 34 193 C 37 193, 39 191, 39.5 186 C 40.5 174, 41 158, 41.5 146 C 42 136, 43 122, 44.5 106 L 50 98 L 55.5 106 C 57 122, 58 136, 58.5 146 C 59 158, 59.5 174, 60.5 186 C 61 191, 63 193, 66 193 C 69 193, 69 191, 67 189 C 64.5 186, 63.7 180, 63.5 174 C 63 162, 62.5 146, 63 136 C 64 122, 65 106, 65 92 C 65 84, 64 78, 64 72 C 64 58, 66 46, 66 46 C 66 46, 68.5 49, 69.5 55 C 70.5 62, 71.5 70, 73 82 C 74 86, 74.5 91, 76.5 91 C 79 91, 78.5 86, 78 82 C 77 70, 76 62, 75 55 C 74 43, 72 37, 69 35 C 64 31, 53 30, 53 30 L 53 24 Z" />
+              </svg>
+
+              <!-- Interactive Joint Node Points -->
+              <!-- Shoulder Node -->
+              <button onclick="selectJoint('shoulder')" id="node-shoulder" class="joint-node absolute top-[96px] left-[95px] w-5 h-5 rounded-full bg-medical-blueLight/30 border-2 border-medical-blueLight flex items-center justify-center hover:scale-125 transition-transform group" aria-label="Inspect Shoulder">
+                <span class="w-2 h-2 rounded-full bg-medical-blueLight animate-ping absolute"></span>
+                <span class="w-2 h-2 rounded-full bg-medical-blueLight"></span>
+              </button>
+
+              <!-- Elbow Node -->
+              <button onclick="selectJoint('elbow')" id="node-elbow" class="joint-node absolute top-[147px] left-[84px] w-5 h-5 rounded-full bg-medical-blueLight/30 border-2 border-medical-blueLight flex items-center justify-center hover:scale-125 transition-transform" aria-label="Inspect Elbow">
+                <span class="w-2 h-2 rounded-full bg-medical-blueLight"></span>
+              </button>
+
+              <!-- Spine/Back Node -->
+              <button onclick="selectJoint('spine')" id="node-spine" class="joint-node absolute top-[131px] left-[49.5%] transform -translate-x-1/2 w-5 h-5 rounded-full bg-medical-blueLight/30 border-2 border-medical-blueLight flex items-center justify-center hover:scale-125 transition-transform" aria-label="Inspect Spine">
+                <span class="w-2 h-2 rounded-full bg-medical-blueLight"></span>
+              </button>
+
+              <!-- Hip Node -->
+              <button onclick="selectJoint('hip')" id="node-hip" class="joint-node absolute top-[196px] left-[45%] w-5 h-5 rounded-full bg-medical-blueLight/30 border-2 border-medical-blueLight flex items-center justify-center hover:scale-125 transition-transform" aria-label="Inspect Hip">
+                <span class="w-2 h-2 rounded-full bg-medical-blueLight"></span>
+              </button>
+
+              <!-- Knee Node (Default) -->
+              <button onclick="selectJoint('knee')" id="node-knee" class="joint-node active-node absolute top-[266px] left-[43%] w-5 h-5 rounded-full bg-medical-cyan/30 border-2 border-medical-cyan flex items-center justify-center hover:scale-125 transition-transform" aria-label="Inspect Knee">
+                <span class="w-2 h-2 rounded-full bg-medical-cyan animate-ping absolute"></span>
+                <span class="w-2 h-2 rounded-full bg-medical-cyan"></span>
+              </button>
+
+              <!-- Ankle/Foot Node -->
+              <button onclick="selectJoint('ankle')" id="node-ankle" class="joint-node absolute top-[341px] left-[41.8%] w-5 h-5 rounded-full bg-medical-blueLight/30 border-2 border-medical-blueLight flex items-center justify-center hover:scale-125 transition-transform" aria-label="Inspect Ankle and Foot">
+                <span class="w-2 h-2 rounded-full bg-medical-blueLight"></span>
+              </button>
+
+            </div>
+
+            <!-- Helper Text Legend -->
+            <div class="mt-4 text-center text-[10px] text-slate-450 dark:text-slate-500">
+              <span class="inline-block w-2.5 h-2.5 rounded-full bg-medical-cyan border border-white mr-1.5 align-middle"></span>Active &bull;
+              <span class="inline-block w-2.5 h-2.5 rounded-full bg-medical-blueLight border border-white ml-2 mr-1.5 align-middle"></span>Available
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: Symptom Description & Pathway Details (Col 6-12) -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <div class="p-6 md:p-8 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl shadow-sm space-y-6">
+              
+              <!-- Joint Title & Status Badge -->
+              <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+                <div>
+                  <span class="text-[10px] text-medical-blueLight dark:text-medical-cyan uppercase tracking-widest font-semibold block mb-1 strict-subheading">Selected Area</span>
+                  <h2 id="joint-title" class="strict-heading text-2xl text-medical-navy dark:text-white font-semibold">Knee Joint</h2>
+                </div>
+                <span id="rehab-tier" class="px-3 py-1 bg-medical-cyan/10 text-medical-cyan text-xs font-semibold rounded-full strict-subheading">High Strain Joint</span>
+              </div>
+
+              <!-- Common Injury Profiles list -->
+              <div class="space-y-3">
+                <h4 class="strict-heading text-xs text-slate-450 dark:text-slate-500 uppercase tracking-wider font-semibold">Common Sports Injuries</h4>
+                <div id="injury-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <!-- JS Injects cards here -->
+                </div>
+              </div>
+
+              <!-- Symptoms Checklist indicators -->
+              <div class="space-y-3">
+                <h4 class="strict-heading text-xs text-slate-450 dark:text-slate-500 uppercase tracking-wider font-semibold">Warning Indicators</h4>
+                <ul id="symptoms-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-650 dark:text-slate-400">
+                  <!-- JS Injects items -->
+                </ul>
+              </div>
+
+              <!-- Treatment Paths -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                
+                <div class="space-y-1.5">
+                  <span class="text-[10px] text-slate-450 uppercase tracking-wider block font-semibold strict-subheading">Surgical Pathway</span>
+                  <p id="surgical-path" class="text-xs text-slate-700 dark:text-slate-350 strict-paragraph">
+                    Knee Arthroscopy, ACL autograft reconstruction, or meniscus repair sutures.
+                  </p>
+                </div>
+
+                <div class="space-y-1.5">
+                  <span class="text-[10px] text-slate-450 uppercase tracking-wider block font-semibold strict-subheading">Rehab Pathway</span>
+                  <p id="rehab-path" class="text-xs text-slate-700 dark:text-slate-350 strict-paragraph">
+                    Hamstring load strengthening, dynamic proprioceptive plate holds, and flexion gains.
+                  </p>
+                </div>
+
+              </div>
+
+              <!-- Recovery Timeline indicators -->
+              <div class="p-4 bg-slate-50 dark:bg-slate-950 rounded-2xl flex items-center justify-between border border-slate-100 dark:border-slate-800">
+                <div class="flex items-center space-x-3.5 rtl:space-x-reverse">
+                  <i class="fa-solid fa-clock-rotate-left text-medical-blueLight dark:text-medical-cyan text-xl"></i>
+                  <div>
+                    <span class="text-[10px] text-slate-400 block font-semibold strict-subheading">Estimated Recovery Period</span>
+                    <span id="rehab-weeks" class="strict-heading text-sm text-slate-850 dark:text-slate-200 font-semibold">12 Weeks Protocols</span>
+                  </div>
+                </div>
+                
+                <a id="consultation-link" href="signup.html" class="px-5 py-2.5 rounded-xl bg-medical-blueLight hover:bg-medical-blue text-white text-xs strict-subheading transition-colors shadow-sm font-semibold">
+                  Sign Up
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= COMMON SPORTS INJURIES QUICK REFERENCE ================= -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Injury Library</span>
+          <h2 class="strict-heading text-3xl sm:text-4xl text-medical-navy dark:text-white mb-4">
+            Common Sports Injuries Quick Reference
+          </h2>
+          <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
+            Explore the most frequently diagnosed orthopedic sports injuries, their severity grading, affected anatomy, and average clinical recovery windows.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Injury Card 1 -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center">
+                <i class="fa-solid fa-bolt text-lg"></i>
+              </div>
+              <span class="px-2.5 py-1 bg-red-500/10 text-red-500 text-[10px] font-semibold rounded-full uppercase tracking-wider strict-subheading">Severe</span>
+            </div>
+            <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-2">ACL Tear (Anterior Cruciate Ligament)</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed flex-grow mb-4">
+              Complete or partial rupture of the knee's primary stabilizing ligament, typically caused by sudden pivoting, deceleration, or landing from jumps. Often accompanied by an audible "pop" and immediate swelling.
+            </p>
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Affected Joint</span>
+                <span class="text-medical-navy dark:text-white font-medium">Knee</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Recovery Window</span>
+                <span class="text-medical-navy dark:text-white font-medium">6–9 Months</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Treatment</span>
+                <span class="text-medical-navy dark:text-white font-medium">Surgical Reconstruction</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Injury Card 2 -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+                <i class="fa-solid fa-hand text-lg"></i>
+              </div>
+              <span class="px-2.5 py-1 bg-amber-500/10 text-amber-500 text-[10px] font-semibold rounded-full uppercase tracking-wider strict-subheading">Moderate</span>
+            </div>
+            <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-2">Rotator Cuff Impingement</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed flex-grow mb-4">
+              Compression and irritation of the rotator cuff tendons beneath the acromion bone during overhead motions. Common in swimmers, baseball pitchers, and tennis players. Can progress to tears if untreated.
+            </p>
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Affected Joint</span>
+                <span class="text-medical-navy dark:text-white font-medium">Shoulder</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Recovery Window</span>
+                <span class="text-medical-navy dark:text-white font-medium">6–12 Weeks</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Treatment</span>
+                <span class="text-medical-navy dark:text-white font-medium">Physical Therapy + Injection</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Injury Card 3 -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center">
+                <i class="fa-solid fa-bone text-lg"></i>
+              </div>
+              <span class="px-2.5 py-1 bg-red-500/10 text-red-500 text-[10px] font-semibold rounded-full uppercase tracking-wider strict-subheading">Severe</span>
+            </div>
+            <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-2">Achilles Tendon Rupture</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed flex-grow mb-4">
+              Complete tear of the Achilles tendon connecting the calf muscle to the heel bone. Typically occurs during explosive push-off movements like sprinting or jumping. Requires immediate immobilization and usually surgical repair.
+            </p>
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Affected Joint</span>
+                <span class="text-medical-navy dark:text-white font-medium">Ankle & Foot</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Recovery Window</span>
+                <span class="text-medical-navy dark:text-white font-medium">4–6 Months</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Treatment</span>
+                <span class="text-medical-navy dark:text-white font-medium">Surgical Suture Repair</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Injury Card 4 -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+                <i class="fa-solid fa-dumbbell text-lg"></i>
+              </div>
+              <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-semibold rounded-full uppercase tracking-wider strict-subheading">Mild</span>
+            </div>
+            <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-2">Tennis Elbow (Lateral Epicondylitis)</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed flex-grow mb-4">
+              Overuse injury causing micro-tearing of the forearm extensor tendons at the lateral epicondyle. Triggered by repetitive gripping and wrist extension activities. Responds well to eccentric strengthening exercises.
+            </p>
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Affected Joint</span>
+                <span class="text-medical-navy dark:text-white font-medium">Elbow</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Recovery Window</span>
+                <span class="text-medical-navy dark:text-white font-medium">6–12 Weeks</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Treatment</span>
+                <span class="text-medical-navy dark:text-white font-medium">Rest + Physical Therapy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Injury Card 5 -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+                <i class="fa-solid fa-circle-exclamation text-lg"></i>
+              </div>
+              <span class="px-2.5 py-1 bg-amber-500/10 text-amber-500 text-[10px] font-semibold rounded-full uppercase tracking-wider strict-subheading">Moderate</span>
+            </div>
+            <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-2">Herniated Lumbar Disc</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed flex-grow mb-4">
+              A disc nucleus pushes through a tear in the outer annulus, compressing adjacent spinal nerves. Causes radiating leg pain (sciatica), numbness, and weakness. Often manageable with conservative care but may need surgical decompression.
+            </p>
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Affected Area</span>
+                <span class="text-medical-navy dark:text-white font-medium">Lumbar Spine</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Recovery Window</span>
+                <span class="text-medical-navy dark:text-white font-medium">8–16 Weeks</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Treatment</span>
+                <span class="text-medical-navy dark:text-white font-medium">Therapy / Microdiscectomy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Injury Card 6 -->
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 p-6 flex flex-col hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+                <i class="fa-solid fa-person-running text-lg"></i>
+              </div>
+              <span class="px-2.5 py-1 bg-amber-500/10 text-amber-500 text-[10px] font-semibold rounded-full uppercase tracking-wider strict-subheading">Moderate</span>
+            </div>
+            <h3 class="strict-heading text-base text-medical-navy dark:text-white mb-2">Hip Labral Tear</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed flex-grow mb-4">
+              Tear in the ring of cartilage (labrum) surrounding the hip socket. Common in athletes performing deep squats, pivoting, or twisting. Causes deep groin pain and clicking sensation. Often requires arthroscopic surgical repair.
+            </p>
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Affected Joint</span>
+                <span class="text-medical-navy dark:text-white font-medium">Hip</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Recovery Window</span>
+                <span class="text-medical-navy dark:text-white font-medium">12–16 Weeks</span>
+              </div>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400 strict-subheading">Treatment</span>
+                <span class="text-medical-navy dark:text-white font-medium">Arthroscopic Repair</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WHEN TO SEE A SPECIALIST ================= -->
+    <section class="py-20 bg-white dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-semibold text-medical-teal uppercase tracking-wider strict-subheading block mb-2">Urgency Guide</span>
+          <h2 class="strict-heading text-3xl sm:text-4xl text-medical-navy dark:text-white mb-4">
+            When Should You See a Specialist?
+          </h2>
+          <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
+            Not every injury requires surgery. Use this clinical triage guide to understand when self-care is sufficient, when to schedule a consultation, and when emergency medical care is critical.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          
+          <!-- Emergency Tier -->
+          <div class="bg-red-500/5 dark:bg-red-500/10 rounded-2xl border border-red-200 dark:border-red-500/20 p-8 flex flex-col text-center items-center">
+            <div class="w-14 h-14 rounded-2xl bg-red-500/15 text-red-500 flex items-center justify-center mb-5">
+              <i class="fa-solid fa-truck-medical text-2xl"></i>
+            </div>
+            <h3 class="strict-heading text-lg text-red-600 dark:text-red-400 mb-2">Emergency — Seek Immediate Care</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-6 flex-grow">
+              Go to the nearest emergency room or call 911 immediately if you experience any of these symptoms after a sports injury.
+            </p>
+            <ul class="space-y-2.5 text-left w-full">
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-circle-xmark text-red-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Visible bone deformity or open fracture</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-circle-xmark text-red-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Complete loss of motor function in a limb</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-circle-xmark text-red-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Severe, uncontrollable bleeding at injury site</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-circle-xmark text-red-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Loss of sensation, numbness, or tingling below the injury</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-circle-xmark text-red-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Joint locked in position and cannot be moved</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Urgent Tier -->
+          <div class="bg-amber-500/5 dark:bg-amber-500/10 rounded-2xl border border-amber-200 dark:border-amber-500/20 p-8 flex flex-col text-center items-center">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/15 text-amber-500 flex items-center justify-center mb-5">
+              <i class="fa-solid fa-calendar-check text-2xl"></i>
+            </div>
+            <h3 class="strict-heading text-lg text-amber-600 dark:text-amber-400 mb-2">Urgent — Book a Consultation</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-6 flex-grow">
+              Schedule an appointment within 48–72 hours if you experience persistent symptoms that are not resolving with basic R.I.C.E. treatment.
+            </p>
+            <ul class="space-y-2.5 text-left w-full">
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Swelling that persists beyond 48 hours</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Joint instability or "giving way" feeling</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Audible popping sound at time of injury</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Pain that limits weight-bearing or daily activities</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Recurring pain in the same joint over several weeks</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Self-Care Tier -->
+          <div class="bg-emerald-500/5 dark:bg-emerald-500/10 rounded-2xl border border-emerald-200 dark:border-emerald-500/20 p-8 flex flex-col text-center items-center">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center mb-5">
+              <i class="fa-solid fa-house-chimney-medical text-2xl"></i>
+            </div>
+            <h3 class="strict-heading text-lg text-emerald-600 dark:text-emerald-400 mb-2">Self-Care — Monitor at Home</h3>
+            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-6 flex-grow">
+              Many minor sports injuries respond well to the R.I.C.E. protocol (Rest, Ice, Compression, Elevation) and typically resolve within 1–2 weeks.
+            </p>
+            <ul class="space-y-2.5 text-left w-full">
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Mild soreness after physical activity</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Minor bruising without joint instability</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Stiffness that improves with gentle movement</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Muscle cramps or delayed-onset muscle soreness</span>
+              </li>
+              <li class="flex items-start space-x-2.5 rtl:space-x-reverse text-xs text-slate-700 dark:text-slate-300">
+                <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 shrink-0"></i>
+                <span class="strict-paragraph">Slight swelling that reduces with ice within 24 hours</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- CTA Banner -->
+        <div class="bg-gradient-to-r from-medical-navy via-slate-900 to-medical-navy rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-800">
+          <div class="flex-1">
+            <h3 class="strict-heading text-xl md:text-2xl text-white mb-2">Not sure about your symptoms?</h3>
+            <p class="strict-paragraph text-slate-400 text-sm max-w-lg">
+              Our board-certified orthopedic specialists can evaluate your condition and recommend the right treatment pathway — from conservative care to surgical intervention.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+            <a href="contact.html" class="px-8 py-3.5 rounded-xl bg-medical-blueLight hover:bg-medical-blue text-white text-sm strict-subheading transition-all duration-200 shadow-lg shadow-medical-blueLight/25 text-center">
+              <i class="fa-solid fa-calendar-plus mr-2"></i>Book Consultation
+            </a>
+            <a href="#symptom-checker-tool" class="px-8 py-3.5 rounded-xl border border-slate-600 hover:border-slate-500 hover:bg-slate-800/60 text-slate-200 text-sm strict-subheading transition-all duration-200 text-center">
+              <i class="fa-solid fa-magnifying-glass mr-2"></i>Use Symptom Checker
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-900 text-slate-400 text-sm mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <!-- Column 1: Clinic Intro -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2 rtl:space-x-reverse text-white">
+            <div class="w-8 h-8 rounded-lg bg-medical-blueLight flex items-center justify-center">
+              <i class="fa-solid fa-house-medical"></i>
+            </div>
+            <span class="strict-heading text-lg font-semibold">AcuraCare</span>
+          </div>
+          <p class="strict-paragraph text-xs leading-relaxed">
+            Expert surgical intervention and athletic rehabilitation recovery protocols to restore physical mobility safely.
+          </p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+          <h4 class="strict-heading text-white text-sm font-semibold mb-4 uppercase tracking-wider">Site Pages</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="index.html" class="hover:text-white transition-colors strict-paragraph">Home (Surgery)</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph">Home (Rehab)</a></li>
+            <li><a href="about.html" class="hover:text-white transition-colors strict-paragraph">About AcuraCare</a></li>
+            <li><a href="symptom-checker.html" class="hover:text-white transition-colors strict-paragraph">Symptom Checker</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Medical Specialities -->
+        <div>
+          <h4 class="strict-heading text-white text-sm font-semibold mb-4 uppercase tracking-wider">Treatments</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph">Physiotherapy & Exercises</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors strict-paragraph">Joint Arthroscopy</a></li>
+            <li><a href="home-2.html" class="hover:text-white transition-colors strict-paragraph">Orthobiologics & PRP</a></li>
+            <li><a href="index.html" class="hover:text-white transition-colors strict-paragraph">Ligament Reconstruction</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Location Contact -->
+        <div>
+          <h4 class="strict-heading text-white text-sm font-semibold mb-4 uppercase tracking-wider">Contact Info</h4>
+          <p class="strict-paragraph text-xs leading-relaxed">
+            AcuraCare Campus, Suite 400<br>
+            Boston Medical Square, MA 02118<br>
+            Emergency Ortho Hotline: 1-800-555-ACL-REHAB
+          </p>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-800 mt-12 pt-6 text-center text-xs text-slate-500">
+        <p class="strict-paragraph">&copy; 2026 AcuraCare Sports Orthopedics. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Joint Checker Dynamic Handler script -->
+  <script>
+    // Detailed joint diagnostic data map
+    const jointData = {
+      knee: {
+        title: "Knee Joint",
+        tier: "High Strain Joint",
+        injuries: [
+          { name: "ACL Ligament Tears", desc: "Common in sudden deceleration cuts. Often requires autograft surgical reconstruction." },
+          { name: "Meniscus Cartilage Tears", desc: "Caused by rotational twists under axial weight loading. Repaired arthroscopically." },
+          { name: "Patellofemoral Pain", desc: "Misalignment of the knee-cap tracking. Managed primarily through physical exercises." }
+        ],
+        symptoms: [
+          "Pulsing swelling and immediate fluid lock",
+          "Audible popping sensation under sudden pivot",
+          "Catching limits when flexing past 90 degrees",
+          "Subjective instability (knee giving out)"
+        ],
+        surgical: "Arthroscopic ACL autograft/allograft reconstruction, meniscus suture repair, or patellar realignment.",
+        rehab: "Quadriceps activation, hamstring loading ratios, and slide-board lateral stabilization drills.",
+        weeks: "12 Weeks Protocols",
+        link: "knee"
+      },
+      shoulder: {
+        title: "Shoulder Joint",
+        tier: "Multi-Axial Rotational",
+        injuries: [
+          { name: "Rotator Cuff Tears", desc: "Tears in supraspinatus tendon due to overhead load stress. Repaired surgically or via physical therapy." },
+          { name: "Labral Tear (SLAP)", desc: "Injury to ring of cartilage surrounding shoulder socket. Common in throwing athletes." },
+          { name: "Subacromial Impingement", desc: "Compression of tendons under shoulder blade, causing severe pain during overhead lifting." }
+        ],
+        symptoms: [
+          "Sharp stabbing pain when reaching overhead",
+          "Radiating ache during night side-sleeping",
+          "Weakness or cracking when rotating arm",
+          "Reduced range of abduction/external rotation"
+        ],
+        surgical: "Rotator cuff anchor reattachment, subacromial decompression arthroscopy, or labral repair.",
+        rehab: "Scapular stabilization exercises, rotator cuff cuff band rotations, and posterior capsule stretches.",
+        weeks: "8 to 16 Weeks",
+        link: "shoulder"
+      },
+      elbow: {
+        title: "Elbow Joint",
+        tier: "Repetitive Motion Hinge",
+        injuries: [
+          { name: "Lateral Epicondylitis", desc: "Tennis Elbow. Micro-tearing of extensor tendons from repetitive grip stresses." },
+          { name: "Medial Collateral (UCL) Tears", desc: "Tommy John injury. Common in throwing pitchers. Requires ligament reconstruction." },
+          { name: "Cubital Tunnel Syndrome", desc: "Compression of the ulnar nerve behind the elbow crease, causing hand numbness." }
+        ],
+        symptoms: [
+          "Dull ache along outer/inner elbow protrusion",
+          "Weakened grip strength when shaking hands",
+          "Numbness/tingling in ring and pinky fingers",
+          "Pain when flexing wrist against resistance"
+        ],
+        surgical: "UCL Tommy John reconstruction, ulnar nerve transposition, or tendon debridement surgery.",
+        rehab: "Wrist extensor eccentricity stretching, grip load training, and forearm massage protocols.",
+        weeks: "6 to 24 Weeks",
+        link: "elbow"
+      },
+      spine: {
+        title: "Spine & Core",
+        tier: "Central Axial Load",
+        injuries: [
+          { name: "Herniated Lumbar Disc", desc: "Disc extrusion compressing spinal nerve root, causing sciatica pain down legs." },
+          { name: "Spondylolysis / Stress Fracture", desc: "Vertebral stress fracture from repetitive hyper-extension, common in gymnasts." },
+          { name: "Lumbar Muscular Strains", desc: "Heavy mechanical load strain of erector spinae. Managed non-surgically." }
+        ],
+        symptoms: [
+          "Radiating leg shock sensation (Sciatica)",
+          "Aggravated pain when bending or lifting weight",
+          "Localized morning stiffness in lower back",
+          "Loss of reflexes or motor power in ankles"
+        ],
+        surgical: "Microdiscectomy nerve decompression, laminectomy, or spinal fusion for severe instabilities.",
+        rehab: "Core stability brace strengthening, pelvic tilts, and hamstring/hip flexor flexibilities.",
+        weeks: "8 to 12 Weeks",
+        link: "spine"
+      },
+      hip: {
+        title: "Hip Joint",
+        tier: "Weight-Bearing Ball & Socket",
+        injuries: [
+          { name: "Femoroacetabular Impingement", desc: "FAI. Bony friction mismatch pinching hip labrum under deep flexed postures." },
+          { name: "Acetabular Labral Tears", desc: "Tear in hip cartilage ring. Repaired arthroscopically in active athletes." },
+          { name: "Trochanteric Bursitis", desc: "Inflammation of hip side pocket. Highly responsive to stretching and injections." }
+        ],
+        symptoms: [
+          "Groin pinch pain when squatting or twisting",
+          "Audible deep snap or click during hip flexes",
+          "Lateral hip tenderness when direct laying",
+          "Difficulty climbing stairs or entering cars"
+        ],
+        surgical: "Hip arthroscopy bone shaving (osteoplasty) and labral cartilage anchor sutures.",
+        rehab: "Gluteus medius hip loading, core control training, and hip mobility sweeps.",
+        weeks: "12 to 16 Weeks",
+        link: "hip"
+      },
+      ankle: {
+        title: "Ankle & Foot",
+        tier: "Impact & Ground Interface",
+        injuries: [
+          { name: "Lateral Ankle Sprains", desc: "Inversion sprain tearing ATFL ligament. Managed with proprioceptive balance." },
+          { name: "Achilles Tendon Tears", desc: "Rupture of heel cord. Requires surgical reattachment or casting." },
+          { name: "Plantar Fasciitis", desc: "Chronic heel-base pain. Managed with Achilles stretching and supportive splints." }
+        ],
+        symptoms: [
+          "Immediate swelling and black ankle bruising",
+          "Inability to load weight or press off toes",
+          "Morning heel-strike pain that eases with walking",
+          "Weakness or ankle rolling on irregular surfaces"
+        ],
+        surgical: "Achilles tendon suture repair, Brostrom lateral ankle ligament reconstruction, or fascia release.",
+        rehab: "Balance board training, calf raises, eccentric heel drops, and foot arch stability curls.",
+        weeks: "6 to 12 Weeks",
+        link: "ankle"
+      }
+    };
+
+    function selectJoint(jointKey) {
+      // Get joint detail object
+      const data = jointData[jointKey];
+      if (!data) return;
+
+      // Update Node Highlight visual state
+      document.querySelectorAll('.joint-node').forEach(node => {
+        node.classList.remove('active-node', 'border-medical-cyan', 'bg-medical-cyan/30');
+        node.classList.add('border-medical-blueLight', 'bg-medical-blueLight/30');
+        
+        // Remove ping animation from other children
+        const ping = node.querySelector('.animate-ping');
+        if (ping) ping.classList.add('hidden');
+      });
+
+      const selectedNode = document.getElementById(`node-${jointKey}`);
+      if (selectedNode) {
+        selectedNode.classList.remove('border-medical-blueLight', 'bg-medical-blueLight/30');
+        selectedNode.classList.add('active-node', 'border-medical-cyan', 'bg-medical-cyan/30');
+        
+        // Ensure active node child has ping animation
+        const activePing = selectedNode.querySelector('span');
+        if (activePing) activePing.classList.remove('hidden');
+      }
+
+      // Update Details Content Panel with smooth transition fade
+      const detailsContainer = document.getElementById('joint-title').parentElement.parentElement;
+      detailsContainer.classList.add('opacity-40');
+      
+      setTimeout(() => {
+        // Update Title
+        document.getElementById('joint-title').textContent = data.title;
+        document.getElementById('rehab-tier').textContent = data.tier;
+
+        // Build Injury Profile list elements
+        const injuryContainer = document.getElementById('injury-list');
+        injuryContainer.innerHTML = '';
+        data.injuries.forEach(inj => {
+          injuryContainer.innerHTML += `
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-800 rounded-xl">
+              <h5 class="strict-heading text-xs text-medical-navy dark:text-white font-semibold mb-1">${inj.name}</h5>
+              <p class="strict-paragraph text-[10px] text-slate-500 dark:text-slate-400 leading-normal">${inj.desc}</p>
+            </div>
+          `;
+        });
+
+        // Build Warning indicators
+        const symptomsContainer = document.getElementById('symptoms-list');
+        symptomsContainer.innerHTML = '';
+        data.symptoms.forEach(sym => {
+          symptomsContainer.innerHTML += `
+            <li class="flex items-start space-x-2.5 rtl:space-x-reverse">
+              <i class="fa-solid fa-triangle-exclamation text-medical-cyan text-xs mt-0.5"></i>
+              <span class="strict-paragraph">${sym}</span>
+            </li>
+          `;
+        });
+
+        // Build Treatment lines
+        document.getElementById('surgical-path').textContent = data.surgical;
+        document.getElementById('rehab-path').textContent = data.rehab;
+
+        // Timeline details & link
+        document.getElementById('rehab-weeks').textContent = data.weeks;
+        document.getElementById('consultation-link').setAttribute('href', `signup.html`);
+
+        // Fade in details panel
+        detailsContainer.classList.remove('opacity-40');
+      }, 200);
+    }
+
+    // Default select Knee Joint on initial page load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check query parameter (e.g. ?joint=shoulder)
+      const urlParams = new URLSearchParams(window.location.search);
+      const jointParam = urlParams.get('joint');
+      if (jointParam && jointData[jointParam]) {
+        selectJoint(jointParam);
+      } else {
+        selectJoint('knee');
+      }
+    });
+  </script>
+  
+  <!-- Shared JS logic -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

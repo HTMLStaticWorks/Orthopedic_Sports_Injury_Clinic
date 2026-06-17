@@ -111,11 +111,42 @@
         <p id="confirm-error-msg" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Passwords do not match.</p>
       </div>
 
+      <!-- Terms of Service Checkbox -->
+      <div class="space-y-1">
+        <div class="flex items-start">
+          <input type="checkbox" id="terms" required class="mt-1 w-4 h-4 rounded border-slate-300 dark:border-slate-700 bg-transparent text-medical-blueLight focus:ring-medical-blueLight cursor-pointer flex-shrink-0">
+          <label for="terms" class="ml-2 text-xs text-slate-500 dark:text-slate-400 cursor-pointer strict-paragraph select-none">
+            I agree to the <a href="#" onclick="alert('Terms of Service: Mock Terms of AcuraCare')" class="text-medical-blueLight dark:text-medical-cyan hover:underline font-semibold">Terms of Service</a> &amp; <a href="#" onclick="alert('Privacy Policy: Mock Privacy Policy of AcuraCare')" class="text-medical-blueLight dark:text-medical-cyan hover:underline font-semibold">Privacy Policy</a> *
+          </label>
+        </div>
+        <p id="terms-error-msg" class="hidden text-red-500 text-[10px] mt-1">You must agree to the Terms &amp; Privacy Policy to proceed.</p>
+      </div>
+
       <!-- Submit Button -->
       <button type="submit" class="w-full py-3 mt-2 rounded-xl bg-medical-blueLight text-white font-semibold strict-subheading hover:bg-medical-blue active:scale-[0.98] transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-medical-blueLight">
         Create Account
       </button>
-    </form>
+     </form>
+
+    <!-- Divider -->
+    <div class="relative flex py-4 items-center">
+      <div class="flex-grow border-t border-slate-200 dark:border-slate-800"></div>
+      <span class="flex-shrink mx-4 text-slate-400 dark:text-slate-500 text-[10px] strict-paragraph uppercase tracking-wider">or sign up with</span>
+      <div class="flex-grow border-t border-slate-200 dark:border-slate-800"></div>
+    </div>
+
+    <!-- Social Signup Buttons -->
+    <div class="grid grid-cols-3 gap-3">
+      <button onclick="alert('Demo Mode: Social authentication is simulated. Please use default credentials.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors shadow-sm cursor-pointer" aria-label="Sign up with Google">
+        <i class="fa-brands fa-google text-sm text-red-500 dark:text-red-400"></i>
+      </button>
+      <button onclick="alert('Demo Mode: Social authentication is simulated. Please use default credentials.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors shadow-sm cursor-pointer" aria-label="Sign up with Apple">
+        <i class="fa-brands fa-apple text-base text-slate-800 dark:text-slate-100"></i>
+      </button>
+      <button onclick="alert('Demo Mode: Social authentication is simulated. Please use default credentials.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors shadow-sm cursor-pointer" aria-label="Sign up with Facebook">
+        <i class="fa-brands fa-facebook-f text-sm text-blue-600 dark:text-blue-400"></i>
+      </button>
+    </div>
 
     <!-- Sign In Link -->
     <div class="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">
@@ -133,6 +164,7 @@
       const phoneInput = document.getElementById('phone');
       const passwordInput = document.getElementById('password');
       const confirmInput = document.getElementById('confirm');
+      const termsInput = document.getElementById('terms');
       const errorAlert = document.getElementById('signup-error');
       const errorText = document.getElementById('error-text');
 
@@ -211,6 +243,16 @@
           isValid = false;
         } else {
           showError(confirmInput, false, 'confirm-error-msg');
+        }
+
+        // Terms Check
+        if (!termsInput.checked) {
+          const termsErrorMsg = document.getElementById('terms-error-msg');
+          if (termsErrorMsg) termsErrorMsg.classList.remove('hidden');
+          isValid = false;
+        } else {
+          const termsErrorMsg = document.getElementById('terms-error-msg');
+          if (termsErrorMsg) termsErrorMsg.classList.add('hidden');
         }
 
         if (isValid) {

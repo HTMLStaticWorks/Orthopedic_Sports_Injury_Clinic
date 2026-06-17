@@ -18,11 +18,11 @@
 
   <!-- ================= STICKY HEADER ================= -->
   <header id="sticky-header" class="sticky top-0 w-full z-50 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800/80 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 xl:px-8">
       <div class="flex items-center justify-between h-20">
         
         <!-- Clinic Logo -->
-        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse flex-shrink-0">
           <div class="w-10 h-10 rounded-lg bg-medical-blueLight flex items-center justify-center text-white">
             <i class="fa-solid fa-house-medical text-lg"></i>
           </div>
@@ -30,18 +30,18 @@
         </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
-          <a href="index.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home</a>
-          <a href="home-2.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home 2</a>
-          <a href="about.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">About</a>
-          <a href="symptom-checker.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Symptom Checker</a>
-          <a href="blog.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Blog</a>
-          <a href="contact.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Contact</a>
-          <a href="dashboard.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Dashboard</a>
+        <nav class="hidden lg:flex items-center space-x-3 xl:space-x-8 rtl:space-x-reverse flex-shrink-0">
+          <a href="index.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home</a>
+          <a href="home-2.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home 2</a>
+          <a href="about.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">About</a>
+          <a href="symptom-checker.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Symptom Checker</a>
+          <a href="blog.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Blog</a>
+          <a href="contact.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Contact</a>
+          <a href="dashboard.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Dashboard</a>
         </nav>
 
-        <!-- Right Side Controls -->
-        <div class="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
+        <!-- Right Side Controls (Theme, RTL, Portal Button) -->
+        <div class="hidden lg:flex items-center space-x-2 xl:space-x-4 rtl:space-x-reverse flex-shrink-0">
           <button class="rtl-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg text-xs font-semibold uppercase tracking-wider border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
             RTL
           </button>
@@ -51,19 +51,13 @@
           </button>
 
           <!-- Sign Up CTA -->
-          <a href="signup.html" class="px-5 py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading">
+          <a href="signup.html" class="px-3 xl:px-5 py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading whitespace-nowrap">
             Sign Up
           </a>
         </div>
 
         <!-- Mobile Hamburg Menu Button -->
         <div class="flex items-center space-x-2 rtl:space-x-reverse lg:hidden">
-          <button class="rtl-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
-            RTL
-          </button>
-          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
-            <i class="fa-solid fa-moon"></i>
-          </button>
           <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle Mobile Menu">
             <i class="fa-solid fa-bars text-xl"></i>
           </button>
@@ -74,14 +68,27 @@
 
     <!-- Mobile Menu Container -->
     <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 pt-2 pb-6 space-y-2">
-      <a href="index.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home</a>
-      <a href="home-2.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home 2</a>
-      <a href="about.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">About</a>
-      <a href="symptom-checker.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Symptom Checker</a>
-      <a href="blog.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Blog</a>
-      <a href="contact.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Contact</a>
-      <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Dashboard</a>
+      <a href="index.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home</a>
+      <a href="home-2.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home 2</a>
+      <a href="about.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">About</a>
+      <a href="symptom-checker.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Symptom Checker</a>
+      <a href="blog.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Blog</a>
+      <a href="contact.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Contact</a>
+      <a href="dashboard.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Dashboard</a>
       <a href="signup.html" class="block w-full text-center px-4 py-2.5 rounded-lg bg-medical-blueLight text-white strict-subheading mt-4">Sign Up</a>
+
+      <!-- Mobile Preferences Controls Row -->
+      <div class="flex items-center justify-between px-3 pt-4 border-t border-slate-100 dark:border-slate-800/80 mt-4">
+        <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Preferences</span>
+        <div class="flex items-center space-x-2.5 rtl:space-x-reverse">
+          <button class="rtl-toggle-btn px-3 py-1.5 flex items-center justify-center rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            RTL
+          </button>
+          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle Theme">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -193,9 +200,9 @@
             <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
               
               <!-- Article 1 -->
-              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow" data-category="prevention">
-                <div class="h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400">
-                  <i class="fa-solid fa-shield-halved text-5xl"></i>
+              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group" data-category="prevention">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="assets/images/service-sports-med.png" alt="Youth ACL Injury Prevention" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
                 <div class="p-6">
                   <div class="flex items-center space-x-2 rtl:space-x-reverse mb-3">
@@ -216,9 +223,9 @@
               </article>
 
               <!-- Article 2 -->
-              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow" data-category="recovery">
-                <div class="h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400">
-                  <i class="fa-solid fa-person-running text-5xl"></i>
+              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group" data-category="recovery">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="assets/images/service-sport-rehab.png" alt="Athlete Post-Op Ligament Healing Guide" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
                 <div class="p-6">
                   <div class="flex items-center space-x-2 rtl:space-x-reverse mb-3">
@@ -239,9 +246,9 @@
               </article>
 
               <!-- Article 3 -->
-              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow" data-category="surgery">
-                <div class="h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400">
-                  <i class="fa-solid fa-stethoscope text-5xl"></i>
+              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group" data-category="surgery">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="assets/images/service-spine-care.png" alt="Minimally Invasive Spine Decompression" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
                 <div class="p-6">
                   <div class="flex items-center space-x-2 rtl:space-x-reverse mb-3">
@@ -262,9 +269,9 @@
               </article>
 
               <!-- Article 4 -->
-              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow" data-category="physio">
-                <div class="h-48 bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400">
-                  <i class="fa-solid fa-dumbbell text-5xl"></i>
+              <article class="article-card bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow group" data-category="physio">
+                <div class="h-48 overflow-hidden relative">
+                  <img src="assets/images/service-joint-care.png" alt="Rotator Cuff Rehabilitation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
                 <div class="p-6">
                   <div class="flex items-center space-x-2 rtl:space-x-reverse mb-3">
@@ -385,7 +392,7 @@
           
           <!-- Story 1 -->
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col md:flex-row gap-6 hover:shadow-md transition-shadow">
-            <div class="w-full md:w-48 h-48 rounded-2xl overflow-hidden shrink-0 relative bg-slate-100 dark:bg-slate-950">
+            <div class="w-48 h-48 mx-auto md:mx-0 rounded-2xl overflow-hidden shrink-0 relative bg-slate-100 dark:bg-slate-950">
               <img src="assets/images/profile-marcus.png" alt="Athlete Recovery Portrait" class="w-full h-full object-cover">
               <span class="absolute top-3 left-3 px-2 py-1 bg-medical-cyan text-white text-[9px] font-bold rounded uppercase tracking-wider">ACL post-op</span>
             </div>
@@ -406,7 +413,7 @@
 
           <!-- Story 2 -->
           <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col md:flex-row gap-6 hover:shadow-md transition-shadow">
-            <div class="w-full md:w-48 h-48 rounded-2xl overflow-hidden shrink-0 relative bg-slate-100 dark:bg-slate-950">
+            <div class="w-48 h-48 mx-auto md:mx-0 rounded-2xl overflow-hidden shrink-0 relative bg-slate-100 dark:bg-slate-950">
               <img src="assets/images/profile-jessica.png" alt="Athlete Recovery Portrait" class="w-full h-full object-cover">
               <span class="absolute top-3 left-3 px-2 py-1 bg-indigo-500 text-white text-[9px] font-bold rounded uppercase tracking-wider">Shoulder Labrum</span>
             </div>

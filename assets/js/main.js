@@ -88,12 +88,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
-    if (href && (currentPath.endsWith(href) || (href === 'index.html' && (currentPath.endsWith('/') || currentPath === '')))) {
+    const isActive = href && (currentPath.endsWith(href) || (href === 'index.html' && (currentPath.endsWith('/') || currentPath === '')));
+    
+    if (isActive) {
       link.classList.add('text-medical-blueLight', 'font-semibold');
-      link.classList.remove('text-slate-600', 'dark:text-slate-300');
+      link.classList.remove('text-slate-600', 'text-slate-700', 'dark:text-slate-300', 'dark:text-slate-200');
     } else {
       link.classList.remove('text-medical-blueLight', 'font-semibold');
-      link.classList.add('text-slate-600', 'dark:text-slate-300');
+      if (link.classList.contains('block')) {
+        link.classList.add('text-slate-700', 'dark:text-slate-200');
+        link.classList.remove('text-slate-600', 'dark:text-slate-300');
+      } else {
+        link.classList.add('text-slate-600', 'dark:text-slate-300');
+        link.classList.remove('text-slate-700', 'dark:text-slate-200');
+      }
     }
   });
 

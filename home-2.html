@@ -18,11 +18,11 @@
 
   <!-- ================= STICKY HEADER ================= -->
   <header id="sticky-header" class="sticky top-0 w-full z-50 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800/80 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 xl:px-8">
       <div class="flex items-center justify-between h-20">
         
         <!-- Clinic Logo -->
-        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse flex-shrink-0">
           <div class="w-10 h-10 rounded-lg bg-medical-blueLight flex items-center justify-center text-white">
             <i class="fa-solid fa-house-medical text-lg"></i>
           </div>
@@ -30,18 +30,18 @@
         </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
-          <a href="index.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home</a>
-          <a href="home-2.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home 2</a>
-          <a href="about.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">About</a>
-          <a href="symptom-checker.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Symptom Checker</a>
-          <a href="blog.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Blog</a>
-          <a href="contact.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Contact</a>
-          <a href="dashboard.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Dashboard</a>
+        <nav class="hidden lg:flex items-center space-x-3 xl:space-x-8 rtl:space-x-reverse flex-shrink-0">
+          <a href="index.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home</a>
+          <a href="home-2.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home 2</a>
+          <a href="about.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">About</a>
+          <a href="symptom-checker.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Symptom Checker</a>
+          <a href="blog.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Blog</a>
+          <a href="contact.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Contact</a>
+          <a href="dashboard.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Dashboard</a>
         </nav>
 
         <!-- Right Side Controls (Theme, RTL, Portal Button) -->
-        <div class="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
+        <div class="hidden lg:flex items-center space-x-2 xl:space-x-4 rtl:space-x-reverse flex-shrink-0">
           <button class="rtl-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg text-xs font-semibold uppercase tracking-wider border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
             RTL
           </button>
@@ -51,19 +51,13 @@
           </button>
 
           <!-- Sign Up CTA -->
-          <a href="signup.html" class="px-5 py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading">
+          <a href="signup.html" class="px-3 xl:px-5 py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading whitespace-nowrap">
             Sign Up
           </a>
         </div>
 
         <!-- Mobile Hamburg Menu Button -->
         <div class="flex items-center space-x-2 rtl:space-x-reverse lg:hidden">
-          <button class="rtl-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
-            RTL
-          </button>
-          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
-            <i class="fa-solid fa-moon"></i>
-          </button>
           <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle Mobile Menu">
             <i class="fa-solid fa-bars text-xl"></i>
           </button>
@@ -74,14 +68,27 @@
 
     <!-- Mobile Menu Container -->
     <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 pt-2 pb-6 space-y-2">
-      <a href="index.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home</a>
-      <a href="home-2.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home 2</a>
-      <a href="about.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">About</a>
-      <a href="symptom-checker.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Symptom Checker</a>
-      <a href="blog.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Blog</a>
-      <a href="contact.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Contact</a>
-      <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Dashboard</a>
+      <a href="index.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home</a>
+      <a href="home-2.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Home 2</a>
+      <a href="about.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">About</a>
+      <a href="symptom-checker.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Symptom Checker</a>
+      <a href="blog.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Blog</a>
+      <a href="contact.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Contact</a>
+      <a href="dashboard.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Dashboard</a>
       <a href="signup.html" class="block w-full text-center px-4 py-2.5 rounded-lg bg-medical-blueLight text-white strict-subheading mt-4">Sign Up</a>
+
+      <!-- Mobile Preferences Controls Row -->
+      <div class="flex items-center justify-between px-3 pt-4 border-t border-slate-100 dark:border-slate-800/80 mt-4">
+        <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Preferences</span>
+        <div class="flex items-center space-x-2.5 rtl:space-x-reverse">
+          <button class="rtl-toggle-btn px-3 py-1.5 flex items-center justify-center rounded-lg text-xs font-semibold border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            RTL
+          </button>
+          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle Theme">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -136,10 +143,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           
           <!-- Program 1 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all duration-300 text-center flex flex-col items-center">
-            <div class="w-12 h-12 rounded-xl bg-medical-blueLight/10 text-medical-blueLight flex items-center justify-center mb-6">
-              <i class="fa-solid fa-person-walking text-xl"></i>
-            </div>
+          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
+            <img src="assets/images/program-athletic-physio.png" alt="Athletic Physio" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
             <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Athletic Physio</h3>
             <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               Sports-specific biomechanics retraining, targeting fast recovery of competitive sprint speed, agility, and joint torque.
@@ -147,10 +152,8 @@
           </div>
 
           <!-- Program 2 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all duration-300 text-center flex flex-col items-center">
-            <div class="w-12 h-12 rounded-xl bg-medical-teal/10 text-medical-teal flex items-center justify-center mb-6">
-              <i class="fa-solid fa-hand-holding-hand text-xl"></i>
-            </div>
+          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
+            <img src="assets/images/program-musculoskeletal-rehab.png" alt="Musculoskeletal Rehab" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
             <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Musculoskeletal Rehab</h3>
             <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               Manual therapy, joint mobilization, myofascial trigger release, and specialized stretching to reduce chronic back, hip, and neck pain.
@@ -158,10 +161,8 @@
           </div>
 
           <!-- Program 3 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all duration-300 text-center flex flex-col items-center">
-            <div class="w-12 h-12 rounded-xl bg-medical-cyan/10 text-medical-cyan flex items-center justify-center mb-6">
-              <i class="fa-solid fa-dumbbell text-xl"></i>
-            </div>
+          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
+            <img src="assets/images/program-post-operative-strength.png" alt="Post-Operative Strength" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
             <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Post-Operative Strength</h3>
             <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               Carefully guided range-of-motion increments, isometric contraction drills, and progressive overload schemes after bone/ligament surgeries.
@@ -169,10 +170,8 @@
           </div>
 
           <!-- Program 4 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-lg transition-all duration-300 text-center flex flex-col items-center">
-            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center mb-6">
-              <i class="fa-solid fa-heart-pulse text-xl"></i>
-            </div>
+          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
+            <img src="assets/images/program-cardiorespiratory-fitness.png" alt="Cardiorespiratory Fitness" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
             <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Cardiorespiratory Fitness</h3>
             <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
               Low-impact conditioning protocols, swimming programs, and stationary biking to support cardiac output during long limb recovery.

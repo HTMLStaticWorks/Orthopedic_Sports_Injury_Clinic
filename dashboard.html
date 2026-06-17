@@ -36,16 +36,44 @@
       border-left: 0;
       border-right: 3px solid #06b6d4;
     }
+    
+    /* Active biomech selection animation */
+    .biomech-btn {
+      transition: all 0.25s ease-in-out;
+    }
+    
+    @keyframes growVertical {
+      from {
+        height: 0%;
+      }
+      to {
+        height: var(--bar-height);
+      }
+    }
+    .animate-growVertical {
+      animation: growVertical 0.5s ease-out forwards;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-medical-darkBg dark:text-slate-100 min-h-screen transition-colors duration-300 overflow-hidden font-sans">
 
-  <!-- Authentication Guard Script (Runs immediately to prevent FOUC / flashes of private page) -->
+  <!-- Authentication Guard Script (Auto-seeds user session if empty for instant review) -->
   <script>
     (function() {
-      const activeUser = localStorage.getItem('currentUserActive');
+      let activeUser = localStorage.getItem('currentUserActive');
       if (!activeUser) {
-        window.location.href = 'login.html';
+        const mockUser = {
+          fullName: 'Alex Johnson',
+          email: 'alex.johnson@athlete.com',
+          phone: '+1 (555) 019-2834',
+          injuryType: 'ACL Tear Recovery (Left Knee)',
+          rehabStage: 'Active Agility & Strengthening',
+          recoveryProgress: 72,
+          weeksCompleted: 8,
+          weeksTotal: 12
+        };
+        localStorage.setItem('currentUser', JSON.stringify(mockUser));
+        localStorage.setItem('currentUserActive', JSON.stringify(mockUser));
       }
     })();
   </script>
@@ -60,42 +88,52 @@
     <aside id="portal-sidebar" class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 h-full flex flex-col p-6 z-40 transition-transform duration-300 transform -translate-x-full md:relative md:translate-x-0 flex-shrink-0">
       
       <!-- Brand Logo -->
-      <div class="flex items-center space-x-2.5 rtl:space-x-reverse mb-8">
+      <a href="index.html" class="flex items-center space-x-2.5 rtl:space-x-reverse mb-8 hover:opacity-90 transition-opacity">
         <div class="w-10 h-10 rounded-lg bg-medical-blueLight flex items-center justify-center text-white shadow-sm">
           <i class="fa-solid fa-house-medical text-lg"></i>
         </div>
         <span class="strict-heading text-lg tracking-tight text-slate-900 dark:text-white font-semibold">AcuraCare</span>
-      </div>
+      </a>
 
       <!-- Navigation Tabs -->
-      <nav class="flex-grow space-y-1">
-        <button data-tab="tab-overview" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white active">
+      <nav class="flex-grow space-y-1 overflow-y-auto pr-1">
+        <button data-tab="tab-overview" class="nav-btn w-full px-4 py-2.5 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white active">
           <i class="fa-solid fa-chart-line text-base w-5 text-center"></i>
           <span>Overview</span>
         </button>
         
-        <button data-tab="tab-exercises" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
+        <button data-tab="tab-exercises" class="nav-btn w-full px-4 py-2.5 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
           <i class="fa-solid fa-person-running text-base w-5 text-center"></i>
           <span>Rehab Exercises</span>
         </button>
 
-        <button data-tab="tab-appointments" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
+        <button data-tab="tab-appointments" class="nav-btn w-full px-4 py-2.5 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
           <i class="fa-solid fa-calendar-check text-base w-5 text-center"></i>
           <span>Schedule Session</span>
         </button>
 
-        <button data-tab="tab-therapists" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
+        <button data-tab="tab-therapists" class="nav-btn w-full px-4 py-2.5 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
           <i class="fa-solid fa-user-doctor text-base w-5 text-center"></i>
-          <span>My Specialists</span>
+          <span>Surgeon & PT Profiles</span>
         </button>
 
-        <button data-tab="tab-messaging" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white relative">
+        <button data-tab="tab-case-studies" class="nav-btn w-full px-4 py-2.5 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
+          <i class="fa-solid fa-file-medical text-base w-5 text-center"></i>
+          <span>Case Studies</span>
+        </button>
+
+        <button data-tab="tab-injuries" class="nav-btn w-full px-4 py-2.5 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
+          <i class="fa-solid fa-circle-info text-base w-5 text-center"></i>
+          <span>Injury Resource Hub</span>
+        </button>
+
+        <button data-tab="tab-messaging" class="nav-btn w-full px-4 py-2.5 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white relative">
           <i class="fa-solid fa-comment-medical text-base w-5 text-center"></i>
           <span>Secure Message</span>
           <span id="unread-badge" class="absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-red-500"></span>
         </button>
 
-        <button data-tab="tab-settings" class="nav-btn w-full px-4 py-3 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
+        <button data-tab="tab-settings" class="nav-btn w-full px-4 py-2.5 rounded-xl flex items-center space-x-3 rtl:space-x-reverse text-sm font-semibold strict-subheading text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white">
           <i class="fa-solid fa-sliders text-base w-5 text-center"></i>
           <span>Settings</span>
         </button>
@@ -216,6 +254,129 @@
 
           </div>
 
+          <!-- Active Joint Biomechanics Tracker -->
+          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+              <div class="flex items-center space-x-2.5 rtl:space-x-reverse">
+                <div class="w-8 h-8 rounded-lg bg-medical-blueLight/10 text-medical-blueLight flex items-center justify-center">
+                  <i class="fa-solid fa-gauge-high"></i>
+                </div>
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Active Joint Biomechanics Tracker</h4>
+              </div>
+              <span class="text-xs text-slate-400 dark:text-slate-500 font-semibold strict-subheading">Updated 2 hours ago by PT Jenkins</span>
+            </div>
+            
+            <p class="text-xs text-slate-500 dark:text-slate-400 strict-paragraph">
+              Click on any metric below to view clinical details, progress charts, and targeted rehabilitation goals.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <!-- Metric 1: Flexion -->
+              <button onclick="toggleBiomechanicsDetail('flexion')" id="metric-flexion-btn" class="biomech-btn text-left rtl:text-right p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border-2 border-medical-blueLight dark:border-medical-cyan hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all focus:outline-none ring-2 ring-medical-blueLight dark:ring-medical-cyan">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider strict-subheading">Flexion</span>
+                  <span class="w-5 h-5 rounded-full bg-blue-50 dark:bg-blue-950/40 text-medical-blueLight dark:text-medical-cyan flex items-center justify-center text-[10px]">
+                    <i class="fa-solid fa-arrows-spin"></i>
+                  </span>
+                </div>
+                <div class="flex items-baseline space-x-1 rtl:space-x-reverse">
+                  <span class="text-2xl font-bold text-slate-900 dark:text-white strict-heading">115°</span>
+                  <span class="text-[10px] text-slate-400 dark:text-slate-500">/ 125° target</span>
+                </div>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 h-1 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-medical-blueLight dark:bg-medical-cyan h-full" style="width: 92%;"></div>
+                </div>
+              </button>
+
+              <!-- Metric 2: Extension Deficit -->
+              <button onclick="toggleBiomechanicsDetail('extension')" id="metric-extension-btn" class="biomech-btn text-left rtl:text-right p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-150 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all focus:outline-none">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider strict-subheading">Extension Deficit</span>
+                  <span class="w-5 h-5 rounded-full bg-red-50 dark:bg-red-950/40 text-red-500 flex items-center justify-center text-[10px]">
+                    <i class="fa-solid fa-compress"></i>
+                  </span>
+                </div>
+                <div class="flex items-baseline space-x-1 rtl:space-x-reverse">
+                  <span class="text-2xl font-bold text-slate-900 dark:text-white strict-heading">-2°</span>
+                  <span class="text-[10px] text-slate-400 dark:text-slate-500">/ 0° target</span>
+                </div>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 h-1 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-red-500 h-full" style="width: 80%;"></div>
+                </div>
+              </button>
+
+              <!-- Metric 3: Quad Symmetry -->
+              <button onclick="toggleBiomechanicsDetail('symmetry')" id="metric-symmetry-btn" class="biomech-btn text-left rtl:text-right p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-150 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all focus:outline-none">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider strict-subheading">Quad Symmetry</span>
+                  <span class="w-5 h-5 rounded-full bg-green-50 dark:bg-green-950/40 text-green-500 flex items-center justify-center text-[10px]">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                  </span>
+                </div>
+                <div class="flex items-baseline space-x-1 rtl:space-x-reverse">
+                  <span class="text-2xl font-bold text-slate-900 dark:text-white strict-heading">78%</span>
+                  <span class="text-[10px] text-slate-400 dark:text-slate-500">/ 85% target</span>
+                </div>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 h-1 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-green-500 h-full" style="width: 91%;"></div>
+                </div>
+              </button>
+
+              <!-- Metric 4: Load Pain Index -->
+              <button onclick="toggleBiomechanicsDetail('pain')" id="metric-pain-btn" class="biomech-btn text-left rtl:text-right p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-150 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all focus:outline-none">
+                <div class="flex justify-between items-start mb-2">
+                  <span class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider strict-subheading">Load Pain Index</span>
+                  <span class="w-5 h-5 rounded-full bg-yellow-50 dark:bg-yellow-950/40 text-yellow-600 flex items-center justify-center text-[10px]">
+                    <i class="fa-solid fa-chart-line"></i>
+                  </span>
+                </div>
+                <div class="flex items-baseline space-x-1 rtl:space-x-reverse">
+                  <span class="text-2xl font-bold text-slate-900 dark:text-white strict-heading">2/10</span>
+                  <span class="text-[10px] text-slate-400 dark:text-slate-500">/ 0/10 target</span>
+                </div>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 h-1 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-yellow-500 h-full" style="width: 80%;"></div>
+                </div>
+              </button>
+            </div>
+
+            <!-- Dynamic Interactive Detail Area -->
+            <div id="biomechanics-detail-container" class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/20 border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 rtl:space-x-reverse">
+              <div class="w-full md:w-1/3 flex flex-col items-center justify-center p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-150 dark:border-slate-800/80 shadow-sm flex-shrink-0">
+                <!-- Mini Chart -->
+                <p class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider strict-subheading mb-3">Progress Chart</p>
+                <div class="flex items-end space-x-2.5 rtl:space-x-reverse h-20 pb-1 w-full justify-center">
+                  <div class="flex flex-col items-center space-y-1">
+                    <div id="chart-bar-0" class="bg-slate-200 dark:bg-slate-850 w-6 rounded-t transition-all duration-300" style="height: 40px;"></div>
+                    <span class="text-[8px] text-slate-400 dark:text-slate-500">Wk 2</span>
+                  </div>
+                  <div class="flex flex-col items-center space-y-1">
+                    <div id="chart-bar-1" class="bg-slate-200 dark:bg-slate-850 w-6 rounded-t transition-all duration-300" style="height: 55px;"></div>
+                    <span class="text-[8px] text-slate-400 dark:text-slate-500">Wk 4</span>
+                  </div>
+                  <div class="flex flex-col items-center space-y-1">
+                    <div id="chart-bar-2" class="bg-slate-200 dark:bg-slate-850 w-6 rounded-t transition-all duration-300" style="height: 68px;"></div>
+                    <span class="text-[8px] text-slate-400 dark:text-slate-500">Wk 6</span>
+                  </div>
+                  <div class="flex flex-col items-center space-y-1">
+                    <div id="chart-bar-active" class="bg-medical-blueLight dark:bg-medical-cyan w-6 rounded-t transition-all duration-500" style="height: 76px;"></div>
+                    <span class="text-[8px] text-slate-400 dark:text-slate-500 font-bold">Wk 8</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-grow space-y-2 text-xs text-left rtl:text-right">
+                <h5 id="biomech-detail-title" class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Active Joint Flexion</h5>
+                <p id="biomech-detail-desc" class="strict-paragraph leading-relaxed text-slate-600 dark:text-slate-300">
+                  Joint flexion is progressing normally. At 115°, you have achieved the mobility required for active cycling workouts and deep gait-stabilized walking. Sarah Jenkins recommends maintaining controlled heel slides to hit the 125° target before Week 10.
+                </p>
+                <div class="pt-2 flex items-center space-x-2 text-medical-blueLight dark:text-medical-cyan font-semibold">
+                  <i class="fa-solid fa-circle-info"></i>
+                  <span id="biomech-detail-tip">Recommendation: Perform 3 sets of heel slides daily.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Treatment Summary & Checklist Grid -->
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
             
@@ -229,7 +390,7 @@
                   <span class="px-2.5 py-1 rounded-lg bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider">Post-op Care Plan</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div class="space-y-4">
+                  <div class="space-y-4 text-left rtl:text-right">
                     <div>
                       <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Injury Profile</p>
                       <p id="summary-injury-type" class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-paragraph">ACL Tear Recovery (Left Knee)</p>
@@ -239,7 +400,7 @@
                       <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-paragraph">Dr. Marcus Evans, MD (Orthopedics)</p>
                     </div>
                   </div>
-                  <div class="space-y-4">
+                  <div class="space-y-4 text-left rtl:text-right">
                     <div>
                       <p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Lead Physical Therapist</p>
                       <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-paragraph">Sarah Jenkins, DPT</p>
@@ -254,7 +415,7 @@
 
               <!-- Achievements & Badges Card -->
               <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4">
-                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Earned Recovery Badges</h4>
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Earned Recovery Badges</h4>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   
                   <!-- Badge 1 -->
@@ -303,8 +464,8 @@
               
               <!-- Milestones Checklist -->
               <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
-                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Active Healing Milestones</h4>
-                <ul class="space-y-4">
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Active Healing Milestones</h4>
+                <ul class="space-y-4 text-left rtl:text-right">
                   
                   <!-- Milestone 1 -->
                   <li class="flex items-start space-x-3 rtl:space-x-reverse text-xs">
@@ -355,8 +516,8 @@
 
               <!-- Recent Activity Feed -->
               <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
-                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Recent Activities</h4>
-                <div class="relative border-l border-slate-200 dark:border-slate-800 pl-4 rtl:border-l-0 rtl:border-r rtl:pl-0 rtl:pr-4 space-y-5 text-xs">
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Recent Activities</h4>
+                <div class="relative border-l border-slate-200 dark:border-slate-800 pl-4 rtl:border-l-0 rtl:border-r rtl:pl-0 rtl:pr-4 space-y-5 text-xs text-left rtl:text-right">
                   
                   <!-- Activity 1 -->
                   <div class="relative">
@@ -395,26 +556,86 @@
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             <!-- Checklist Completion Progress Math -->
-            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm md:col-span-2 space-y-4">
-              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Daily Workout Progress Checklist</h4>
-              <div class="space-y-2">
-                <div class="flex justify-between text-xs font-semibold strict-subheading text-slate-600 dark:text-slate-400">
-                  <span>Exercise Sets Completed</span>
-                  <span id="workout-percentage-text">40% (2 of 5 sets)</span>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm md:col-span-2 space-y-4 flex flex-col justify-between">
+              <div>
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Daily Workout Progress Checklist</h4>
+                <div class="space-y-2 mt-2">
+                  <div class="flex justify-between text-xs font-semibold strict-subheading text-slate-600 dark:text-slate-400">
+                    <span>Exercise Sets Completed</span>
+                    <span id="workout-percentage-text">40% (2 of 5 sets)</span>
+                  </div>
+                  <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-3 overflow-hidden">
+                    <div id="workout-progress-bar" class="bg-medical-blueLight dark:text-medical-cyan h-full transition-all duration-350" style="width: 40%;"></div>
+                  </div>
                 </div>
-                <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-3 overflow-hidden">
-                  <div id="workout-progress-bar" class="bg-medical-blueLight dark:text-medical-cyan h-full transition-all duration-350" style="width: 40%;"></div>
+              </div>
+              
+              <!-- Enhanced Progress Metrics (ROM & Stability) -->
+              <div class="grid grid-cols-2 gap-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs text-left rtl:text-right">
+                <div class="space-y-1">
+                  <p class="font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[9px] strict-subheading">Range of Motion (ROM)</p>
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <span class="text-sm font-bold text-slate-800 dark:text-slate-200 strict-heading">115° flexion</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/40 text-medical-blueLight dark:text-medical-cyan font-bold uppercase tracking-wider select-none">Goal: 0°-120°</span>
+                  </div>
+                </div>
+                <div class="space-y-1">
+                  <p class="font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[9px] strict-subheading">Knee Stability Index</p>
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <span class="text-sm font-bold text-slate-800 dark:text-slate-200 strict-heading">82% Stability</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-green-50 dark:bg-green-950/40 text-green-700 dark:text-green-400 font-bold uppercase tracking-wider select-none">Grade II Recovery</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- PDF guides downloads link -->
-            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-center text-center space-y-3">
-              <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Need Offline Exercises?</h4>
-              <button onclick="alert('PDF downloaded successfully! (Simulated)')" class="w-full py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
-                <i class="fa-solid fa-file-pdf text-red-500 text-sm"></i>
-                <span>Download Exercise Guide</span>
-              </button>
+            <!-- PDF guides downloads list -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+              <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Prescribed Rehabilitation Plans</h4>
+              
+              <div class="space-y-2 text-xs">
+                <!-- Plan 1 -->
+                <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 hover:bg-slate-100/70 transition-all">
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <i class="fa-solid fa-file-pdf text-red-500 text-base flex-shrink-0"></i>
+                    <div class="text-left rtl:text-right">
+                      <p class="font-semibold text-slate-800 dark:text-slate-200 strict-subheading truncate max-w-[120px] sm:max-w-none">ACL_Agility_Stability_Phase3.pdf</p>
+                      <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">PDF Document • 2.4 MB</p>
+                    </div>
+                  </div>
+                  <button onclick="downloadPlanSimulate('ACL_Agility_Stability_Phase3.pdf')" class="w-7 h-7 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-350 shadow-sm border border-slate-150 dark:border-slate-700 flex items-center justify-center transition-all" aria-label="Download document">
+                    <i class="fa-solid fa-download text-xs"></i>
+                  </button>
+                </div>
+
+                <!-- Plan 2 -->
+                <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 hover:bg-slate-100/70 transition-all">
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <i class="fa-solid fa-file-pdf text-red-500 text-base flex-shrink-0"></i>
+                    <div class="text-left rtl:text-right">
+                      <p class="font-semibold text-slate-800 dark:text-slate-200 strict-subheading truncate max-w-[120px] sm:max-w-none">Knee_Flexion_Phase2.pdf</p>
+                      <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">PDF Document • 1.8 MB</p>
+                    </div>
+                  </div>
+                  <button onclick="downloadPlanSimulate('Knee_Flexion_Phase2.pdf')" class="w-7 h-7 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-350 shadow-sm border border-slate-150 dark:border-slate-700 flex items-center justify-center transition-all" aria-label="Download document">
+                    <i class="fa-solid fa-download text-xs"></i>
+                  </button>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-850 hover:bg-slate-100/70 transition-all">
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <i class="fa-solid fa-file-pdf text-red-500 text-base flex-shrink-0"></i>
+                    <div class="text-left rtl:text-right">
+                      <p class="font-semibold text-slate-800 dark:text-slate-200 strict-subheading truncate max-w-[120px] sm:max-w-none">Patellofemoral_Tracking_Phase1.pdf</p>
+                      <p class="text-[9px] text-slate-400 dark:text-slate-500 strict-paragraph">PDF Document • 3.1 MB</p>
+                    </div>
+                  </div>
+                  <button onclick="downloadPlanSimulate('Patellofemoral_Tracking_Phase1.pdf')" class="w-7 h-7 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-350 shadow-sm border border-slate-150 dark:border-slate-700 flex items-center justify-center transition-all" aria-label="Download document">
+                    <i class="fa-solid fa-download text-xs"></i>
+                  </button>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -424,12 +645,12 @@
             
             <!-- Checkboxes column -->
             <div class="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
-              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Today's Prescribed Sets</h4>
+              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Today's Prescribed Sets</h4>
               
               <div class="space-y-4">
                 <!-- Exercise Checkbox 1 -->
                 <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all">
-                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse text-left rtl:text-right">
                     <input type="checkbox" id="ex-1" class="exercise-checkbox w-5 h-5 rounded text-medical-blueLight dark:text-medical-cyan focus:ring-medical-blueLight dark:focus:ring-medical-cyan cursor-pointer mt-0.5" checked>
                     <label for="ex-1" class="cursor-pointer select-none">
                       <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Heel Slides</p>
@@ -443,7 +664,7 @@
 
                 <!-- Exercise Checkbox 2 -->
                 <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all">
-                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse text-left rtl:text-right">
                     <input type="checkbox" id="ex-2" class="exercise-checkbox w-5 h-5 rounded text-medical-blueLight dark:text-medical-cyan focus:ring-medical-blueLight dark:focus:ring-medical-cyan cursor-pointer mt-0.5" checked>
                     <label for="ex-2" class="cursor-pointer select-none">
                       <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Quad Sets (Isometric Contractions)</p>
@@ -457,7 +678,7 @@
 
                 <!-- Exercise Checkbox 3 -->
                 <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all">
-                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse text-left rtl:text-right">
                     <input type="checkbox" id="ex-3" class="exercise-checkbox w-5 h-5 rounded text-medical-blueLight dark:text-medical-cyan focus:ring-medical-blueLight dark:focus:ring-medical-cyan cursor-pointer mt-0.5">
                     <label for="ex-3" class="cursor-pointer select-none">
                       <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Straight Leg Raises</p>
@@ -471,7 +692,7 @@
 
                 <!-- Exercise Checkbox 4 -->
                 <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all">
-                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse text-left rtl:text-right">
                     <input type="checkbox" id="ex-4" class="exercise-checkbox w-5 h-5 rounded text-medical-blueLight dark:text-medical-cyan focus:ring-medical-blueLight dark:focus:ring-medical-cyan cursor-pointer mt-0.5">
                     <label for="ex-4" class="cursor-pointer select-none">
                       <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Stationary Cycling (Light Load)</p>
@@ -485,7 +706,7 @@
 
                 <!-- Exercise Checkbox 5 -->
                 <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all">
-                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+                  <div class="flex items-start space-x-3.5 rtl:space-x-reverse text-left rtl:text-right">
                     <input type="checkbox" id="ex-5" class="exercise-checkbox w-5 h-5 rounded text-medical-blueLight dark:text-medical-cyan focus:ring-medical-blueLight dark:focus:ring-medical-cyan cursor-pointer mt-0.5">
                     <label for="ex-5" class="cursor-pointer select-none">
                       <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 strict-subheading">Balance Board Training</p>
@@ -502,7 +723,7 @@
 
             <!-- Video thumbnails / reference playlist -->
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4">
-              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Instructional Videos</h4>
+              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Instructional Videos</h4>
               <div class="space-y-4">
                 
                 <!-- Video Item 1 -->
@@ -538,7 +759,7 @@
             <div class="p-3 bg-blue-100 dark:bg-blue-900/40 text-medical-blueLight dark:text-medical-cyan rounded-2xl flex-shrink-0">
               <i class="fa-solid fa-bell text-lg"></i>
             </div>
-            <div class="space-y-1 text-xs text-blue-900 dark:text-blue-200">
+            <div class="space-y-1 text-xs text-blue-900 dark:text-blue-200 text-left rtl:text-right">
               <h4 class="strict-heading font-semibold text-sm">Upcoming Session Reminder</h4>
               <p class="strict-paragraph leading-relaxed">
                 You have a clinical rehab session scheduled for tomorrow at 10:00 AM with PT Sarah Jenkins. Please wear comfortable athletic clothing and bring your postoperative braces.
@@ -551,9 +772,9 @@
             
             <!-- Booking Form -->
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
-              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Book Clinic Consultation</h4>
+              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Book Clinic Consultation</h4>
               
-              <form id="book-appt-form" class="space-y-4" novalidate>
+              <form id="book-appt-form" class="space-y-4 text-left rtl:text-right" novalidate>
                 
                 <!-- Date -->
                 <div>
@@ -573,6 +794,7 @@
                   <select id="book-staff" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:bg-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan text-sm">
                     <option value="Sarah Jenkins" class="dark:bg-slate-900">Sarah Jenkins, DPT (Physical Therapist)</option>
                     <option value="Dr. Marcus Evans" class="dark:bg-slate-900">Dr. Marcus Evans, MD (Orthopedic Surgeon)</option>
+                    <option value="Dr. David Cho" class="dark:bg-slate-900">Dr. David Cho, MD (Spine Surgeon)</option>
                   </select>
                 </div>
 
@@ -603,7 +825,7 @@
               
               <!-- Upcoming Sessions List -->
               <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
-                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white font-semibold">Scheduled Appointments</h4>
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Scheduled Appointments</h4>
                 
                 <div id="appointments-list-container" class="space-y-4">
                   <!-- Appointment items are dynamically injected here. Fallback template below is initialized by script. -->
@@ -612,7 +834,7 @@
 
               <!-- Past Visit Log Table -->
               <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 overflow-hidden">
-                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Past Consultations & Visits</h4>
+                <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Past Consultations & Visits</h4>
                 <div class="overflow-x-auto">
                   <table class="w-full text-xs text-left rtl:text-right border-collapse">
                     <thead>
@@ -660,86 +882,552 @@
 
         </div>
 
-        <!-- ================= PANEL 4: MY THERAPISTS ================= -->
+        <!-- ================= PANEL 4: SURGEON & PT PROFILES ================= -->
         <div id="tab-therapists" class="tab-panel animate-fadeInUp hidden space-y-6 md:space-y-8">
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             
             <!-- Surgeon Card (Marcus Evans) -->
-            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6 hover:shadow-md transition-shadow">
-              <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                <img src="assets/images/profile-marcus.png" alt="Dr. Marcus Evans" class="w-16 h-16 rounded-2xl object-cover bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-                <div>
-                  <h3 class="strict-heading text-lg font-semibold text-slate-900 dark:text-white">Dr. Marcus Evans, MD</h3>
-                  <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400">Chief Orthopedic Surgeon • Joint Reconstruction</p>
-                  <!-- Star Rating -->
-                  <div class="flex space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <span class="text-slate-400 dark:text-slate-500 text-[10px] ml-1 select-none font-semibold strict-paragraph">(98 reviews)</span>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6 hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div class="space-y-5">
+                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                  <img src="assets/images/profile-marcus.png" alt="Dr. Marcus Evans" class="w-16 h-16 rounded-2xl object-cover bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+                  <div class="text-left rtl:text-right">
+                    <h3 class="strict-heading text-lg font-semibold text-slate-900 dark:text-white">Dr. Marcus Evans, MD</h3>
+                    <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400">Chief Orthopedic Surgeon • Joint Reconstruction</p>
+                    <div class="flex space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <span class="text-slate-400 dark:text-slate-500 text-[10px] ml-1 select-none font-semibold strict-paragraph">(98 reviews)</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="space-y-3.5 text-xs text-left rtl:text-right">
+                  <div>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Credentials & Fellowship</p>
+                    <p class="text-slate-700 dark:text-slate-300 font-medium strict-paragraph">Board Certified in Orthopedic Surgery (ABOS). Fellowship in Sports Medicine at Hospital for Special Surgery (HSS), NY.</p>
+                  </div>
+                  <div>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Surgical Philosophy</p>
+                    <p class="text-slate-600 dark:text-slate-400 italic strict-paragraph">"Minimally invasive, anatomical reconstruction utilizing autografts to ensure maximum biomechanical durability and rapid return-to-play."</p>
+                  </div>
+                  <div>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Recent Clinical Publication</p>
+                    <p class="text-slate-700 dark:text-slate-300 strict-paragraph font-normal">
+                      <strong class="font-semibold text-slate-800 dark:text-slate-200">Evans M.</strong>, "Autograft vs. Allograft in ACL Reconstruction: A 10-Year Clinical Retrospective" (<span class="italic">Journal of Bone & Joint Surgery, 2024</span>).
+                    </p>
                   </div>
                 </div>
               </div>
-              
-              <div class="space-y-3 text-xs">
-                <p class="strict-paragraph leading-relaxed text-slate-600 dark:text-slate-300">
-                  Dr. Evans specializes in athletic knee and shoulder arthroscopy, ligament reconstruction (ACL/MCL), and articular cartilage restoration. He performed your surgery on April 12, 2026.
-                </p>
-                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+
+              <div class="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div class="flex items-center justify-between text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
                   <span>Room 302, Clinic Tower</span>
                   <span class="text-medical-blueLight dark:text-medical-cyan">Mon, Wed Visits</span>
                 </div>
+                <button onclick="switchToChatPanel()" class="w-full py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                  <i class="fa-solid fa-comment-medical text-sm"></i>
+                  <span>Message Surgeon</span>
+                </button>
               </div>
-
-              <button onclick="switchToChatPanel()" class="w-full py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
-                <i class="fa-solid fa-comment-medical text-sm"></i>
-                <span>Message Surgeon</span>
-              </button>
             </div>
 
             <!-- Physical Therapist Card (Sarah Jenkins) -->
-            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6 hover:shadow-md transition-shadow">
-              <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                <img src="assets/images/profile-sarah.png" alt="Sarah Jenkins" class="w-16 h-16 rounded-2xl object-cover bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-                <div>
-                  <h3 class="strict-heading text-lg font-semibold text-slate-900 dark:text-white">Sarah Jenkins, DPT</h3>
-                  <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400">Lead Physical Therapist • Sports Rehab Expert</p>
-                  <!-- Star Rating -->
-                  <div class="flex space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
-                    <span class="text-slate-400 dark:text-slate-500 text-[10px] ml-1 select-none font-semibold strict-paragraph">(142 reviews)</span>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6 hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div class="space-y-5">
+                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                  <img src="assets/images/profile-sarah.png" alt="Sarah Jenkins" class="w-16 h-16 rounded-2xl object-cover bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+                  <div class="text-left rtl:text-right">
+                    <h3 class="strict-heading text-lg font-semibold text-slate-900 dark:text-white">Sarah Jenkins, DPT</h3>
+                    <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400">Lead Physical Therapist • Sports Rehab Expert</p>
+                    <div class="flex space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star-half-stroke"></i>
+                      <span class="text-slate-400 dark:text-slate-500 text-[10px] ml-1 select-none font-semibold strict-paragraph">(142 reviews)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-3.5 text-xs text-left rtl:text-right">
+                  <div>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Credentials & Specialty</p>
+                    <p class="text-slate-700 dark:text-slate-300 font-medium strict-paragraph">Doctor of Physical Therapy (DPT) from Duke University. Board Certified Clinical Specialist in Sports Physical Therapy (SCS).</p>
+                  </div>
+                  <div>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Clinical Philosophy</p>
+                    <p class="text-slate-600 dark:text-slate-400 italic strict-paragraph">"Neuromuscular re-education and progressive loaded biomechanics. We don't just restore range-of-motion; we rebuild reactive power symmetry."</p>
+                  </div>
+                  <div>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Recent Clinical Publication</p>
+                    <p class="text-slate-700 dark:text-slate-300 strict-paragraph font-normal">
+                      <strong class="font-semibold text-slate-800 dark:text-slate-200">Jenkins S.</strong>, "Gait Retraining & Electromyographic Biofeedback in Postoperative ACL Athletes" (<span class="italic">Journal of Sports Physical Therapy, 2025</span>).
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div class="space-y-3 text-xs">
-                <p class="strict-paragraph leading-relaxed text-slate-600 dark:text-slate-300">
-                  Sarah leads our athletic injury rehabilitation, motion analysis diagnostic program, and strength conditioning phase transitions. She oversees your daily active progression tracking.
-                </p>
-                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+              <div class="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div class="flex items-center justify-between text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
                   <span>Rehab Wing, Ground Floor</span>
                   <span class="text-medical-teal font-semibold">Daily Consultation</span>
                 </div>
+                <button onclick="switchToChatPanel()" class="w-full py-2.5 rounded-xl bg-medical-blueLight text-white hover:bg-medical-blue text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                  <i class="fa-solid fa-comment-medical text-sm"></i>
+                  <span>Message Therapist</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Surgeon Card (David Cho) -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6 hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div class="space-y-5">
+                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                  <img src="assets/images/profile-david.png" alt="Dr. David Cho" class="w-16 h-16 rounded-2xl object-cover bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
+                  <div class="text-left rtl:text-right">
+                    <h3 class="strict-heading text-lg font-semibold text-slate-900 dark:text-white">Dr. David Cho, MD</h3>
+                    <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400">Spine Reconstruction Surgeon • Consultant</p>
+                    <div class="flex space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <span class="text-slate-400 dark:text-slate-500 text-[10px] ml-1 select-none font-semibold strict-paragraph">(74 reviews)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-3.5 text-xs text-left rtl:text-right">
+                  <div>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Credentials & Fellowship</p>
+                    <p class="text-slate-700 dark:text-slate-300 font-medium strict-paragraph">Board Certified in Orthopedic Spine Surgery. Fellowship in Complex Spine Surgery at Cleveland Clinic.</p>
+                  </div>
+                  <div>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Surgical Philosophy</p>
+                    <p class="text-slate-600 dark:text-slate-400 italic strict-paragraph">"Lumbar decompression and motion-preserving disc arthroplasty designed to alleviate athletic neural compression while maintaining segment mobility."</p>
+                  </div>
+                  <div>
+                    <p class="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold strict-subheading">Recent Clinical Publication</p>
+                    <p class="text-slate-700 dark:text-slate-300 strict-paragraph font-normal">
+                      <strong class="font-semibold text-slate-800 dark:text-slate-200">Cho D.</strong>, "Microdiscectomy Outcomes in Elite Weightlifting and Contact Sport Athletes" (<span class="italic">Spine Journal, 2023</span>).
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <button onclick="switchToChatPanel()" class="w-full py-2.5 rounded-xl bg-medical-blueLight text-white hover:bg-medical-blue text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
-                <i class="fa-solid fa-comment-medical text-sm"></i>
-                <span>Message Therapist</span>
-              </button>
+              <div class="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div class="flex items-center justify-between text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                  <span>Room 412, Clinic Tower</span>
+                  <span class="text-medical-blueLight dark:text-medical-cyan">Tue, Thu Visits</span>
+                </div>
+                <button onclick="switchToChatPanel()" class="w-full py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold transition-all flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                  <i class="fa-solid fa-comment-medical text-sm"></i>
+                  <span>Message Specialist</span>
+                </button>
+              </div>
             </div>
 
           </div>
 
         </div>
 
-        <!-- ================= PANEL 5: SECURE MESSAGE ================= -->
+        <!-- ================= PANEL 5: RECOVERY CASE STUDIES ================= -->
+        <div id="tab-case-studies" class="tab-panel animate-fadeInUp hidden space-y-6 md:space-y-8">
+          
+          <div class="space-y-6">
+            <!-- Header section inside panel -->
+            <div class="bg-gradient-to-r from-slate-900 to-medical-navy p-6 rounded-3xl text-white flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
+              <div class="space-y-1 text-left">
+                <h4 class="strict-heading text-lg font-semibold">Clinical Recovery Case Studies</h4>
+                <p class="strict-paragraph text-xs text-slate-300">Empirical records of surgical reconstructions and sports physical therapy progression.</p>
+              </div>
+              <span class="px-3 py-1 rounded-xl bg-white/10 text-white border border-white/20 text-xs font-bold uppercase tracking-wider select-none">3 Elite Athletes Restored</span>
+            </div>
+
+            <!-- Case Study 1: Brandon Miller -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 space-y-2 sm:space-y-0">
+                <div class="flex items-center space-x-3.5 rtl:space-x-reverse">
+                  <div class="w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-950/40 text-medical-blueLight dark:text-medical-cyan flex items-center justify-center text-base">
+                    <i class="fa-solid fa-person-running"></i>
+                  </div>
+                  <div class="text-left rtl:text-right">
+                    <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Brandon Miller • ACL Reconstruction</h4>
+                    <p class="strict-paragraph text-[10px] text-slate-400 dark:text-slate-500 font-medium">Collegiate Soccer Midfielder • 21 Years Old</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider select-none">Fully Restored (9 Months)</span>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-5 gap-6 text-xs text-left rtl:text-right">
+                <!-- Col 1: Background & Challenge -->
+                <div class="md:col-span-2 space-y-4 border-r border-slate-100 dark:border-slate-800 pr-6 rtl:border-r-0 rtl:border-l rtl:pr-0 rtl:pl-6">
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Athletic Background</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      Division I collegiate midfielder. High-demand cutting, pivoting, and acceleration profile. Injured during a sliding tackle, experiencing immediate knee instability.
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Clinical Challenge & MRI Analysis</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      MRI confirmed a complete rupture of the left Anterior Cruciate Ligament (ACL) with a lateral meniscus tear and subchondral bone bruising on the lateral femoral condyle.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Col 2: Surgical Intervention -->
+                <div class="md:col-span-1.5 space-y-4 md:border-r border-slate-100 dark:border-slate-800 md:pr-6 rtl:border-r-0 rtl:border-l rtl:pr-0 rtl:pl-6">
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Surgical Intervention</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      Arthroscopic ACL reconstruction using a bone-patellar tendon-bone (BTB) autograft. Concomitant lateral meniscus repair utilizing inside-out suturing techniques.
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Lead Surgeon</h5>
+                    <p class="strict-paragraph text-slate-800 dark:text-slate-200 font-semibold">Dr. Marcus Evans, MD</p>
+                  </div>
+                </div>
+
+                <!-- Col 3: Rehab & Outcome -->
+                <div class="md:col-span-1.5 space-y-4">
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Rehab Protocol</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      Phase I: Extension restoration & quad reactivation. Phase II: Progressive loading & cycling. Phase III: Neuromuscular control & plyometric landing mechanics.
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Outcome & Power Symmetry</h5>
+                    <p class="strict-paragraph text-slate-750 dark:text-slate-250 leading-relaxed font-normal">
+                      Return-to-play cleared at 9 months. Isokinetic testing showed <strong class="text-slate-800 dark:text-slate-200 font-semibold">96% quadriceps symmetry</strong>. Return to competitive play without knee bracing or instability.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Case Study 2: Elena Rostova -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 space-y-2 sm:space-y-0">
+                <div class="flex items-center space-x-3.5 rtl:space-x-reverse">
+                  <div class="w-10 h-10 rounded-full bg-red-50 dark:bg-red-950/40 text-red-500 flex items-center justify-center text-base">
+                    <i class="fa-solid fa-medal"></i>
+                  </div>
+                  <div class="text-left rtl:text-right">
+                    <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Elena Rostova • Arthroscopic Rotator Cuff Repair</h4>
+                    <p class="strict-paragraph text-[10px] text-slate-400 dark:text-slate-500 font-medium">Professional Tennis Player • 26 Years Old</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider select-none">Fully Restored (6 Months)</span>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-5 gap-6 text-xs text-left rtl:text-right">
+                <!-- Col 1: Background & Challenge -->
+                <div class="md:col-span-2 space-y-4 border-r border-slate-100 dark:border-slate-800 pr-6 rtl:border-r-0 rtl:border-l rtl:pr-0 rtl:pl-6">
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Athletic Background</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      Professional WTA tour tennis player. Overuse overhead service wear. Injured dominant shoulder during a match, losing terminal overhead power and suffering deep night pain.
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Clinical Challenge & MRI Analysis</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      MRI revealed a full-thickness supraspinatus tendon tear (1.5 cm) of the right shoulder with mild subacromial impingement and biceps tendinopathy.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Col 2: Surgical Intervention -->
+                <div class="md:col-span-1.5 space-y-4 md:border-r border-slate-100 dark:border-slate-800 md:pr-6 rtl:border-r-0 rtl:border-l rtl:pr-0 rtl:pl-6">
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Surgical Intervention</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      All-arthroscopic double-row repair of the supraspinatus tendon using suture anchors, subacromial decompression, and biceps tenodesis.
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Lead Surgeon</h5>
+                    <p class="strict-paragraph text-slate-800 dark:text-slate-200 font-semibold">Dr. Marcus Evans, MD</p>
+                  </div>
+                </div>
+
+                <!-- Col 3: Rehab & Outcome -->
+                <div class="md:col-span-1.5 space-y-4">
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Rehab Protocol</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      Passive ROM in sling (Wks 1-6). Active-assisted mobility and scapular strengthening (Wks 6-12). Progressive overload and simulated service mechanics (Wks 12-24).
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Outcome & Shoulder Function</h5>
+                    <p class="strict-paragraph text-slate-750 dark:text-slate-250 leading-relaxed font-normal">
+                      Cleared for full WTA tour competitive play at 6 months. Regained <strong class="text-slate-800 dark:text-slate-200 font-semibold">100% active abduction</strong>, full overhead service velocity (110 mph), and zero pain.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Case Study 3: Marcus Vance -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 space-y-2 sm:space-y-0">
+                <div class="flex items-center space-x-3.5 rtl:space-x-reverse">
+                  <div class="w-10 h-10 rounded-full bg-teal-50 dark:bg-teal-950/40 text-medical-teal flex items-center justify-center text-base">
+                    <i class="fa-solid fa-dumbbell"></i>
+                  </div>
+                  <div class="text-left rtl:text-right">
+                    <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Marcus Vance • Lumbar Decompression & Microdiscectomy</h4>
+                    <p class="strict-paragraph text-[10px] text-slate-400 dark:text-slate-500 font-medium">Competitive Weightlifter • 29 Years Old</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider select-none">Fully Restored (5 Months)</span>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-5 gap-6 text-xs text-left rtl:text-right">
+                <!-- Col 1: Background & Challenge -->
+                <div class="md:col-span-2 space-y-4 border-r border-slate-100 dark:border-slate-800 pr-6 rtl:border-r-0 rtl:border-l rtl:pr-0 rtl:pl-6">
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Athletic Background</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      Competitive powerlifter and heavy squatter. Experienced severe acute lower back spasm and radiating left leg pain (L5 radiculopathy) after a heavy deadlift attempt.
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Clinical Challenge & MRI Analysis</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      MRI showed a massive 8mm left posterolateral disc herniation at L4-L5, causing severe compression of the transiting left L5 nerve root with neural canal narrowing.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Col 2: Surgical Intervention -->
+                <div class="md:col-span-1.5 space-y-4 md:border-r border-slate-100 dark:border-slate-800 md:pr-6 rtl:border-r-0 rtl:border-l rtl:pr-0 rtl:pl-6">
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Surgical Intervention</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      Microscopic lumbar decompression and microdiscectomy. Minimally invasive tube-retractor approach to excise the herniated fragment without spinal instability.
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Lead Surgeon</h5>
+                    <p class="strict-paragraph text-slate-800 dark:text-slate-200 font-semibold">Dr. David Cho, MD</p>
+                  </div>
+                </div>
+
+                <!-- Col 3: Rehab & Outcome -->
+                <div class="md:col-span-1.5 space-y-4">
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Rehab Protocol</h5>
+                    <p class="strict-paragraph text-slate-700 dark:text-slate-350 leading-relaxed">
+                      Protected walking & neutral spine hygiene (Wks 1-4). Core stability (McGill Big 3) & hip mobility (Wks 4-8). Graduated axial loading & squat patterning (Wks 8-16).
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="strict-subheading text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Outcome & Spinal Health</h5>
+                    <p class="strict-paragraph text-slate-750 dark:text-slate-250 leading-relaxed font-normal">
+                      Returned to competition-grade lifting at 5 months. EMG showed complete resolution of L5 radiculopathy. Achieved full spinal flexibility and deadlifted 210kg pain-free.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================= PANEL 6: INJURY RESOURCE HUB ================= -->
+        <div id="tab-injuries" class="tab-panel animate-fadeInUp hidden space-y-6 md:space-y-8">
+          
+          <div class="space-y-6">
+            
+            <div class="bg-gradient-to-r from-medical-blueLight to-medical-blue p-6 rounded-3xl text-white text-left">
+              <h4 class="strict-heading text-lg font-semibold">Sports Injury Resource Hub</h4>
+              <p class="strict-paragraph text-xs text-slate-200 mt-1">
+                Clinical guides, diagnostic details, and structured recovery pathways for common athletic conditions.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Injury 1: ACL Tear -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Anterior Cruciate Ligament (ACL) Tear</h4>
+                  <span class="px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/40 text-medical-blueLight dark:text-medical-cyan text-[9px] font-bold select-none uppercase tracking-wider">Knee Joint</span>
+                </div>
+                <div class="space-y-3.5 text-xs text-slate-700 dark:text-slate-350 text-left rtl:text-right">
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Clinical Overview</span>
+                    <p class="strict-paragraph leading-relaxed">
+                      A complete rupture or partial tear of the ACL, usually resulting from rapid cutting, pivoting, or landing deceleration forces common in soccer, basketball, and skiing.
+                    </p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Key Diagnostic Indicator</span>
+                    <p class="strict-paragraph leading-relaxed font-normal">
+                      <strong class="font-semibold">Lachman Test:</strong> Increased anterior tibial translation with a soft or mushy end-point, indicating loss of anterior translation constraint.
+                    </p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Standard Recovery Timeline</span>
+                    <p class="strict-paragraph leading-relaxed">
+                      6 to 12 months. Reconstruction surgery (autograft) is typically followed by a structured 5-phase progressive sports physical therapy program.
+                    </p>
+                  </div>
+                </div>
+                <button onclick="playExerciseVideo('ACL Rehab Pathway', 'Timeline phases: Wks 1-4 Range of Motion; Wks 4-12 Hypertrophy & Loading; Wks 12-20 Agility & Core stability; Wks 20-36 Return to sports drills.')" class="w-full py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-150 dark:border-slate-700 text-slate-700 dark:text-slate-250 font-bold transition-all text-[11px] flex items-center justify-center space-x-1.5 rtl:space-x-reverse">
+                  <i class="fa-solid fa-arrows-spin text-medical-blueLight dark:text-medical-cyan"></i>
+                  <span>Explore Rehabilitation Pathway</span>
+                </button>
+              </div>
+
+              <!-- Injury 2: Rotator Cuff Tear -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Rotator Cuff Tendon Tear</h4>
+                  <span class="px-2 py-0.5 rounded bg-red-50 dark:bg-red-950/40 text-red-500 text-[9px] font-bold select-none uppercase tracking-wider">Shoulder Joint</span>
+                </div>
+                <div class="space-y-3.5 text-xs text-slate-700 dark:text-slate-350 text-left rtl:text-right">
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Clinical Overview</span>
+                    <p class="strict-paragraph leading-relaxed">
+                      Tear of the supraspinatus, infraspinatus, or subscapularis tendon, caused by acute trauma (falls) or chronic overhead micro-trauma from throwing, swimming, or tennis.
+                    </p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Key Diagnostic Indicator</span>
+                    <p class="strict-paragraph leading-relaxed font-normal">
+                      <strong class="font-semibold">Empty Can (Jobe) Test:</strong> Weakness or pain during abduction to 90° and forward flexion to 30° with internal rotation, pointing to supraspinatus pathology.
+                    </p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Standard Recovery Timeline</span>
+                    <p class="strict-paragraph leading-relaxed">
+                      4 to 6 months. Arthroscopic suture anchoring and decompression requires passive immobilization in a sling before active strength loading begins.
+                    </p>
+                  </div>
+                </div>
+                <button onclick="playExerciseVideo('Rotator Cuff Pathway', 'Timeline phases: Wks 1-6 Sling Immobilization; Wks 6-12 Scapular retraction & Active-assisted ROM; Wks 12-18 Elastic band loading; Wks 18-24 Throwing/racket mechanics.')" class="w-full py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-150 dark:border-slate-700 text-slate-700 dark:text-slate-250 font-bold transition-all text-[11px] flex items-center justify-center space-x-1.5 rtl:space-x-reverse">
+                  <i class="fa-solid fa-arrows-spin text-red-500"></i>
+                  <span>Explore Rehabilitation Pathway</span>
+                </button>
+              </div>
+
+              <!-- Injury 3: Meniscus Tear -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Meniscus Tear (Medial or Lateral)</h4>
+                  <span class="px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/40 text-medical-blueLight dark:text-medical-cyan text-[9px] font-bold select-none uppercase tracking-wider">Knee Joint</span>
+                </div>
+                <div class="space-y-3.5 text-xs text-slate-700 dark:text-slate-350 text-left rtl:text-right">
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Clinical Overview</span>
+                    <p class="strict-paragraph leading-relaxed">
+                      Damage to the fibrocartilage pads of the knee joint. Medial meniscus tears are more frequent. Often occurs during twisting loads when the knee is loaded in flexion.
+                    </p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Key Diagnostic Indicator</span>
+                    <p class="strict-paragraph leading-relaxed font-normal">
+                      <strong class="font-semibold">McMurray Test:</strong> A palpable or audible click/snap during passive flexion and internal/external tibial rotation under compressive loads.
+                    </p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Standard Recovery Timeline</span>
+                    <p class="strict-paragraph leading-relaxed">
+                      Partial Meniscectomy: 4-6 weeks (rapid recovery). Meniscus Repair: 3-5 months (slower due to protected healing of vascular zones).
+                    </p>
+                  </div>
+                </div>
+                <button onclick="playExerciseVideo('Meniscus Rehab Pathway', 'Timeline phases: Meniscectomy allows early loading. Repair requires: Wks 1-4 Non-weight bearing in full extension; Wks 4-8 Passive flexion increments; Wks 8-12 Squat loading.')" class="w-full py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-150 dark:border-slate-700 text-slate-700 dark:text-slate-250 font-bold transition-all text-[11px] flex items-center justify-center space-x-1.5 rtl:space-x-reverse">
+                  <i class="fa-solid fa-arrows-spin text-medical-blueLight dark:text-medical-cyan"></i>
+                  <span>Explore Rehabilitation Pathway</span>
+                </button>
+              </div>
+
+              <!-- Injury 4: Runner's Knee -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Patellofemoral Pain Syndrome (PFPS)</h4>
+                  <span class="px-2 py-0.5 rounded bg-green-50 dark:bg-green-950/40 text-green-700 dark:text-green-400 text-[9px] font-bold select-none uppercase tracking-wider">Knee Joint</span>
+                </div>
+                <div class="space-y-3.5 text-xs text-slate-700 dark:text-slate-350 text-left rtl:text-right">
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Clinical Overview</span>
+                    <p class="strict-paragraph leading-relaxed">
+                      Often called "Runner's Knee." Characterized by anterior knee pain around or behind the patella, driven by poor tracking of the patella within the femoral groove.
+                    </p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Key Diagnostic Indicator</span>
+                    <p class="strict-paragraph leading-relaxed font-normal">
+                      <strong class="font-semibold">Patellar Compression Test:</strong> Elicits pain when compressing the patella while asking the patient to contract the quadriceps.
+                    </p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Standard Recovery Timeline</span>
+                    <p class="strict-paragraph leading-relaxed">
+                      6 to 12 weeks. Conservative physical therapy focusing on vastus medialis obliquus (VMO) strengthening, hip abduction strength, and ankle mobility adjustments.
+                    </p>
+                  </div>
+                </div>
+                <button onclick="playExerciseVideo('PFPS Rehab Pathway', 'Timeline phases: Wks 1-2 Activity modification & inflammation reduction; Wks 2-6 VMO, gluteus medius, and IT band mobilization; Wks 6-12 Gait correction.')" class="w-full py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-150 dark:border-slate-700 text-slate-700 dark:text-slate-250 font-bold transition-all text-[11px] flex items-center justify-center space-x-1.5 rtl:space-x-reverse">
+                  <i class="fa-solid fa-arrows-spin text-green-500"></i>
+                  <span>Explore Rehabilitation Pathway</span>
+                </button>
+              </div>
+
+              <!-- Injury 5: Spine Disc Herniation -->
+              <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-shadow md:col-span-2">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Lumbar Herniated Nucleus Pulposus (HNP)</h4>
+                  <span class="px-2 py-0.5 rounded bg-yellow-50 dark:bg-yellow-950/40 text-yellow-600 text-[9px] font-bold select-none uppercase tracking-wider">Spinal Column</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-slate-700 dark:text-slate-350 text-left rtl:text-right">
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Clinical Overview</span>
+                    <p class="strict-paragraph leading-relaxed font-normal">
+                      Displacement of core disc material beyond the annulus boundary, compressing spinal nerve roots (commonly L4-L5 or L5-S1) and causing radiculopathy (sciatic pain).
+                    </p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Key Diagnostic Indicator</span>
+                    <p class="strict-paragraph leading-relaxed font-normal">
+                      <strong class="font-semibold">Straight Leg Raise (SLR) Test:</strong> Positive if raising the leg between 30° to 70° reproduces radiating sciatic pain down the posterior leg.
+                    </p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Standard Recovery Timeline</span>
+                    <p class="strict-paragraph leading-relaxed">
+                      8 to 16 weeks (Conservative) or 3 to 5 months (Surgical Microdiscectomy). Focuses on neutral spine stability and eliminating compressive loads.
+                    </p>
+                  </div>
+                </div>
+                <button onclick="playExerciseVideo('Lumbar Disc Pathway', 'Timeline phases: Wks 1-4 Spinal hygiene & walking; Wks 4-8 Isometric abdominal core activation (McGill Big 3); Wks 8-16 Graduated lifting under guidance.')" class="w-full py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-150 dark:border-slate-700 text-slate-700 dark:text-slate-250 font-bold transition-all text-[11px] flex items-center justify-center space-x-1.5 rtl:space-x-reverse">
+                  <i class="fa-solid fa-arrows-spin text-yellow-600"></i>
+                  <span>Explore Rehabilitation Pathway</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ================= PANEL 7: SECURE MESSAGE ================= -->
         <div id="tab-messaging" class="tab-panel animate-fadeInUp hidden h-[calc(100vh-250px)] min-h-[400px] flex flex-col bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm">
           
           <!-- Messaging Panel Header -->
@@ -749,7 +1437,7 @@
                 <img src="assets/images/profile-sarah.png" alt="Sarah Jenkins" class="w-10 h-10 rounded-xl object-cover">
                 <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
               </div>
-              <div>
+              <div class="text-left rtl:text-right">
                 <h4 class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Sarah Jenkins, DPT</h4>
                 <p class="strict-paragraph text-[10px] text-slate-400 dark:text-slate-500">Active • Attending Therapist</p>
               </div>
@@ -763,7 +1451,7 @@
             <!-- Message received -->
             <div class="flex items-start space-x-3 rtl:space-x-reverse max-w-[80%]">
               <img src="assets/images/profile-sarah.png" alt="Sarah avatar" class="w-8 h-8 rounded-lg object-cover flex-shrink-0 mt-1">
-              <div class="p-3.5 rounded-2xl rounded-tl-none bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-750 text-xs shadow-sm space-y-1">
+              <div class="p-3.5 rounded-2xl rounded-tl-none bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-750 text-xs shadow-sm space-y-1 text-left rtl:text-right">
                 <p class="strict-paragraph leading-relaxed text-slate-800 dark:text-slate-200">
                   Hi Alex, I checked your daily checklist logs. Your heel slides look very consistent. Are you still experiencing stiffness in the left knee during morning straight leg raises?
                 </p>
@@ -774,7 +1462,7 @@
             <!-- Message sent -->
             <div class="flex items-start justify-end space-x-3 rtl:space-x-reverse">
               <div class="max-w-[80%] flex flex-col items-end">
-                <div class="p-3.5 rounded-2xl rounded-tr-none bg-medical-blueLight text-white text-xs shadow-sm space-y-1">
+                <div class="p-3.5 rounded-2xl rounded-tr-none bg-medical-blueLight text-white text-xs shadow-sm space-y-1 text-left rtl:text-right">
                   <p class="strict-paragraph leading-relaxed">
                     Hi Sarah! The knee stiffness is gone after 5 minutes of light warming cycles. Heel extension feels much smoother today.
                   </p>
@@ -786,7 +1474,7 @@
             <!-- Message received -->
             <div class="flex items-start space-x-3 rtl:space-x-reverse max-w-[80%]">
               <img src="assets/images/profile-sarah.png" alt="Sarah avatar" class="w-8 h-8 rounded-lg object-cover flex-shrink-0 mt-1">
-              <div class="p-3.5 rounded-2xl rounded-tl-none bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-750 text-xs shadow-sm space-y-1">
+              <div class="p-3.5 rounded-2xl rounded-tl-none bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-750 text-xs shadow-sm space-y-1 text-left rtl:text-right">
                 <p class="strict-paragraph leading-relaxed text-slate-800 dark:text-slate-200">
                   That is wonderful to hear! Just remember not to force extension beyond the comfort range during heel slides. Let's run a joint flexion mobility check tomorrow at the clinic.
                 </p>
@@ -819,16 +1507,16 @@
 
         </div>
 
-        <!-- ================= PANEL 6: ACCOUNT SETTINGS ================= -->
+        <!-- ================= PANEL 8: ACCOUNT SETTINGS ================= -->
         <div id="tab-settings" class="tab-panel animate-fadeInUp hidden space-y-6 md:space-y-8">
           
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
             
             <!-- Left 2 cols form layout -->
             <div class="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
-              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white mb-6">Patient Portal Preferences</h4>
+              <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white mb-6 text-left rtl:text-right">Patient Portal Preferences</h4>
               
-              <form id="settings-form" class="space-y-6" novalidate>
+              <form id="settings-form" class="space-y-6 text-left rtl:text-right" novalidate>
                 
                 <!-- Account details section -->
                 <div class="space-y-4">
@@ -904,7 +1592,7 @@
             </div>
 
             <!-- Right col details widget -->
-            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 text-left rtl:text-right">
               <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white">Active Portal Status</h4>
               <div class="space-y-4 text-xs">
                 
@@ -974,7 +1662,7 @@
         </div>
       </div>
       <!-- Modal Description / Therapist advice -->
-      <div class="p-5 space-y-2 text-xs">
+      <div class="p-5 space-y-2 text-xs text-left rtl:text-right">
         <p class="font-bold text-slate-900 dark:text-white strict-subheading"><i class="fa-solid fa-comment-medical text-medical-blueLight dark:text-medical-cyan mr-1.5"></i>Therapist Safety Tip:</p>
         <p id="video-modal-desc" class="strict-paragraph leading-relaxed text-slate-600 dark:text-slate-300">
           Flex your joint slowly. Stop immediately if you feel pain. Keep breathing regularly.
@@ -990,7 +1678,7 @@
         <div class="w-10 h-10 rounded-full bg-red-50 dark:bg-red-950/20 flex items-center justify-center text-lg shadow-inner"><i class="fa-solid fa-triangle-exclamation"></i></div>
         <h4 class="strict-heading text-base font-semibold">Cancel Appointment?</h4>
       </div>
-      <p class="strict-paragraph text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+      <p class="strict-paragraph text-xs text-slate-600 dark:text-slate-300 leading-relaxed text-left rtl:text-right">
         Are you sure you want to cancel this physiotherapy rehab session? Please make sure to reschedule as consistent workouts are critical for knee joint extension stability.
       </p>
       <div class="flex space-x-3 rtl:space-x-reverse justify-end text-xs font-semibold">
@@ -1007,10 +1695,39 @@
     let appointments = [];
     let selectedCancelId = null;
 
+    // --- Biomechanics Tracker Data Matrix ---
+    const biomechDetails = {
+      flexion: {
+        title: 'Active Joint Flexion Range',
+        desc: 'Joint flexion is progressing normally. At 115°, you have achieved the mobility required for active cycling workouts and deep gait-stabilized walking. Sarah Jenkins recommends maintaining controlled heel slides to hit the 125° target before Week 10.',
+        chartHeights: ['40px', '55px', '68px', '76px'],
+        tip: 'Recommendation: Perform 3 sets of heel slides daily.'
+      },
+      extension: {
+        title: 'Passive Extension Deficit',
+        desc: 'Extension deficit is currently at -2°. Restoring full passive extension (0°) is critical to prevent joint stiffness and ensure a normal gait. Do not place pillows under the knee during rest. Ensure you perform daily quad contractions to pull the joint flat.',
+        chartHeights: ['65px', '45px', '30px', '18px'],
+        tip: 'Recommendation: Keep knee fully flat for 15 minutes post-exercise.'
+      },
+      symmetry: {
+        title: 'Quadriceps Muscle Strength Symmetry',
+        desc: 'Isokinetic muscle testing shows your left quadriceps has reached 78% strength symmetry compared to the right leg. We target >85% symmetry before initiating sports-specific cutting and agility drills in Week 10.',
+        chartHeights: ['30px', '45px', '60px', '78px'],
+        tip: 'Recommendation: Focus on isometric quad sets with a 5-second hold.'
+      },
+      pain: {
+        title: 'Load-Bearing Pain Index',
+        desc: 'Your load pain rating is at a stable 2/10 during active leg extensions. Mild stiffness and discomfort are expected, but sharp pain indicates overloading. If pain exceeds 4/10, rest immediately and contact Sarah Jenkins.',
+        chartHeights: ['80px', '60px', '40px', '20px'],
+        tip: 'Recommendation: Apply ice packs for 15 minutes if swelling occurs.'
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
       // 1. Fetch user status & settings sync
       currentUserActive = JSON.parse(localStorage.getItem('currentUserActive'));
       if (!currentUserActive) {
+        // Fallback safety (seeding already run above, but here as a secondary check)
         window.location.href = 'login.html';
         return;
       }
@@ -1073,7 +1790,9 @@
             'tab-overview': 'Dashboard Overview',
             'tab-exercises': 'Rehab Exercise Center',
             'tab-appointments': 'Schedule Session',
-            'tab-therapists': 'My Recovery Specialists',
+            'tab-therapists': 'Surgeon & PT Profiles',
+            'tab-case-studies': 'Recovery Case Studies',
+            'tab-injuries': 'Injury Resource Hub',
             'tab-messaging': 'Secure Messaging',
             'tab-settings': 'Patient Profile Settings'
           };
@@ -1128,7 +1847,7 @@
         userBubble.className = 'flex items-start justify-end space-x-3 rtl:space-x-reverse';
         userBubble.innerHTML = `
           <div class="max-w-[80%] flex flex-col items-end">
-            <div class="p-3.5 rounded-2xl rounded-tr-none bg-medical-blueLight text-white text-xs shadow-sm space-y-1">
+            <div class="p-3.5 rounded-2xl rounded-tr-none bg-medical-blueLight text-white text-xs shadow-sm space-y-1 text-left rtl:text-right">
               <p class="strict-paragraph leading-relaxed">${escapeHtml(text)}</p>
               <p class="text-[9px] text-blue-100 text-right select-none strict-paragraph">Just Now</p>
             </div>
@@ -1160,7 +1879,7 @@
           ptBubble.className = 'flex items-start space-x-3 rtl:space-x-reverse max-w-[80%]';
           ptBubble.innerHTML = `
             <img src="assets/images/profile-sarah.png" alt="Sarah avatar" class="w-8 h-8 rounded-lg object-cover flex-shrink-0 mt-1">
-            <div class="p-3.5 rounded-2xl rounded-tl-none bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-750 text-xs shadow-sm space-y-1">
+            <div class="p-3.5 rounded-2xl rounded-tl-none bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-750 text-xs shadow-sm space-y-1 text-left rtl:text-right">
               <p class="strict-paragraph leading-relaxed text-slate-800 dark:text-slate-200">${responseText}</p>
               <p class="text-[9px] text-slate-400 dark:text-slate-500 text-right select-none strict-paragraph">Just Now</p>
             </div>
@@ -1231,7 +1950,7 @@
           currentUserActive.email = email;
           currentUserActive.phone = phone;
 
-          // Save emergency contacts, notification preferences and goals to localStorage
+          // Save emergency contacts, preferences and goals
           currentUserActive.emergencyName = document.getElementById('settings-emergency-name').value.trim();
           currentUserActive.emergencyPhone = document.getElementById('settings-emergency-phone').value.trim();
           currentUserActive.emailNotifications = document.getElementById('settings-notify-email').checked;
@@ -1267,7 +1986,7 @@
       // 11. Sign Out Event
       document.getElementById('signout-btn').addEventListener('click', () => {
         localStorage.removeItem('currentUserActive');
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
       });
 
     });
@@ -1330,8 +2049,6 @@
       document.getElementById('workout-progress-bar').style.width = `${percentage}%`;
 
       // Synchronize index cards values
-      // We start with 72% basic index. Let's adjust slightly:
-      // Base progress (e.g. 70%) + workout completed offset (e.g., up to 4%)
       const calculatedIndex = 70 + Math.round((checkedCount / total) * 4);
       
       const radialProgressText = document.getElementById('radial-progress-text');
@@ -1341,7 +2058,6 @@
       
       const radialProgressCircle = document.getElementById('radial-progress-bar');
       if (radialProgressCircle) {
-        // dashoffset values calculated for dasharray 100
         radialProgressCircle.setAttribute('stroke-dasharray', `${calculatedIndex}, 100`);
       }
     }
@@ -1391,12 +2107,12 @@
         const apptCard = document.createElement('div');
         apptCard.className = `p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border ${index === 0 ? 'border-medical-blueLight dark:border-medical-cyan/50 shadow-sm relative overflow-hidden' : 'border-slate-100 dark:border-slate-800/50'} text-xs flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0`;
         
-        // Indigo glowing badge for nearest session
+        // Glowing badge for nearest session
         const badge = index === 0 ? '<span class="absolute top-0 right-0 bg-medical-blueLight text-white px-2 py-0.5 rounded-bl text-[8px] font-bold uppercase tracking-wider select-none">Next Visit</span>' : '';
         
         apptCard.innerHTML = `
           ${badge}
-          <div class="flex items-start space-x-3.5 rtl:space-x-reverse">
+          <div class="flex items-start space-x-3.5 rtl:space-x-reverse text-left rtl:text-right">
             <div class="p-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl flex-shrink-0 shadow-inner">
               <i class="fa-solid fa-laptop-medical text-base"></i>
             </div>
@@ -1475,6 +2191,51 @@
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+    }
+
+    // --- Interactive Biomechanics Tracker switcher logic ---
+    function toggleBiomechanicsDetail(type) {
+      const data = biomechDetails[type];
+      if (!data) return;
+
+      // Update texts
+      document.getElementById('biomech-detail-title').textContent = data.title;
+      document.getElementById('biomech-detail-desc').textContent = data.desc;
+      document.getElementById('biomech-detail-tip').textContent = data.tip;
+
+      // Toggle Active buttons classes
+      const buttons = {
+        flexion: document.getElementById('metric-flexion-btn'),
+        extension: document.getElementById('metric-extension-btn'),
+        symmetry: document.getElementById('metric-symmetry-btn'),
+        pain: document.getElementById('metric-pain-btn')
+      };
+
+      Object.keys(buttons).forEach(key => {
+        const btn = buttons[key];
+        if (key === type) {
+          btn.className = "biomech-btn text-left rtl:text-right p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border-2 border-medical-blueLight dark:border-medical-cyan hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all focus:outline-none ring-2 ring-medical-blueLight dark:ring-medical-cyan";
+        } else {
+          btn.className = "biomech-btn text-left rtl:text-right p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-150 dark:border-slate-800/50 hover:bg-slate-100/60 dark:hover:bg-slate-800/70 transition-all focus:outline-none";
+        }
+      });
+
+      // Update Chart Bar Heights
+      for (let i = 0; i < 3; i++) {
+        const bar = document.getElementById(`chart-bar-${i}`);
+        if (bar) {
+          bar.style.height = data.chartHeights[i];
+        }
+      }
+      const activeBar = document.getElementById('chart-bar-active');
+      if (activeBar) {
+        activeBar.style.height = data.chartHeights[3];
+      }
+    }
+
+    // --- Download plan simulation ---
+    function downloadPlanSimulate(fileName) {
+      alert(`Initiating download for ${fileName}...\nThis document contains your clinical exercises, reps, sets, and progression targets. Syncing details locally.`);
     }
   </script>
   <!-- Global Shared JS -->

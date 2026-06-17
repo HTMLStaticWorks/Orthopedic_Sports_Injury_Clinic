@@ -15,6 +15,15 @@
   <link rel="stylesheet" href="assets/css/index.css">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @keyframes scanLine {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(112px); }
+    }
+    .faceid-scanner-line {
+      animation: scanLine 2s infinite ease-in-out;
+    }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-medical-darkBg dark:text-medical-darkText min-h-screen flex items-center justify-center transition-colors duration-300 relative py-12 px-4">
 
@@ -108,7 +117,7 @@
       <button onclick="alert('Social sign-in coming soon. Please use email and password to log in.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200 transition-all shadow-sm cursor-pointer" aria-label="Sign in with Google">
         <i class="fa-brands fa-google text-sm text-red-500 dark:text-red-400"></i>
       </button>
-      <button onclick="alert('Social sign-in coming soon. Please use email and password to log in.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200 transition-all shadow-sm cursor-pointer" aria-label="Sign in with Apple">
+      <button type="button" onclick="openAppleModal()" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200 transition-all shadow-sm cursor-pointer" aria-label="Sign in with Apple">
         <i class="fa-brands fa-apple text-base text-slate-800 dark:text-slate-100"></i>
       </button>
       <button onclick="alert('Social sign-in coming soon. Please use email and password to log in.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200 transition-all shadow-sm cursor-pointer" aria-label="Sign in with Facebook">
@@ -203,6 +212,217 @@
       });
     });
   </script>
+
+  <!-- ================= APPLE SIGN IN MODAL ================= -->
+  <div id="apple-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300">
+    <!-- Backdrop overlay -->
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-md" onclick="closeAppleModal()"></div>
+    
+    <!-- Modal Container -->
+    <div class="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl p-8 overflow-hidden font-sans text-slate-900 dark:text-white z-10 animate-fadeInUp">
+      
+      <!-- Close button -->
+      <button onclick="closeAppleModal()" class="absolute top-4 right-4 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" aria-label="Close modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Step 1: Login Form details -->
+      <div id="apple-details-step" class="space-y-5">
+        <div class="flex flex-col items-center text-center">
+          <i class="fa-brands fa-apple text-5xl mb-4 text-slate-900 dark:text-white"></i>
+          <h4 class="strict-heading text-xl font-bold tracking-tight">Sign in with Apple ID</h4>
+          <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400 mt-1 text-center">AcuraCare will receive your name and email address to log in.</p>
+        </div>
+
+        <!-- Apple ID Email Input -->
+        <div class="space-y-1.5 text-left rtl:text-right">
+          <label for="apple-id-input" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 strict-subheading">Apple ID</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 dark:text-slate-500 rtl:left-auto rtl:right-0 rtl:pr-3.5">
+              <i class="fa-solid fa-envelope text-sm"></i>
+            </span>
+            <input type="email" id="apple-id-input" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="example@icloud.com">
+          </div>
+          <p id="apple-email-error" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Please enter a valid Apple ID email.</p>
+        </div>
+
+        <!-- Email Options -->
+        <div class="space-y-3">
+          <p class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider strict-subheading text-left rtl:text-right">Email Privacy</p>
+          
+          <div onclick="selectAppleEmailOption('share')" id="apple-opt-share" class="flex items-start p-3.5 rounded-2xl border-2 border-medical-blueLight dark:border-medical-cyan bg-slate-50/50 dark:bg-slate-800/30 cursor-pointer transition-all">
+            <div class="mt-0.5 flex-shrink-0">
+              <input type="radio" id="apple-radio-share" name="apple-email-opt" value="share" checked class="w-4 h-4 text-medical-blueLight dark:text-medical-cyan border-slate-300 dark:border-slate-700 bg-transparent focus:ring-0 cursor-pointer">
+            </div>
+            <div class="ml-3 rtl:ml-0 rtl:mr-3 text-left rtl:text-right">
+              <label for="apple-radio-share" class="block text-xs font-semibold text-slate-800 dark:text-slate-200 cursor-pointer select-none">Share My Email</label>
+              <span class="block text-[10px] text-slate-400 dark:text-slate-500 mt-0.5" id="apple-share-preview">example@icloud.com</span>
+            </div>
+          </div>
+
+          <div onclick="selectAppleEmailOption('hide')" id="apple-opt-hide" class="flex items-start p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-transparent cursor-pointer transition-all hover:bg-slate-50/30 dark:hover:bg-slate-800/20">
+            <div class="mt-0.5 flex-shrink-0">
+              <input type="radio" id="apple-radio-hide" name="apple-email-opt" value="hide" class="w-4 h-4 text-medical-blueLight dark:text-medical-cyan border-slate-300 dark:border-slate-700 bg-transparent focus:ring-0 cursor-pointer">
+            </div>
+            <div class="ml-3 rtl:ml-0 rtl:mr-3 text-left rtl:text-right">
+              <label for="apple-radio-hide" class="block text-xs font-semibold text-slate-800 dark:text-slate-200 cursor-pointer select-none">Hide My Email</label>
+              <span class="block text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">Use a unique, random email address that forwards to yours.</span>
+              <span class="block text-[10px] text-medical-blueLight dark:text-medical-cyan font-medium mt-0.5 hidden" id="apple-hide-preview">a1b2c3d4e5@privaterelay.appleid.com</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Continue Button -->
+        <button type="button" onclick="submitAppleDetails()" class="w-full py-3.5 mt-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold strict-subheading hover:bg-slate-800 dark:hover:bg-slate-100 active:scale-[0.98] transition-all shadow-md focus:outline-none flex items-center justify-center space-x-2 rtl:space-x-reverse">
+          <span>Continue</span>
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+      </div>
+
+      <!-- Step 2: Verification Step -->
+      <div id="apple-verification-step" class="hidden space-y-6 py-6 flex flex-col items-center text-center">
+        <!-- Face ID Scanner Circle -->
+        <div class="relative w-28 h-28 border border-slate-200 dark:border-slate-800 rounded-3xl flex items-center justify-center mb-4 overflow-hidden bg-slate-50/50 dark:bg-slate-800/30 shadow-inner animate-pulse">
+          <!-- Laser Line -->
+          <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-medical-blueLight to-transparent dark:via-medical-cyan faceid-scanner-line shadow-lg"></div>
+          <!-- Face ID Smile Icon -->
+          <i id="faceid-icon" class="fa-solid fa-face-smile text-5xl text-slate-300 dark:text-slate-600 transition-colors duration-500"></i>
+        </div>
+        <div class="space-y-1">
+          <h5 id="faceid-status-title" class="strict-heading text-sm font-semibold text-slate-900 dark:text-white">Authenticating...</h5>
+          <p id="faceid-status-desc" class="strict-paragraph text-xs text-slate-400 dark:text-slate-500">Verify your Apple ID using Face ID or passcode.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function openAppleModal() {
+      const modal = document.getElementById('apple-modal');
+      const emailInput = document.getElementById('email');
+      const appleIdInput = document.getElementById('apple-id-input');
+      const errorMsg = document.getElementById('apple-email-error');
+      
+      // Reset states
+      modal.classList.remove('hidden');
+      document.getElementById('apple-details-step').classList.remove('hidden');
+      document.getElementById('apple-verification-step').classList.add('hidden');
+      if (errorMsg) errorMsg.classList.add('hidden');
+
+      // Populate default email based on form email input if valid, otherwise fallback
+      let userEmail = emailInput ? emailInput.value.trim() : "";
+      if (!userEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
+        userEmail = "john.doe@icloud.com";
+      }
+      appleIdInput.value = userEmail;
+      
+      updateApplePreviews(userEmail);
+      selectAppleEmailOption('share');
+    }
+
+    function closeAppleModal() {
+      document.getElementById('apple-modal').classList.add('hidden');
+    }
+
+    function updateApplePreviews(email) {
+      const sharePreview = document.getElementById('apple-share-preview');
+      const hidePreview = document.getElementById('apple-hide-preview');
+      if (!sharePreview || !hidePreview) return;
+      
+      sharePreview.textContent = email;
+      
+      // Generate realistic mock relay email
+      const localPart = email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '') || 'user';
+      const randomHash = Math.random().toString(36).substring(2, 7);
+      hidePreview.textContent = `${localPart}_${randomHash}@privaterelay.appleid.com`;
+    }
+
+    // Listener for email input change in the modal
+    document.addEventListener('DOMContentLoaded', () => {
+      const appleIdInput = document.getElementById('apple-id-input');
+      if (appleIdInput) {
+        appleIdInput.addEventListener('input', (e) => {
+          updateApplePreviews(e.target.value.trim() || "john.doe@icloud.com");
+        });
+      }
+    });
+
+    function selectAppleEmailOption(option) {
+      const shareRadio = document.getElementById('apple-radio-share');
+      const hideRadio = document.getElementById('apple-radio-hide');
+      const shareCard = document.getElementById('apple-opt-share');
+      const hideCard = document.getElementById('apple-opt-hide');
+      const hidePreview = document.getElementById('apple-hide-preview');
+
+      if (option === 'share') {
+        shareRadio.checked = true;
+        shareCard.className = "flex items-start p-3.5 rounded-2xl border-2 border-medical-blueLight dark:border-medical-cyan bg-slate-50/50 dark:bg-slate-800/30 cursor-pointer transition-all";
+        hideCard.className = "flex items-start p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-transparent cursor-pointer transition-all hover:bg-slate-50/30 dark:hover:bg-slate-800/20";
+        hidePreview.classList.add('hidden');
+      } else {
+        hideRadio.checked = true;
+        hideCard.className = "flex items-start p-3.5 rounded-2xl border-2 border-medical-blueLight dark:border-medical-cyan bg-slate-50/50 dark:bg-slate-800/30 cursor-pointer transition-all";
+        shareCard.className = "flex items-start p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-transparent cursor-pointer transition-all hover:bg-slate-50/30 dark:hover:bg-slate-800/20";
+        hidePreview.classList.remove('hidden');
+      }
+    }
+
+    function submitAppleDetails() {
+      const email = document.getElementById('apple-id-input').value.trim();
+      const errorMsg = document.getElementById('apple-email-error');
+      
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (errorMsg) errorMsg.classList.remove('hidden');
+        return;
+      }
+      if (errorMsg) errorMsg.classList.add('hidden');
+
+      // Switch to Face ID view
+      document.getElementById('apple-details-step').classList.add('hidden');
+      document.getElementById('apple-verification-step').classList.remove('hidden');
+
+      const faceidIcon = document.getElementById('faceid-icon');
+      const statusTitle = document.getElementById('faceid-status-title');
+      const statusDesc = document.getElementById('faceid-status-desc');
+      
+      // Simulate Face ID scan
+      setTimeout(() => {
+        // Successful verification animation
+        faceidIcon.className = "fa-solid fa-circle-check text-5xl text-green-500 animate-bounce transition-colors duration-300";
+        statusTitle.textContent = "Sign In Complete";
+        statusTitle.className = "strict-heading text-sm font-semibold text-green-500 dark:text-green-400";
+        statusDesc.textContent = "Securely authenticated.";
+        
+        // Log user in
+        const selectedOption = document.querySelector('input[name="apple-email-opt"]:checked').value;
+        const finalEmail = selectedOption === 'share' 
+          ? email 
+          : document.getElementById('apple-hide-preview').textContent;
+        
+        const appleName = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        
+        const demoUser = {
+          fullName: appleName,
+          email: finalEmail,
+          phone: '',
+          injuryType: 'ACL Tear Recovery (Left Knee)',
+          rehabStage: 'Active Agility & Strengthening',
+          recoveryProgress: 72,
+          weeksCompleted: 8,
+          weeksTotal: 12
+        };
+        
+        localStorage.setItem('currentUser', JSON.stringify(demoUser));
+        localStorage.setItem('currentUserActive', JSON.stringify(demoUser));
+
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1000);
+      }, 2000);
+    }
+  </script>
+
   <!-- Global Shared JS -->
   <script src="assets/js/main.js"></script>
 </body>

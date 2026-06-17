@@ -207,7 +207,7 @@
           </div>
 
           <!-- Status & Metrics Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-3 gap-4 md:gap-6">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
             
             <!-- Card 1: Upcoming Session -->
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex items-start space-x-4 rtl:space-x-reverse hover:shadow-md transition-shadow">
@@ -839,8 +839,8 @@
               <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 overflow-hidden">
                 <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Past Consultations & Visits</h4>
                 <div class="overflow-x-auto">
-                  <table class="w-full text-xs text-left rtl:text-right border-collapse">
-                    <thead>
+                  <table class="w-full text-xs text-left rtl:text-right border-collapse block lg:table">
+                    <thead class="hidden lg:table-header-group">
                       <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                         <th class="pb-3 font-semibold strict-subheading">Date & Time</th>
                         <th class="pb-3 font-semibold strict-subheading">Attending Specialist</th>
@@ -848,30 +848,66 @@
                         <th class="pb-3 font-semibold strict-subheading">Diagnosis/Notes</th>
                       </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-200">
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-200 block lg:table-row-group">
                       
                       <!-- Row 1 -->
-                      <tr>
-                        <td class="py-3.5 strict-paragraph">Jun 10, 2026 • 10:00 AM</td>
-                        <td class="py-3.5 strict-paragraph">Sarah Jenkins, PT</td>
-                        <td class="py-3.5 strict-paragraph">In-Clinic Visit</td>
-                        <td class="py-3.5 text-slate-500 dark:text-slate-300 strict-paragraph">Knee brace adjustment; joint mobility drill.</td>
+                      <tr class="flex flex-col lg:table-row py-3.5 lg:py-0">
+                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Date & Time</span>
+                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Jun 10, 2026 • 10:00 AM</span>
+                        </td>
+                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Attending Specialist</span>
+                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Sarah Jenkins, PT</span>
+                        </td>
+                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Session Type</span>
+                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">In-Clinic Visit</span>
+                        </td>
+                        <td class="py-1.5 flex flex-col lg:table-cell lg:py-3.5 border-none text-left rtl:text-right">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] mb-1">Diagnosis/Notes</span>
+                          <span class="text-slate-500 dark:text-slate-300 strict-paragraph">Knee brace adjustment; joint mobility drill.</span>
+                        </td>
                       </tr>
 
                       <!-- Row 2 -->
-                      <tr>
-                        <td class="py-3.5 strict-paragraph">Jun 03, 2026 • 02:30 PM</td>
-                        <td class="py-3.5 strict-paragraph">Dr. Marcus Evans</td>
-                        <td class="py-3.5 strict-paragraph">Telehealth Check</td>
-                        <td class="py-3.5 text-slate-500 dark:text-slate-300 strict-paragraph">Post-op Week 6 evaluation. Joint flexion cleared.</td>
+                      <tr class="flex flex-col lg:table-row py-3.5 lg:py-0">
+                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Date & Time</span>
+                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Jun 03, 2026 • 02:30 PM</span>
+                        </td>
+                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Attending Specialist</span>
+                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Dr. Marcus Evans</span>
+                        </td>
+                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Session Type</span>
+                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Telehealth Check</span>
+                        </td>
+                        <td class="py-1.5 flex flex-col lg:table-cell lg:py-3.5 border-none text-left rtl:text-right">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] mb-1">Diagnosis/Notes</span>
+                          <span class="text-slate-500 dark:text-slate-300 strict-paragraph">Post-op Week 6 evaluation. Joint flexion cleared.</span>
+                        </td>
                       </tr>
 
                       <!-- Row 3 -->
-                      <tr>
-                        <td class="py-3.5 strict-paragraph">May 20, 2026 • 11:15 AM</td>
-                        <td class="py-3.5 strict-paragraph">Sarah Jenkins, PT</td>
-                        <td class="py-3.5 strict-paragraph">In-Clinic Visit</td>
-                        <td class="py-3.5 text-slate-500 dark:text-slate-300 strict-paragraph">Initial extension test. Quad sets introduced.</td>
+                      <tr class="flex flex-col lg:table-row py-3.5 lg:py-0">
+                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Date & Time</span>
+                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">May 20, 2026 • 11:15 AM</span>
+                        </td>
+                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Attending Specialist</span>
+                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Sarah Jenkins, PT</span>
+                        </td>
+                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Session Type</span>
+                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">In-Clinic Visit</span>
+                        </td>
+                        <td class="py-1.5 flex flex-col lg:table-cell lg:py-3.5 border-none text-left rtl:text-right">
+                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] mb-1">Diagnosis/Notes</span>
+                          <span class="text-slate-500 dark:text-slate-300 strict-paragraph">Initial extension test. Quad sets introduced.</span>
+                        </td>
                       </tr>
 
                     </tbody>
@@ -893,12 +929,12 @@
             <!-- Surgeon Card (Marcus Evans) -->
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6 hover:shadow-md transition-shadow flex flex-col justify-between">
               <div class="space-y-5">
-                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                <div class="flex flex-col xl:flex-row items-center xl:items-start text-center xl:text-left rtl:xl:text-right space-y-3 xl:space-y-0 xl:space-x-4 rtl:space-x-reverse">
                   <img src="assets/images/profile-marcus.png" alt="Dr. Marcus Evans" class="w-16 h-16 rounded-2xl object-cover bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-                  <div class="text-left rtl:text-right min-w-0">
-                    <h3 class="strict-heading text-base font-semibold text-slate-900 dark:text-white truncate">Dr. Marcus Evans, MD</h3>
+                  <div class="min-w-0">
+                    <h3 class="strict-heading text-base font-semibold text-slate-900 dark:text-white xl:truncate">Dr. Marcus Evans, MD</h3>
                     <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400">Chief Orthopedic Surgeon • Joint Reconstruction</p>
-                    <div class="flex space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
+                    <div class="flex items-center justify-center xl:justify-start space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
                       <i class="fa-solid fa-star"></i>
                       <i class="fa-solid fa-star"></i>
                       <i class="fa-solid fa-star"></i>
@@ -942,12 +978,12 @@
             <!-- Physical Therapist Card (Sarah Jenkins) -->
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6 hover:shadow-md transition-shadow flex flex-col justify-between">
               <div class="space-y-5">
-                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                <div class="flex flex-col xl:flex-row items-center xl:items-start text-center xl:text-left rtl:xl:text-right space-y-3 xl:space-y-0 xl:space-x-4 rtl:space-x-reverse">
                   <img src="assets/images/profile-sarah.png" alt="Sarah Jenkins" class="w-16 h-16 rounded-2xl object-cover bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-                  <div class="text-left rtl:text-right min-w-0">
-                    <h3 class="strict-heading text-base font-semibold text-slate-900 dark:text-white truncate">Sarah Jenkins, DPT</h3>
+                  <div class="min-w-0">
+                    <h3 class="strict-heading text-base font-semibold text-slate-900 dark:text-white xl:truncate">Sarah Jenkins, DPT</h3>
                     <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400">Lead Physical Therapist • Sports Rehab Expert</p>
-                    <div class="flex space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
+                    <div class="flex items-center justify-center xl:justify-start space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
                       <i class="fa-solid fa-star"></i>
                       <i class="fa-solid fa-star"></i>
                       <i class="fa-solid fa-star"></i>
@@ -991,12 +1027,12 @@
             <!-- Surgeon Card (David Cho) -->
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-6 hover:shadow-md transition-shadow flex flex-col justify-between">
               <div class="space-y-5">
-                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                <div class="flex flex-col xl:flex-row items-center xl:items-start text-center xl:text-left rtl:xl:text-right space-y-3 xl:space-y-0 xl:space-x-4 rtl:space-x-reverse">
                   <img src="assets/images/profile-david.png" alt="Dr. David Cho" class="w-16 h-16 rounded-2xl object-cover bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex-shrink-0">
-                  <div class="text-left rtl:text-right min-w-0">
-                    <h3 class="strict-heading text-base font-semibold text-slate-900 dark:text-white truncate">Dr. David Cho, MD</h3>
+                  <div class="min-w-0">
+                    <h3 class="strict-heading text-base font-semibold text-slate-900 dark:text-white xl:truncate">Dr. David Cho, MD</h3>
                     <p class="strict-paragraph text-xs text-slate-500 dark:text-slate-400">Spine Reconstruction Surgeon • Consultant</p>
-                    <div class="flex space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
+                    <div class="flex items-center justify-center xl:justify-start space-x-1 rtl:space-x-reverse mt-1 text-yellow-400 text-xs">
                       <i class="fa-solid fa-star"></i>
                       <i class="fa-solid fa-star"></i>
                       <i class="fa-solid fa-star"></i>

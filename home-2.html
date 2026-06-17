@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Physiotherapy & Rehabilitation | AcuraCare Sports Orthopedics</title>
   <meta name="description" content="AcuraCare Physiotherapy & Active Rehabilitation Page. High-tech diagnostics, specialized athletic recovery plans, home exercise modules, and expert therapist consultations.">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="shortcut icon" href="assets/images/favicon.svg">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Custom Tailwind Config -->
@@ -30,7 +33,7 @@
         </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center space-x-3 xl:space-x-8 rtl:space-x-reverse flex-shrink-0">
+        <nav class="hidden lg:flex items-center space-x-5 xl:space-x-8 rtl:space-x-reverse flex-shrink-0">
           <a href="index.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home</a>
           <a href="home-2.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home 2</a>
           <a href="about.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">About</a>
@@ -41,7 +44,7 @@
         </nav>
 
         <!-- Right Side Controls (Theme, RTL, Portal Button) -->
-        <div class="hidden lg:flex items-center space-x-2 xl:space-x-4 rtl:space-x-reverse flex-shrink-0">
+        <div class="hidden lg:flex items-center space-x-3 xl:space-x-4 rtl:space-x-reverse flex-shrink-0">
           <button class="rtl-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg text-xs font-semibold uppercase tracking-wider border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
             RTL
           </button>
@@ -143,39 +146,67 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           
           <!-- Program 1 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
-            <img src="assets/images/program-athletic-physio.png" alt="Athletic Physio" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
-            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Athletic Physio</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
-              Sports-specific biomechanics retraining, targeting fast recovery of competitive sprint speed, agility, and joint torque.
-            </p>
+          <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
+            <!-- Image Banner -->
+            <div class="relative h-52 overflow-hidden">
+              <img src="assets/images/program-athletic-physio.png" alt="Athletic Physio" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow text-center items-center">
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Athletic Physio</h3>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                Sports-specific biomechanics retraining, targeting fast recovery of competitive sprint speed, agility, and joint torque.
+              </p>
+            </div>
           </div>
 
           <!-- Program 2 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
-            <img src="assets/images/program-musculoskeletal-rehab.png" alt="Musculoskeletal Rehab" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
-            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Musculoskeletal Rehab</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
-              Manual therapy, joint mobilization, myofascial trigger release, and specialized stretching to reduce chronic back, hip, and neck pain.
-            </p>
+          <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
+            <!-- Image Banner -->
+            <div class="relative h-52 overflow-hidden">
+              <img src="assets/images/program-musculoskeletal-rehab.png" alt="Musculoskeletal Rehab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow text-center items-center">
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Musculoskeletal Rehab</h3>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                Manual therapy, joint mobilization, myofascial trigger release, and specialized stretching to reduce chronic back, hip, and neck pain.
+              </p>
+            </div>
           </div>
 
           <!-- Program 3 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
-            <img src="assets/images/program-post-operative-strength.png" alt="Post-Operative Strength" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
-            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Post-Operative Strength</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
-              Carefully guided range-of-motion increments, isometric contraction drills, and progressive overload schemes after bone/ligament surgeries.
-            </p>
+          <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
+            <!-- Image Banner -->
+            <div class="relative h-52 overflow-hidden">
+              <img src="assets/images/program-post-operative-strength.png" alt="Post-Operative Strength" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow text-center items-center">
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Post-Operative Strength</h3>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                Carefully guided range-of-motion increments, isometric contraction drills, and progressive overload schemes after bone/ligament surgeries.
+              </p>
+            </div>
           </div>
 
           <!-- Program 4 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
-            <img src="assets/images/program-cardiorespiratory-fitness.png" alt="Cardiorespiratory Fitness" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
-            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Cardiorespiratory Fitness</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
-              Low-impact conditioning protocols, swimming programs, and stationary biking to support cardiac output during long limb recovery.
-            </p>
+          <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
+            <!-- Image Banner -->
+            <div class="relative h-52 overflow-hidden">
+              <img src="assets/images/program-cardiorespiratory-fitness.png" alt="Cardiorespiratory Fitness" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow text-center items-center">
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Cardiorespiratory Fitness</h3>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                Low-impact conditioning protocols, swimming programs, and stationary biking to support cardiac output during long limb recovery.
+              </p>
+            </div>
           </div>
 
         </div>

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AcuraCare Sports Orthopedics | Expert Sports Injury & Recovery Clinic</title>
   <meta name="description" content="AcuraCare is a premium orthopedic & sports injury recovery clinic. Specialized in sports medicine, joint reconstruction, surgery consultation, and active rehabilitation.">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="shortcut icon" href="assets/images/favicon.svg">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Custom Tailwind Config -->
@@ -30,7 +33,7 @@
         </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center space-x-3 xl:space-x-8 rtl:space-x-reverse flex-shrink-0">
+        <nav class="hidden lg:flex items-center space-x-5 xl:space-x-8 rtl:space-x-reverse flex-shrink-0">
           <a href="index.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home</a>
           <a href="home-2.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">Home 2</a>
           <a href="about.html" class="nav-link whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-medical-blueLight dark:hover:text-medical-cyan transition-colors strict-subheading py-2">About</a>
@@ -41,7 +44,7 @@
         </nav>
 
         <!-- Right Side Controls (Theme, RTL, Portal Button) -->
-        <div class="hidden lg:flex items-center space-x-2 xl:space-x-4 rtl:space-x-reverse flex-shrink-0">
+        <div class="hidden lg:flex items-center space-x-3 xl:space-x-4 rtl:space-x-reverse flex-shrink-0">
           <!-- RTL Toggle Button -->
           <button class="rtl-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg text-xs font-semibold uppercase tracking-wider border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
             RTL
@@ -147,55 +150,83 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           
           <!-- Service 1 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
-            <img src="assets/images/service-joint-care.png" alt="Joint Care" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Joint Care</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
-              Advanced treatment for arthritic and painful joints, including hip, knee, and shoulder arthroplasty.
-            </p>
-            <a href="about.html" class="inline-flex items-center text-xs text-medical-blueLight dark:text-medical-cyan strict-subheading group-hover:underline">
-              <span>Learn More</span>
-              <i class="fa-solid fa-arrow-right ml-1 rtl:rotate-180"></i>
-            </a>
+          <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
+            <!-- Image Banner -->
+            <div class="relative h-52 overflow-hidden">
+              <img src="assets/images/service-joint-care.png" alt="Joint Care" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow text-center items-center">
+              <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Joint Care</h3>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+                Advanced treatment for arthritic and painful joints, including hip, knee, and shoulder arthroplasty.
+              </p>
+              <a href="about.html" class="inline-flex items-center text-xs text-medical-blueLight dark:text-medical-cyan strict-subheading group-hover:underline">
+                <span>Learn More</span>
+                <i class="fa-solid fa-arrow-right ml-1 rtl:rotate-180"></i>
+              </a>
+            </div>
           </div>
 
           <!-- Service 2 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
-            <img src="assets/images/service-fracture.png" alt="Fracture Treatment" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Fracture Treatment</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
-              Expert diagnosis, casting, setting, and surgery for skeletal fractures, ensuring precise bone alignment.
-            </p>
-            <a href="about.html" class="inline-flex items-center text-xs text-medical-blueLight dark:text-medical-cyan strict-subheading group-hover:underline">
-              <span>Learn More</span>
-              <i class="fa-solid fa-arrow-right ml-1 rtl:rotate-180"></i>
-            </a>
+          <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
+            <!-- Image Banner -->
+            <div class="relative h-52 overflow-hidden">
+              <img src="assets/images/service-fracture.png" alt="Fracture Treatment" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow text-center items-center">
+              <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Fracture Treatment</h3>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+                Expert diagnosis, casting, setting, and surgery for skeletal fractures, ensuring precise bone alignment.
+              </p>
+              <a href="about.html" class="inline-flex items-center text-xs text-medical-blueLight dark:text-medical-cyan strict-subheading group-hover:underline">
+                <span>Learn More</span>
+                <i class="fa-solid fa-arrow-right ml-1 rtl:rotate-180"></i>
+              </a>
+            </div>
           </div>
 
           <!-- Service 3 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
-            <img src="assets/images/service-sports-med.png" alt="Sports Medicine" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Sports Medicine</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
-              Targeted treatments for ligaments, cartilage, and muscle damages to quickly rebuild speed and endurance.
-            </p>
-            <a href="about.html" class="inline-flex items-center text-xs text-medical-blueLight dark:text-medical-cyan strict-subheading group-hover:underline">
-              <span>Learn More</span>
-              <i class="fa-solid fa-arrow-right ml-1 rtl:rotate-180"></i>
-            </a>
+          <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
+            <!-- Image Banner -->
+            <div class="relative h-52 overflow-hidden">
+              <img src="assets/images/service-sports-med.png" alt="Sports Medicine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow text-center items-center">
+              <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Sports Medicine</h3>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+                Targeted treatments for ligaments, cartilage, and muscle damages to quickly rebuild speed and endurance.
+              </p>
+              <a href="about.html" class="inline-flex items-center text-xs text-medical-blueLight dark:text-medical-cyan strict-subheading group-hover:underline">
+                <span>Learn More</span>
+                <i class="fa-solid fa-arrow-right ml-1 rtl:rotate-180"></i>
+              </a>
+            </div>
           </div>
 
           <!-- Service 4 -->
-          <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-lg transition-all duration-300 group text-center flex flex-col items-center">
-            <img src="assets/images/service-spine-care.png" alt="Spine Care" class="w-24 h-24 rounded-2xl object-cover mb-6 shadow-sm border border-slate-200/50 dark:border-slate-800 group-hover:scale-105 transition-transform duration-300">
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Spine Care</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
-              Minimally invasive spine procedures, disc decompression, and advanced therapies for chronic back and neck issues.
-            </p>
-            <a href="about.html" class="inline-flex items-center text-xs text-medical-blueLight dark:text-medical-cyan strict-subheading group-hover:underline">
-              <span>Learn More</span>
-              <i class="fa-solid fa-arrow-right ml-1 rtl:rotate-180"></i>
-            </a>
+          <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
+            <!-- Image Banner -->
+            <div class="relative h-52 overflow-hidden">
+              <img src="assets/images/service-spine-care.png" alt="Spine Care" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow text-center items-center">
+              <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Spine Care</h3>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+                Minimally invasive spine procedures, disc decompression, and advanced therapies for chronic back and neck issues.
+              </p>
+              <a href="about.html" class="inline-flex items-center text-xs text-medical-blueLight dark:text-medical-cyan strict-subheading group-hover:underline">
+                <span>Learn More</span>
+                <i class="fa-solid fa-arrow-right ml-1 rtl:rotate-180"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -219,7 +250,7 @@
           </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div class="conditions-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           
           <!-- ACL Injury -->
           <div class="p-6 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:scale-[1.02] transition-transform">

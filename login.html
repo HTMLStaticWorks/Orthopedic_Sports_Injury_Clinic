@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patient Portal Login | AcuraCare Sports Orthopedics</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="shortcut icon" href="assets/images/favicon.svg">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Custom Tailwind Config -->
@@ -18,16 +21,16 @@
   <!-- Symmetrical Floating Controls (Theme & RTL) -->
   <div class="fixed top-6 right-6 flex items-center space-x-3 rtl:space-x-reverse z-50">
     <!-- Direction Mode Toggle -->
-    <button class="rtl-toggle-btn w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow border border-slate-200 dark:border-slate-700 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+    <button class="rtl-toggle-btn w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow border border-slate-200 dark:border-slate-700 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
       RTL
     </button>
     <!-- Theme Toggle -->
-    <button class="theme-toggle-btn w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Theme">
+    <button class="theme-toggle-btn w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Theme">
       <i class="fa-solid fa-moon"></i>
     </button>
   </div>
 
-  <div class="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-800 shadow-xl rounded-3xl overflow-hidden p-8 md:p-10 flex flex-col justify-center animate-fadeInUp">
+  <div class="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-3xl overflow-hidden p-8 md:p-10 flex flex-col justify-center animate-fadeInUp">
     
     <!-- Clinic logo (Centered) -->
     <div class="flex justify-center mb-6">
@@ -58,7 +61,7 @@
           <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 dark:text-slate-500 rtl:left-auto rtl:right-0 rtl:pr-3.5">
             <i class="fa-solid fa-envelope text-sm"></i>
           </span>
-          <input type="email" id="email" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="name@example.com" value="alex.johnson@athlete.com">
+          <input type="email" id="email" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="name@example.com">
         </div>
         <p id="email-error-msg" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Please enter a valid email address.</p>
       </div>
@@ -72,7 +75,7 @@
           <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 dark:text-slate-500 rtl:left-auto rtl:right-0 rtl:pr-3.5">
             <i class="fa-solid fa-lock text-sm"></i>
           </span>
-          <input type="password" id="password" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="••••••••" value="password">
+          <input type="password" id="password" required class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-medical-blueLight dark:focus:ring-medical-cyan transition-all text-sm font-normal strict-paragraph rtl:pl-4 rtl:pr-10" placeholder="••••••••">
         </div>
         <p id="password-error-msg" class="hidden text-red-500 text-[10px] mt-1 rtl:text-right">Password must be at least 6 characters.</p>
       </div>
@@ -84,7 +87,7 @@
           <input type="checkbox" id="remember" class="w-4 h-4 rounded border-slate-300 dark:border-slate-700 bg-transparent text-medical-blueLight focus:ring-medical-blueLight cursor-pointer">
           <label for="remember" class="ml-2 text-xs text-slate-500 dark:text-slate-400 cursor-pointer strict-paragraph select-none">Remember this device</label>
         </div>
-        <a href="#" onclick="alert('Demo Mode: Please use email alex.johnson@athlete.com or register a new account.')" class="text-xs text-medical-blueLight dark:text-medical-cyan hover:underline">Forgot Password?</a>
+        <a href="#" onclick="alert('Password reset: Please contact your clinic to reset your account password.')" class="text-xs text-medical-blueLight dark:text-medical-cyan hover:underline">Forgot Password?</a>
       </div>
 
       <!-- Submit Button -->
@@ -102,13 +105,13 @@
 
     <!-- Social Login Buttons -->
     <div class="grid grid-cols-3 gap-3">
-      <button onclick="alert('Demo Mode: Social authentication is simulated. Please use default credentials.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors shadow-sm cursor-pointer" aria-label="Sign in with Google">
+      <button onclick="alert('Social sign-in coming soon. Please use email and password to log in.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200 transition-all shadow-sm cursor-pointer" aria-label="Sign in with Google">
         <i class="fa-brands fa-google text-sm text-red-500 dark:text-red-400"></i>
       </button>
-      <button onclick="alert('Demo Mode: Social authentication is simulated. Please use default credentials.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors shadow-sm cursor-pointer" aria-label="Sign in with Apple">
+      <button onclick="alert('Social sign-in coming soon. Please use email and password to log in.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200 transition-all shadow-sm cursor-pointer" aria-label="Sign in with Apple">
         <i class="fa-brands fa-apple text-base text-slate-800 dark:text-slate-100"></i>
       </button>
-      <button onclick="alert('Demo Mode: Social authentication is simulated. Please use default credentials.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors shadow-sm cursor-pointer" aria-label="Sign in with Facebook">
+      <button onclick="alert('Social sign-in coming soon. Please use email and password to log in.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200 transition-all shadow-sm cursor-pointer" aria-label="Sign in with Facebook">
         <i class="fa-brands fa-facebook-f text-sm text-blue-600 dark:text-blue-400"></i>
       </button>
     </div>
@@ -134,8 +137,6 @@
       };
 
       const showError = (input, show, msgId) => {
-        const borderClass = show ? 'border-red-500' : 'border-slate-200';
-        const darkBorderClass = show ? 'dark:border-red-500' : 'dark:border-slate-700';
         input.classList.remove('border-slate-200', 'dark:border-slate-700', 'border-red-500', 'dark:border-red-500');
         input.classList.add(show ? 'border-red-500' : 'border-slate-200');
         input.classList.add(show ? 'dark:border-red-500' : 'dark:border-slate-700');
@@ -182,24 +183,21 @@
           if (storedUser && storedUser.email.toLowerCase() === email.toLowerCase()) {
             localStorage.setItem('currentUserActive', JSON.stringify(storedUser));
             window.location.href = 'dashboard.html';
-          } else if (email === 'alex.johnson@athlete.com') {
-            // Auto log in for default mock user
-            const mockUser = {
-              fullName: 'Alex Johnson',
-              email: 'alex.johnson@athlete.com',
-              phone: '+1 (555) 019-2834',
-              injuryType: 'ACL Tear Recovery (Left Knee)',
-              rehabStage: 'Active Agility & Strengthening',
-              recoveryProgress: 72,
-              weeksCompleted: 8,
+          } else {
+            // Auto-create a demo session so the user can explore the portal
+            const demoUser = {
+              fullName: email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+              email: email,
+              phone: '',
+              injuryType: 'Rehabilitation Program',
+              rehabStage: 'Initial Evaluation',
+              recoveryProgress: 10,
+              weeksCompleted: 0,
               weeksTotal: 12
             };
-            localStorage.setItem('currentUser', JSON.stringify(mockUser));
-            localStorage.setItem('currentUserActive', JSON.stringify(mockUser));
+            localStorage.setItem('currentUser', JSON.stringify(demoUser));
+            localStorage.setItem('currentUserActive', JSON.stringify(demoUser));
             window.location.href = 'dashboard.html';
-          } else {
-            errorAlert.classList.remove('hidden');
-            errorText.textContent = 'Invalid credentials. Please register or use email alex.johnson@athlete.com.';
           }
         }
       });

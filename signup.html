@@ -27,7 +27,7 @@
     </button>
   </div>
 
-  <div class="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-150 dark:border-slate-800 shadow-xl rounded-3xl overflow-hidden p-8 md:p-10 flex flex-col justify-center animate-fadeInUp">
+  <div class="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl rounded-3xl overflow-hidden p-8 md:p-10 flex flex-col justify-center animate-fadeInUp">
     
     <!-- Clinic logo (Centered) -->
     <div class="flex justify-center mb-6">
@@ -113,10 +113,10 @@
 
       <!-- Terms of Service Checkbox -->
       <div class="space-y-1">
-        <div class="flex items-start">
-          <input type="checkbox" id="terms" required class="mt-1 w-4 h-4 rounded border-slate-300 dark:border-slate-700 bg-transparent text-medical-blueLight focus:ring-medical-blueLight cursor-pointer flex-shrink-0">
-          <label for="terms" class="ml-2 text-xs text-slate-500 dark:text-slate-400 cursor-pointer strict-paragraph select-none">
-            I agree to the <a href="#" onclick="alert('Terms of Service: Mock Terms of AcuraCare')" class="text-medical-blueLight dark:text-medical-cyan hover:underline font-semibold">Terms of Service</a> &amp; <a href="#" onclick="alert('Privacy Policy: Mock Privacy Policy of AcuraCare')" class="text-medical-blueLight dark:text-medical-cyan hover:underline font-semibold">Privacy Policy</a> *
+        <div class="flex items-center gap-2.5">
+          <input type="checkbox" id="terms" required class="w-4 h-4 rounded border-slate-300 dark:border-slate-700 bg-transparent text-medical-blueLight focus:ring-medical-blueLight cursor-pointer flex-shrink-0 accent-medical-blueLight">
+          <label for="terms" class="text-xs text-slate-500 dark:text-slate-400 cursor-pointer strict-paragraph select-none leading-snug">
+            I agree to the <a href="#" onclick="alert('Terms of Service: Please contact AcuraCare clinic for full terms.')" class="text-medical-blueLight dark:text-medical-cyan hover:underline font-semibold">Terms of Service</a> &amp; <a href="#" onclick="alert('Privacy Policy: Please contact AcuraCare clinic for full privacy policy.')" class="text-medical-blueLight dark:text-medical-cyan hover:underline font-semibold">Privacy Policy</a> *
           </label>
         </div>
         <p id="terms-error-msg" class="hidden text-red-500 text-[10px] mt-1">You must agree to the Terms &amp; Privacy Policy to proceed.</p>
@@ -137,13 +137,13 @@
 
     <!-- Social Signup Buttons -->
     <div class="grid grid-cols-3 gap-3">
-      <button onclick="alert('Demo Mode: Social authentication is simulated. Please use default credentials.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors shadow-sm cursor-pointer" aria-label="Sign up with Google">
+      <button onclick="alert('Social sign-up coming soon. Please register using your email and password above.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200 transition-all shadow-sm cursor-pointer" aria-label="Sign up with Google">
         <i class="fa-brands fa-google text-sm text-red-500 dark:text-red-400"></i>
       </button>
-      <button onclick="alert('Demo Mode: Social authentication is simulated. Please use default credentials.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors shadow-sm cursor-pointer" aria-label="Sign up with Apple">
+      <button onclick="alert('Social sign-up coming soon. Please register using your email and password above.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200 transition-all shadow-sm cursor-pointer" aria-label="Sign up with Apple">
         <i class="fa-brands fa-apple text-base text-slate-800 dark:text-slate-100"></i>
       </button>
-      <button onclick="alert('Demo Mode: Social authentication is simulated. Please use default credentials.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors shadow-sm cursor-pointer" aria-label="Sign up with Facebook">
+      <button onclick="alert('Social sign-up coming soon. Please register using your email and password above.')" class="flex items-center justify-center py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 hover:border-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200 transition-all shadow-sm cursor-pointer" aria-label="Sign up with Facebook">
         <i class="fa-brands fa-facebook-f text-sm text-blue-600 dark:text-blue-400"></i>
       </button>
     </div>

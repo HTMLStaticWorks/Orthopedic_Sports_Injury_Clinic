@@ -126,3 +126,10 @@ h1, h2, h3, .strict-heading {
   color: #f8fafc !important; /* slate-50 */
 }
 
+/* Dark Mode — Date & Time Input Picker Icons */
+.dark input[type="date"]::-webkit-calendar-picker-indicator,
+.dark input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.8);
+  cursor: pointer;
+}
+

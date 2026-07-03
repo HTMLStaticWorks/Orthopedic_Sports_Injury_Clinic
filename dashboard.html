@@ -475,10 +475,10 @@
               <!-- Milestones Checklist -->
               <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-5">
                 <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Active Healing Milestones</h4>
-                <ul class="space-y-4 text-left rtl:text-right">
+                <ul class="space-y-4 text-left" dir="ltr">
                   
                   <!-- Milestone 1 -->
-                  <li class="flex items-start space-x-3 rtl:space-x-reverse text-xs">
+                  <li class="flex items-start space-x-3 text-xs text-left">
                     <span class="w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px]">
                       <i class="fa-solid fa-check"></i>
                     </span>
@@ -489,7 +489,7 @@
                   </li>
 
                   <!-- Milestone 2 -->
-                  <li class="flex items-start space-x-3 rtl:space-x-reverse text-xs">
+                  <li class="flex items-start space-x-3 text-xs text-left">
                     <span class="w-5 h-5 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px]">
                       <i class="fa-solid fa-check"></i>
                     </span>
@@ -500,7 +500,7 @@
                   </li>
 
                   <!-- Milestone 3 -->
-                  <li class="flex items-start space-x-3 rtl:space-x-reverse text-xs">
+                  <li class="flex items-start space-x-3 text-xs text-left">
                     <span class="w-5 h-5 rounded-full bg-blue-500 text-white flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px]">
                       <i class="fa-solid fa-ellipsis"></i>
                     </span>
@@ -511,7 +511,7 @@
                   </li>
 
                   <!-- Milestone 4 -->
-                  <li class="flex items-start space-x-3 rtl:space-x-reverse text-xs opacity-50">
+                  <li class="flex items-start space-x-3 text-xs opacity-50 text-left">
                     <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px]">
                       <i class="fa-solid fa-circle"></i>
                     </span>
@@ -846,73 +846,61 @@
               <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 overflow-hidden">
                 <h4 class="strict-heading text-base font-semibold text-slate-900 dark:text-white text-left rtl:text-right">Past Consultations & Visits</h4>
                 <div class="overflow-x-auto">
-                  <table class="w-full text-xs text-left rtl:text-right border-collapse block lg:table">
-                    <thead class="hidden lg:table-header-group">
+                  <table class="w-full text-xs text-left rtl:text-right border-collapse table">
+                    <thead class="table-header-group">
                       <tr class="border-b border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-                        <th class="pb-3 font-semibold strict-subheading">Date & Time</th>
-                        <th class="pb-3 font-semibold strict-subheading">Attending Specialist</th>
-                        <th class="pb-3 font-semibold strict-subheading">Session Type</th>
-                        <th class="pb-3 font-semibold strict-subheading">Diagnosis/Notes</th>
+                        <th class="pb-3 px-4 font-semibold strict-subheading w-1/4 text-left rtl:text-right">Date & Time</th>
+                        <th class="pb-3 px-4 font-semibold strict-subheading w-1/4 text-left rtl:text-right">Attending Specialist</th>
+                        <th class="pb-3 px-4 font-semibold strict-subheading w-1/4 text-left rtl:text-right">Session Type</th>
+                        <th class="pb-3 px-4 font-semibold strict-subheading w-1/4 text-left rtl:text-right">Diagnosis/Notes</th>
                       </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-200 block lg:table-row-group">
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-200 table-row-group">
                       
                       <!-- Row 1 -->
-                      <tr class="flex flex-col lg:table-row py-3.5 lg:py-0">
-                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Date & Time</span>
-                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Jun 10, 2026 • 10:00 AM</span>
+                      <tr class="table-row">
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
+                          <span class="strict-paragraph">Jun 10, 2026 • 10:00 AM</span>
                         </td>
-                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Attending Specialist</span>
-                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Sarah Jenkins, PT</span>
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
+                          <span class="strict-paragraph">Sarah Jenkins, PT</span>
                         </td>
-                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Session Type</span>
-                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">In-Clinic Visit</span>
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
+                          <span class="strict-paragraph">In-Clinic Visit</span>
                         </td>
-                        <td class="py-1.5 flex flex-col lg:table-cell lg:py-3.5 border-none text-left rtl:text-right">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] mb-1">Diagnosis/Notes</span>
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
                           <span class="text-slate-500 dark:text-slate-300 strict-paragraph">Knee brace adjustment; joint mobility drill.</span>
                         </td>
                       </tr>
 
                       <!-- Row 2 -->
-                      <tr class="flex flex-col lg:table-row py-3.5 lg:py-0">
-                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Date & Time</span>
-                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Jun 03, 2026 • 02:30 PM</span>
+                      <tr class="table-row">
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
+                          <span class="strict-paragraph">Jun 03, 2026 • 02:30 PM</span>
                         </td>
-                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Attending Specialist</span>
-                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Dr. Marcus Evans</span>
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
+                          <span class="strict-paragraph">Dr. Marcus Evans</span>
                         </td>
-                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Session Type</span>
-                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Telehealth Check</span>
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
+                          <span class="strict-paragraph">Telehealth Check</span>
                         </td>
-                        <td class="py-1.5 flex flex-col lg:table-cell lg:py-3.5 border-none text-left rtl:text-right">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] mb-1">Diagnosis/Notes</span>
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
                           <span class="text-slate-500 dark:text-slate-300 strict-paragraph">Post-op Week 6 evaluation. Joint flexion cleared.</span>
                         </td>
                       </tr>
 
                       <!-- Row 3 -->
-                      <tr class="flex flex-col lg:table-row py-3.5 lg:py-0">
-                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Date & Time</span>
-                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">May 20, 2026 • 11:15 AM</span>
+                      <tr class="table-row">
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
+                          <span class="strict-paragraph">May 20, 2026 • 11:15 AM</span>
                         </td>
-                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Attending Specialist</span>
-                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">Sarah Jenkins, PT</span>
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
+                          <span class="strict-paragraph">Sarah Jenkins, PT</span>
                         </td>
-                        <td class="py-1.5 flex justify-between items-center lg:table-cell lg:py-3.5 border-none">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] shrink-0 w-32 text-left rtl:text-right">Session Type</span>
-                          <span class="strict-paragraph text-right lg:text-left rtl:text-left rtl:lg:text-right">In-Clinic Visit</span>
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
+                          <span class="strict-paragraph">In-Clinic Visit</span>
                         </td>
-                        <td class="py-1.5 flex flex-col lg:table-cell lg:py-3.5 border-none text-left rtl:text-right">
-                          <span class="lg:hidden font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-[10px] mb-1">Diagnosis/Notes</span>
+                        <td class="py-3.5 px-4 table-cell border-none text-left rtl:text-right">
                           <span class="text-slate-500 dark:text-slate-300 strict-paragraph">Initial extension test. Quad sets introduced.</span>
                         </td>
                       </tr>
@@ -1314,20 +1302,20 @@
                   <span class="px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/40 text-medical-blueLight dark:text-medical-cyan text-[9px] font-bold select-none uppercase tracking-wider">Knee Joint</span>
                 </div>
                 <div class="space-y-3.5 text-xs text-slate-700 dark:text-slate-300 text-left rtl:text-right">
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Clinical Overview</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Clinical Overview</span>
                     <p class="strict-paragraph leading-relaxed">
                       A complete rupture or partial tear of the ACL, usually resulting from rapid cutting, pivoting, or landing deceleration forces common in soccer, basketball, and skiing.
                     </p>
                   </div>
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Key Diagnostic Indicator</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Key Diagnostic Indicator</span>
                     <p class="strict-paragraph leading-relaxed font-normal">
                       <strong class="font-semibold">Lachman Test:</strong> Increased anterior tibial translation with a soft or mushy end-point, indicating loss of anterior translation constraint.
                     </p>
                   </div>
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Standard Recovery Timeline</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Standard Recovery Timeline</span>
                     <p class="strict-paragraph leading-relaxed">
                       6 to 12 months. Reconstruction surgery (autograft) is typically followed by a structured 5-phase progressive sports physical therapy program.
                     </p>
@@ -1346,20 +1334,20 @@
                   <span class="px-2 py-0.5 rounded bg-red-50 dark:bg-red-950/40 text-red-500 text-[9px] font-bold select-none uppercase tracking-wider">Shoulder Joint</span>
                 </div>
                 <div class="space-y-3.5 text-xs text-slate-700 dark:text-slate-300 text-left rtl:text-right">
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Clinical Overview</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Clinical Overview</span>
                     <p class="strict-paragraph leading-relaxed">
                       Tear of the supraspinatus, infraspinatus, or subscapularis tendon, caused by acute trauma (falls) or chronic overhead micro-trauma from throwing, swimming, or tennis.
                     </p>
                   </div>
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Key Diagnostic Indicator</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Key Diagnostic Indicator</span>
                     <p class="strict-paragraph leading-relaxed font-normal">
                       <strong class="font-semibold">Empty Can (Jobe) Test:</strong> Weakness or pain during abduction to 90° and forward flexion to 30° with internal rotation, pointing to supraspinatus pathology.
                     </p>
                   </div>
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Standard Recovery Timeline</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Standard Recovery Timeline</span>
                     <p class="strict-paragraph leading-relaxed">
                       4 to 6 months. Arthroscopic suture anchoring and decompression requires passive immobilization in a sling before active strength loading begins.
                     </p>
@@ -1378,20 +1366,20 @@
                   <span class="px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/40 text-medical-blueLight dark:text-medical-cyan text-[9px] font-bold select-none uppercase tracking-wider">Knee Joint</span>
                 </div>
                 <div class="space-y-3.5 text-xs text-slate-700 dark:text-slate-300 text-left rtl:text-right">
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Clinical Overview</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Clinical Overview</span>
                     <p class="strict-paragraph leading-relaxed">
                       Damage to the fibrocartilage pads of the knee joint. Medial meniscus tears are more frequent. Often occurs during twisting loads when the knee is loaded in flexion.
                     </p>
                   </div>
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Key Diagnostic Indicator</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Key Diagnostic Indicator</span>
                     <p class="strict-paragraph leading-relaxed font-normal">
                       <strong class="font-semibold">McMurray Test:</strong> A palpable or audible click/snap during passive flexion and internal/external tibial rotation under compressive loads.
                     </p>
                   </div>
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Standard Recovery Timeline</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Standard Recovery Timeline</span>
                     <p class="strict-paragraph leading-relaxed">
                       Partial Meniscectomy: 4-6 weeks (rapid recovery). Meniscus Repair: 3-5 months (slower due to protected healing of vascular zones).
                     </p>
@@ -1410,20 +1398,20 @@
                   <span class="px-2 py-0.5 rounded bg-green-50 dark:bg-green-950/40 text-green-700 dark:text-green-400 text-[9px] font-bold select-none uppercase tracking-wider">Knee Joint</span>
                 </div>
                 <div class="space-y-3.5 text-xs text-slate-700 dark:text-slate-300 text-left rtl:text-right">
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Clinical Overview</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Clinical Overview</span>
                     <p class="strict-paragraph leading-relaxed">
                       Often called "Runner's Knee." Characterized by anterior knee pain around or behind the patella, driven by poor tracking of the patella within the femoral groove.
                     </p>
                   </div>
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Key Diagnostic Indicator</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Key Diagnostic Indicator</span>
                     <p class="strict-paragraph leading-relaxed font-normal">
                       <strong class="font-semibold">Patellar Compression Test:</strong> Elicits pain when compressing the patella while asking the patient to contract the quadriceps.
                     </p>
                   </div>
-                  <div>
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block mb-1">Standard Recovery Timeline</span>
+                  <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-4 items-start">
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Standard Recovery Timeline</span>
                     <p class="strict-paragraph leading-relaxed">
                       6 to 12 weeks. Conservative physical therapy focusing on vastus medialis obliquus (VMO) strengthening, hip abduction strength, and ankle mobility adjustments.
                     </p>

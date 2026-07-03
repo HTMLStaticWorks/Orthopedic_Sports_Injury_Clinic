@@ -45,6 +45,7 @@
 
         <!-- Right Side Controls (Theme, RTL, Portal Button) -->
         <div class="hidden lg:flex items-center space-x-3 xl:space-x-4 rtl:space-x-reverse flex-shrink-0">
+
           <!-- RTL Toggle Button -->
           <button class="rtl-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg text-xs font-semibold uppercase tracking-wider border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
             RTL
@@ -55,6 +56,11 @@
             <!-- Icon is dynamically replaced by main.js -->
             <i class="fa-solid fa-moon"></i>
           </button>
+
+          <!-- Book Appointment CTA -->
+          <a href="contact.html#appointment-form" class="px-3 xl:px-5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-850 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading whitespace-nowrap">
+            Book Appointment
+          </a>
 
           <!-- Sign Up CTA -->
           <a href="signup.html" class="px-3 xl:px-5 py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading whitespace-nowrap">
@@ -82,6 +88,7 @@
       <a href="contact.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Contact</a>
       <a href="dashboard.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Dashboard</a>
       <a href="signup.html" class="block w-full text-center px-4 py-2.5 rounded-lg bg-medical-blueLight text-white strict-subheading mt-4">Sign Up</a>
+      <a href="contact.html#appointment-form" class="block w-full text-center px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading mt-2">Book Appointment</a>
 
       <!-- Mobile Preferences Controls Row -->
       <div class="flex items-center justify-between px-3 pt-4 border-t border-slate-100 dark:border-slate-800/80 mt-4">
@@ -152,7 +159,7 @@
           <!-- Service 1 -->
           <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
             <!-- Image Banner -->
-            <div class="relative h-52 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
               <img src="assets/images/service-joint-care.png" alt="Joint Care" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
             </div>
@@ -172,7 +179,7 @@
           <!-- Service 2 -->
           <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
             <!-- Image Banner -->
-            <div class="relative h-52 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
               <img src="assets/images/service-fracture.png" alt="Fracture Treatment" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
             </div>
@@ -192,7 +199,7 @@
           <!-- Service 3 -->
           <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
             <!-- Image Banner -->
-            <div class="relative h-52 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
               <img src="assets/images/service-sports-med.png" alt="Sports Medicine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
             </div>
@@ -212,7 +219,7 @@
           <!-- Service 4 -->
           <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
             <!-- Image Banner -->
-            <div class="relative h-52 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
               <img src="assets/images/service-spine-care.png" alt="Spine Care" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
             </div>
@@ -253,48 +260,93 @@
         <div class="conditions-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           
           <!-- ACL Injury -->
-          <div class="p-6 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:scale-[1.02] transition-transform">
-            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">ACL Tears</h3>
-            <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs mb-4">
-              Anterior cruciate ligament reconstructions via minimally invasive autograft and allograft techniques.
-            </p>
-            <span class="text-xs text-medical-cyan strict-subheading block">Rehab period: 6-9 months</span>
+          <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col overflow-hidden">
+            <div class="relative h-40 overflow-hidden">
+              <img src="assets/images/specialization-acl.png" alt="ACL Tears" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent"></div>
+              <div class="absolute top-3 right-3 w-8 h-8 rounded-full bg-medical-blueLight/90 dark:bg-medical-cyan/90 flex items-center justify-center text-white text-xs shadow-md">
+                <i class="fa-solid fa-person-running"></i>
+              </div>
+            </div>
+            <div class="p-5 flex flex-col flex-grow">
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">ACL Tears</h3>
+              <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs mb-4 flex-grow">
+                Anterior cruciate ligament reconstructions via minimally invasive autograft and allograft techniques.
+              </p>
+              <span class="text-xs text-medical-cyan strict-subheading block mt-auto">Rehab period: 6-9 months</span>
+            </div>
           </div>
 
           <!-- Rotator Cuff -->
-          <div class="p-6 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:scale-[1.02] transition-transform">
-            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">Rotator Cuff</h3>
-            <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs mb-4">
-              Advanced shoulder arthroscopic surgeries to stitch torn shoulder tendons and reconstruct shoulder stability.
-            </p>
-            <span class="text-xs text-medical-cyan strict-subheading block">Rehab period: 4-6 months</span>
+          <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col overflow-hidden">
+            <div class="relative h-40 overflow-hidden">
+              <img src="assets/images/specialization-shoulder.png" alt="Rotator Cuff" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent"></div>
+              <div class="absolute top-3 right-3 w-8 h-8 rounded-full bg-medical-blueLight/90 dark:bg-medical-cyan/90 flex items-center justify-center text-white text-xs shadow-md">
+                <i class="fa-solid fa-arrows-up-down-left-right"></i>
+              </div>
+            </div>
+            <div class="p-5 flex flex-col flex-grow">
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">Rotator Cuff</h3>
+              <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs mb-4 flex-grow">
+                Advanced shoulder arthroscopic surgeries to stitch torn shoulder tendons and reconstruct shoulder stability.
+              </p>
+              <span class="text-xs text-medical-cyan strict-subheading block mt-auto">Rehab period: 4-6 months</span>
+            </div>
           </div>
 
           <!-- Meniscus Tear -->
-          <div class="p-6 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:scale-[1.02] transition-transform">
-            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">Meniscus Tears</h3>
-            <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs mb-4">
-              Meniscus repair or partial menisectomy utilizing suture anchors for maximal cartilage preservation.
-            </p>
-            <span class="text-xs text-medical-cyan strict-subheading block">Rehab period: 2-3 months</span>
+          <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col overflow-hidden">
+            <div class="relative h-40 overflow-hidden">
+              <img src="assets/images/specialization-meniscus.png" alt="Meniscus Tears" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent"></div>
+              <div class="absolute top-3 right-3 w-8 h-8 rounded-full bg-medical-blueLight/90 dark:bg-medical-cyan/90 flex items-center justify-center text-white text-xs shadow-md">
+                <i class="fa-solid fa-circle-nodes"></i>
+              </div>
+            </div>
+            <div class="p-5 flex flex-col flex-grow">
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">Meniscus Tears</h3>
+              <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs mb-4 flex-grow">
+                Meniscus repair or partial menisectomy utilizing suture anchors for maximal cartilage preservation.
+              </p>
+              <span class="text-xs text-medical-cyan strict-subheading block mt-auto">Rehab period: 2-3 months</span>
+            </div>
           </div>
 
           <!-- Tennis Elbow -->
-          <div class="p-6 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:scale-[1.02] transition-transform">
-            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">Tennis Elbow</h3>
-            <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs mb-4">
-              Lateral epicondylitis relief using platelet-rich plasma (PRP) therapy and customized forearm biomechanical rehab.
-            </p>
-            <span class="text-xs text-medical-cyan strict-subheading block">Rehab period: 4-8 weeks</span>
+          <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col overflow-hidden">
+            <div class="relative h-40 overflow-hidden">
+              <img src="assets/images/specialization-elbow.png" alt="Tennis Elbow" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent"></div>
+              <div class="absolute top-3 right-3 w-8 h-8 rounded-full bg-medical-blueLight/90 dark:bg-medical-cyan/90 flex items-center justify-center text-white text-xs shadow-md">
+                <i class="fa-solid fa-dumbbell"></i>
+              </div>
+            </div>
+            <div class="p-5 flex flex-col flex-grow">
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">Tennis Elbow</h3>
+              <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs mb-4 flex-grow">
+                Lateral epicondylitis relief using platelet-rich plasma (PRP) therapy and customized forearm biomechanical rehab.
+              </p>
+              <span class="text-xs text-medical-cyan strict-subheading block mt-auto">Rehab period: 4-8 weeks</span>
+            </div>
           </div>
 
           <!-- Runner's Knee -->
-          <div class="p-6 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:scale-[1.02] transition-transform">
-            <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">Runner's Knee</h3>
-            <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs mb-4">
-              Patellofemoral pain treatment using gait analysis, tracking correction, and quadriceps alignment retraining.
-            </p>
-            <span class="text-xs text-medical-cyan strict-subheading block">Rehab period: 3-6 weeks</span>
+          <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col overflow-hidden">
+            <div class="relative h-40 overflow-hidden">
+              <img src="assets/images/specialization-runners-knee.png" alt="Runner's Knee" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent"></div>
+              <div class="absolute top-3 right-3 w-8 h-8 rounded-full bg-medical-blueLight/90 dark:bg-medical-cyan/90 flex items-center justify-center text-white text-xs shadow-md">
+                <i class="fa-solid fa-shoe-prints"></i>
+              </div>
+            </div>
+            <div class="p-5 flex flex-col flex-grow">
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-2">Runner's Knee</h3>
+              <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-xs mb-4 flex-grow">
+                Patellofemoral pain treatment using gait analysis, tracking correction, and quadriceps alignment retraining.
+              </p>
+              <span class="text-xs text-medical-cyan strict-subheading block mt-auto">Rehab period: 3-6 weeks</span>
+            </div>
           </div>
 
         </div>
@@ -514,65 +566,89 @@
           </p>
         </div>
 
-        <div class="relative border-l-2 border-medical-cyan/30 rtl:border-l-0 rtl:border-r-2 rtl:border-medical-cyan/30 max-w-3xl mx-auto pl-8 rtl:pl-0 rtl:pr-8 space-y-12">
-                 <!-- Step 1 -->
-          <div class="relative">
-            <div class="flex items-center space-x-3 rtl:space-x-reverse mb-2">
-              <div class="absolute -left-[2.75rem] rtl:-right-[2.75rem] rtl:left-auto w-5 h-5 rounded-full bg-medical-blueLight border-4 border-white dark:border-slate-900 z-10 flex-shrink-0"></div>
-              <span class="text-xs uppercase font-semibold text-medical-cyan tracking-wider strict-subheading">Phase 1</span>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          <!-- Left Column: Timeline Navigation Steps -->
+          <div class="lg:col-span-7 space-y-4">
+            <!-- Phase 1 -->
+            <div data-timeline-phase="1" class="timeline-phase-btn group p-6 rounded-2xl border bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 shadow-sm cursor-pointer transition-all duration-300">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs uppercase font-bold text-medical-cyan tracking-wider strict-subheading">Phase 1</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-medical-cyan animate-pulse phase-dot"></span>
+              </div>
+              <h3 class="strict-heading text-lg font-semibold text-slate-900 dark:text-white group-hover:text-medical-blueLight dark:group-hover:text-medical-cyan transition-colors">Comprehensive Evaluation</h3>
+              <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm mt-2">
+                We begin with diagnostic testing, dynamic range-of-motion assessments, and advanced imaging (MRI/X-Ray) to locate exact joint and tissue damages.
+              </p>
             </div>
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-2">Comprehensive Evaluation</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
-              We begin with diagnostic testing, dynamic range-of-motion assessments, and advanced imaging (MRI/X-Ray) to locate exact joint and tissue damages.
-            </p>
+
+            <!-- Phase 2 -->
+            <div data-timeline-phase="2" class="timeline-phase-btn group p-6 rounded-2xl border bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800/60 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 shadow-sm cursor-pointer transition-all duration-300">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs uppercase font-bold text-slate-400 dark:text-slate-500 tracking-wider strict-subheading">Phase 2</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 phase-dot"></span>
+              </div>
+              <h3 class="strict-heading text-lg font-semibold text-slate-750 dark:text-slate-300 group-hover:text-medical-blueLight dark:group-hover:text-medical-cyan transition-colors">Custom Surgical / Treatment Plan</h3>
+              <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-sm mt-2">
+                For surgical cases, we map out minimally invasive arthroscopy. Non-surgical options include targeted orthobiologics or custom braces.
+              </p>
+            </div>
+
+            <!-- Phase 3 -->
+            <div data-timeline-phase="3" class="timeline-phase-btn group p-6 rounded-2xl border bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800/60 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 shadow-sm cursor-pointer transition-all duration-300">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs uppercase font-bold text-slate-400 dark:text-slate-500 tracking-wider strict-subheading">Phase 3</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 phase-dot"></span>
+              </div>
+              <h3 class="strict-heading text-lg font-semibold text-slate-750 dark:text-slate-300 group-hover:text-medical-blueLight dark:group-hover:text-medical-cyan transition-colors">Active Physiotherapy</h3>
+              <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-sm mt-2">
+                Once healed post-op, you enter physical therapy. Focus lies on range-of-motion restoring, muscle activation, and pain management.
+              </p>
+            </div>
+
+            <!-- Phase 4 -->
+            <div data-timeline-phase="4" class="timeline-phase-btn group p-6 rounded-2xl border bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800/60 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 shadow-sm cursor-pointer transition-all duration-300">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs uppercase font-bold text-slate-400 dark:text-slate-500 tracking-wider strict-subheading">Phase 4</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 phase-dot"></span>
+              </div>
+              <h3 class="strict-heading text-lg font-semibold text-slate-750 dark:text-slate-300 group-hover:text-medical-blueLight dark:group-hover:text-medical-cyan transition-colors">Strength & Agility Retraining</h3>
+              <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-sm mt-2">
+                Gradual progression into sport-specific drills, power training, biomechanical alignment adjustments, and active core stabilizing.
+              </p>
+            </div>
+
+            <!-- Phase 5 -->
+            <div data-timeline-phase="5" class="timeline-phase-btn group p-6 rounded-2xl border bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800/60 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 shadow-sm cursor-pointer transition-all duration-300">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs uppercase font-bold text-slate-400 dark:text-slate-500 tracking-wider strict-subheading">Phase 5</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 phase-dot"></span>
+              </div>
+              <h3 class="strict-heading text-lg font-semibold text-slate-750 dark:text-slate-300 group-hover:text-medical-blueLight dark:group-hover:text-medical-cyan transition-colors">Return to Competition</h3>
+              <p class="strict-paragraph text-slate-500 dark:text-slate-400 text-sm mt-2">
+                Final functional biomechanics clearance test. We certify you fit for dynamic competition and supply customized injury prevention guidelines.
+              </p>
+            </div>
           </div>
 
-          <!-- Step 2 -->
-          <div class="relative">
-            <div class="flex items-center space-x-3 rtl:space-x-reverse mb-2">
-              <div class="absolute -left-[2.75rem] rtl:-right-[2.75rem] rtl:left-auto w-5 h-5 rounded-full bg-medical-blueLight border-4 border-white dark:border-slate-900 z-10 flex-shrink-0"></div>
-              <span class="text-xs uppercase font-semibold text-medical-cyan tracking-wider strict-subheading">Phase 2</span>
+          <!-- Right Column: Timeline Image Showcase (Sticky on desktop) -->
+          <div class="lg:col-span-5 lg:sticky lg:top-28">
+            <div class="rounded-3xl border border-slate-200/60 dark:border-slate-800 bg-white dark:bg-slate-950 p-4 shadow-xl">
+              <div class="relative h-96 sm:h-[480px] lg:h-[400px] xl:h-[480px] rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-900">
+                <!-- Image elements mapped to phases -->
+                <img id="timeline-img-1" src="assets/images/service-ai-diagnostics.png" alt="Phase 1 Evaluation" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100">
+                <img id="timeline-img-2" src="assets/images/service-micro-surgery.png" alt="Phase 2 Plan & Surgery" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0">
+                <img id="timeline-img-3" src="assets/images/service-sport-rehab.png" alt="Phase 3 Active Physiotherapy" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0">
+                <img id="timeline-img-4" src="assets/images/program-post-operative-strength.png" alt="Phase 4 Agility Retraining" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0">
+                <img id="timeline-img-5" src="assets/images/program-athletic-physio.png" alt="Phase 5 Return to Sport" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0">
+                
+                <!-- Bottom text badge -->
+                <div class="absolute bottom-4 left-4 right-4 bg-slate-900/80 backdrop-blur-md px-4 py-3 rounded-xl border border-slate-700/50 text-white text-xs">
+                  <p class="font-semibold strict-heading tracking-wide uppercase text-medical-cyan" id="timeline-badge-title">Phase 1: Evaluation</p>
+                  <p class="text-[11px] text-slate-300 mt-0.5" id="timeline-badge-desc">High-resolution 3D diagnostic scans and functional tests.</p>
+                </div>
+              </div>
             </div>
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-2">Custom Surgical / Treatment Plan</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
-              For surgical cases, we map out minimally invasive arthroscopy. Non-surgical options include targeted orthobiologics or custom braces.
-            </p>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="relative">
-            <div class="flex items-center space-x-3 rtl:space-x-reverse mb-2">
-              <div class="absolute -left-[2.75rem] rtl:-right-[2.75rem] rtl:left-auto w-5 h-5 rounded-full bg-medical-blueLight border-4 border-white dark:border-slate-900 z-10 flex-shrink-0"></div>
-              <span class="text-xs uppercase font-semibold text-medical-cyan tracking-wider strict-subheading">Phase 3</span>
-            </div>
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-2">Active Physiotherapy</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
-              Once healed post-op, you enter physical therapy. Focus lies on range-of-motion restoring, muscle activation, and pain management.
-            </p>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="relative">
-            <div class="flex items-center space-x-3 rtl:space-x-reverse mb-2">
-              <div class="absolute -left-[2.75rem] rtl:-right-[2.75rem] rtl:left-auto w-5 h-5 rounded-full bg-medical-blueLight border-4 border-white dark:border-slate-900 z-10 flex-shrink-0"></div>
-              <span class="text-xs uppercase font-semibold text-medical-cyan tracking-wider strict-subheading">Phase 4</span>
-            </div>
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-2">Strength & Agility Retraining</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
-              Gradual progression into sport-specific drills, power training, biomechanical alignment adjustments, and active core stabilizing.
-            </p>
-          </div>
-
-          <!-- Step 5 -->
-          <div class="relative">
-            <div class="flex items-center space-x-3 rtl:space-x-reverse mb-2">
-              <div class="absolute -left-[2.75rem] rtl:-right-[2.75rem] rtl:left-auto w-5 h-5 rounded-full bg-emerald-500 border-4 border-white dark:border-slate-900 z-10 flex-shrink-0"></div>
-              <span class="text-xs uppercase font-semibold text-emerald-500 tracking-wider strict-subheading">Phase 5</span>
-            </div>
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-2">Return to Competition</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm">
-              Final functional biomechanics clearance test. We certify you fit for dynamic competition and supply customized injury prevention guidelines.
-            </p>
           </div>
 
         </div>
@@ -743,5 +819,101 @@
 
   <!-- Global Shared JS -->
   <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const phaseBtns = document.querySelectorAll('.timeline-phase-btn');
+      const badgeTitle = document.getElementById('timeline-badge-title');
+      const badgeDesc = document.getElementById('timeline-badge-desc');
+
+      const phaseDetails = {
+        1: {
+          title: "Phase 1: Evaluation",
+          desc: "High-resolution 3D diagnostic scans and functional tests."
+        },
+        2: {
+          title: "Phase 2: Treatment & Surgery",
+          desc: "Minimally invasive keyhole arthroscopy and custom orthopedic plans."
+        },
+        3: {
+          title: "Phase 3: Active Physiotherapy",
+          desc: "Muscle activation, range-of-motion correction, and pain relief."
+        },
+        4: {
+          title: "Phase 4: Agility Retraining",
+          desc: "Sport-specific dynamic exercises and biomechanical calibration."
+        },
+        5: {
+          title: "Phase 5: Return to Competition",
+          desc: "Clearance testing, performance release, and injury prevention."
+        }
+      };
+
+      const setActivePhase = (phaseNumber) => {
+        phaseBtns.forEach(btn => {
+          const phase = btn.getAttribute('data-timeline-phase');
+          const heading = btn.querySelector('h3');
+          const paragraph = btn.querySelector('p');
+          const label = btn.querySelector('.strict-subheading');
+          const dot = btn.querySelector('.phase-dot');
+
+          if (phase === phaseNumber.toString()) {
+            btn.classList.add('border-medical-blueLight', 'dark:border-medical-cyan', 'shadow-md', 'bg-medical-blueLight/5', 'dark:bg-medical-cyan/5');
+            btn.classList.remove('border-slate-100', 'border-slate-250', 'border-slate-200', 'dark:border-slate-800/60');
+            heading.classList.add('text-medical-blueLight', 'dark:text-medical-cyan');
+            heading.classList.remove('text-slate-700', 'text-slate-750', 'text-slate-900', 'dark:text-slate-300');
+            paragraph.classList.add('text-slate-700', 'dark:text-slate-300');
+            paragraph.classList.remove('text-slate-500', 'text-slate-600');
+            label.classList.add('text-medical-cyan');
+            label.classList.remove('text-slate-400', 'dark:text-slate-500');
+            dot.classList.add('bg-medical-cyan', 'animate-pulse');
+            dot.classList.remove('bg-slate-200', 'dark:bg-slate-800');
+          } else {
+            btn.classList.remove('border-medical-blueLight', 'dark:border-medical-cyan', 'shadow-md', 'bg-medical-blueLight/5', 'dark:bg-medical-cyan/5');
+            btn.classList.add('border-slate-100', 'dark:border-slate-800/60');
+            heading.classList.remove('text-medical-blueLight', 'dark:text-medical-cyan');
+            heading.classList.add('text-slate-705', 'text-slate-750', 'text-slate-900', 'dark:text-slate-300');
+            paragraph.classList.remove('text-slate-700', 'dark:text-slate-300');
+            paragraph.classList.add('text-slate-500', 'dark:text-slate-400');
+            label.classList.remove('text-medical-cyan');
+            label.classList.add('text-slate-400', 'dark:text-slate-500');
+            dot.classList.remove('bg-medical-cyan', 'animate-pulse');
+            dot.classList.add('bg-slate-200', 'dark:bg-slate-800');
+          }
+        });
+
+        // Toggle image opacities
+        for (let i = 1; i <= 5; i++) {
+          const img = document.getElementById(`timeline-img-${i}`);
+          if (img) {
+            if (i === phaseNumber) {
+              img.classList.remove('opacity-0');
+              img.classList.add('opacity-100');
+            } else {
+              img.classList.remove('opacity-100');
+              img.classList.add('opacity-0');
+            }
+          }
+        }
+
+        // Update badge content
+        if (badgeTitle && badgeDesc && phaseDetails[phaseNumber]) {
+          badgeTitle.textContent = phaseDetails[phaseNumber].title;
+          badgeDesc.textContent = phaseDetails[phaseNumber].desc;
+        }
+      };
+
+      phaseBtns.forEach(btn => {
+        const hoverOrClick = () => {
+          const phase = parseInt(btn.getAttribute('data-timeline-phase'));
+          setActivePhase(phase);
+        };
+        btn.addEventListener('mouseenter', hoverOrClick);
+        btn.addEventListener('click', hoverOrClick);
+      });
+
+      // Initialize
+      setActivePhase(1);
+    });
+  </script>
 </body>
 </html>

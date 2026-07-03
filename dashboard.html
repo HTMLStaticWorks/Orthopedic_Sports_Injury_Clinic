@@ -56,6 +56,13 @@
     .animate-growVertical {
       animation: growVertical 0.5s ease-out forwards;
     }
+
+    /* Date and Time input picker icons styling in dark mode */
+    .dark input[type="date"]::-webkit-calendar-picker-indicator,
+    .dark input[type="time"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      cursor: pointer;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-medical-darkBg dark:text-slate-100 min-h-screen transition-colors duration-300 overflow-hidden font-sans">

@@ -45,6 +45,7 @@
 
         <!-- Right Side Controls (Theme, RTL, Portal Button) -->
         <div class="hidden lg:flex items-center space-x-3 xl:space-x-4 rtl:space-x-reverse flex-shrink-0">
+
           <button class="rtl-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg text-xs font-semibold uppercase tracking-wider border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
             RTL
           </button>
@@ -52,6 +53,11 @@
           <button class="theme-toggle-btn w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" aria-label="Toggle Theme">
             <i class="fa-solid fa-moon"></i>
           </button>
+
+          <!-- Book Appointment CTA -->
+          <a href="contact.html#appointment-form" class="px-3 xl:px-5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-850 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading whitespace-nowrap">
+            Book Appointment
+          </a>
 
           <!-- Sign Up CTA -->
           <a href="signup.html" class="px-3 xl:px-5 py-2.5 rounded-lg bg-medical-blueLight text-white hover:bg-medical-blue transition-all duration-300 transform hover:-translate-y-0.5 shadow-sm text-sm strict-subheading whitespace-nowrap">
@@ -79,6 +85,7 @@
       <a href="contact.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Contact</a>
       <a href="dashboard.html" class="nav-link block px-3 py-2 rounded-md text-base text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading">Dashboard</a>
       <a href="signup.html" class="block w-full text-center px-4 py-2.5 rounded-lg bg-medical-blueLight text-white strict-subheading mt-4">Sign Up</a>
+      <a href="contact.html#appointment-form" class="block w-full text-center px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 strict-subheading mt-2">Book Appointment</a>
 
       <!-- Mobile Preferences Controls Row -->
       <div class="flex items-center justify-between px-3 pt-4 border-t border-slate-100 dark:border-slate-800/80 mt-4">
@@ -98,13 +105,15 @@
   <main class="flex-grow">
 
     <!-- ================= 1. HERO SECTION ================= -->
-    <section class="relative bg-slate-900 py-20 lg:py-32 flex items-center">
-      <div class="absolute inset-0 bg-gradient-to-r from-medical-navy via-slate-900/90 to-transparent z-10"></div>
-      
+    <section class="relative bg-medical-navy py-20 lg:py-32 flex items-center overflow-hidden">
       <!-- Generated Image as Background -->
-      <div class="absolute inset-0 w-full h-full">
+      <div class="absolute inset-0 w-full h-full z-0 opacity-40">
         <img src="assets/images/hero-home-2.png" alt="Sports Injury Rehabilitation Gym" class="w-full h-full object-cover object-center transform scale-105 hover:scale-100 transition-transform duration-[6000ms]">
       </div>
+
+      <!-- Blue Shade Overlays -->
+      <div class="absolute inset-0 bg-gradient-to-r from-medical-navy via-medical-navy/90 to-medical-navy/40 z-10"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent z-10"></div>
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
         <div class="max-w-2xl text-left rtl:text-right">
@@ -148,13 +157,17 @@
           <!-- Program 1 -->
           <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
             <!-- Image Banner -->
-            <div class="relative h-52 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
               <img src="assets/images/program-athletic-physio.png" alt="Athletic Physio" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-medical-blueLight/90 dark:bg-medical-cyan/90 text-white text-[9px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full shadow-sm">Athletics</span>
             </div>
             <!-- Content -->
             <div class="p-6 flex flex-col flex-grow text-center items-center">
-              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Athletic Physio</h3>
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3 flex items-center justify-center">
+                <i class="fa-solid fa-person-running text-medical-blueLight dark:text-medical-cyan mr-2 rtl:ml-2 rtl:mr-0"></i>
+                <span>Athletic Physio</span>
+              </h3>
               <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
                 Sports-specific biomechanics retraining, targeting fast recovery of competitive sprint speed, agility, and joint torque.
               </p>
@@ -164,13 +177,17 @@
           <!-- Program 2 -->
           <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
             <!-- Image Banner -->
-            <div class="relative h-52 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
               <img src="assets/images/program-musculoskeletal-rehab.png" alt="Musculoskeletal Rehab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-indigo-500/95 text-white text-[9px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full shadow-sm">Therapy</span>
             </div>
             <!-- Content -->
             <div class="p-6 flex flex-col flex-grow text-center items-center">
-              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Musculoskeletal Rehab</h3>
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3 flex items-center justify-center">
+                <i class="fa-solid fa-bone text-medical-blueLight dark:text-medical-cyan mr-2 rtl:ml-2 rtl:mr-0"></i>
+                <span>Musculoskeletal Rehab</span>
+              </h3>
               <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
                 Manual therapy, joint mobilization, myofascial trigger release, and specialized stretching to reduce chronic back, hip, and neck pain.
               </p>
@@ -180,13 +197,17 @@
           <!-- Program 3 -->
           <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
             <!-- Image Banner -->
-            <div class="relative h-52 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
               <img src="assets/images/program-post-operative-strength.png" alt="Post-Operative Strength" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-rose-600/95 text-white text-[9px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full shadow-sm">Post-Op</span>
             </div>
             <!-- Content -->
             <div class="p-6 flex flex-col flex-grow text-center items-center">
-              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Post-Operative Strength</h3>
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3 flex items-center justify-center">
+                <i class="fa-solid fa-dumbbell text-medical-blueLight dark:text-medical-cyan mr-2 rtl:ml-2 rtl:mr-0"></i>
+                <span>Post-Operative Strength</span>
+              </h3>
               <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
                 Carefully guided range-of-motion increments, isometric contraction drills, and progressive overload schemes after bone/ligament surgeries.
               </p>
@@ -196,13 +217,17 @@
           <!-- Program 4 -->
           <div class="rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-medical-blueLight/50 dark:hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 group flex flex-col overflow-hidden">
             <!-- Image Banner -->
-            <div class="relative h-52 overflow-hidden">
+            <div class="relative h-60 overflow-hidden">
               <img src="assets/images/program-cardiorespiratory-fitness.png" alt="Cardiorespiratory Fitness" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-emerald-600/95 text-white text-[9px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full shadow-sm">Fitness</span>
             </div>
             <!-- Content -->
             <div class="p-6 flex flex-col flex-grow text-center items-center">
-              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3">Cardiorespiratory Fitness</h3>
+              <h3 class="strict-heading text-lg text-medical-navy dark:text-white mb-3 flex items-center justify-center">
+                <i class="fa-solid fa-heart-pulse text-medical-blueLight dark:text-medical-cyan mr-2 rtl:ml-2 rtl:mr-0"></i>
+                <span>Cardiorespiratory Fitness</span>
+              </h3>
               <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
                 Low-impact conditioning protocols, swimming programs, and stationary biking to support cardiac output during long limb recovery.
               </p>
@@ -214,14 +239,14 @@
     </section>
 
     <!-- ================= 3. INJURY-SPECIFIC TREATMENT PROGRAMS ================= -->
-    <section class="py-20 bg-slate-50 dark:bg-slate-900/40">
+    <section class="py-20 bg-slate-900 text-white dark:bg-slate-950 border-y border-slate-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="strict-heading text-3xl text-medical-navy dark:text-white mb-4">
+          <h2 class="strict-heading text-3xl text-white mb-4">
             Injury-Specific Special Treatments
           </h2>
-          <p class="strict-paragraph text-slate-600 dark:text-slate-400">
+          <p class="strict-paragraph text-slate-400">
             Beyond conventional exercise, we offer specialized modalities to speed up cell recovery and reduce joint friction.
           </p>
         </div>
@@ -229,33 +254,42 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           <!-- Treatment 1 -->
-          <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col">
+          <div class="p-8 rounded-2xl bg-slate-800/80 border border-slate-700/50 hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 flex flex-col group">
+            <div class="w-14 h-14 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <i class="fa-solid fa-syringe text-2xl"></i>
+            </div>
             <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Tissue Recovery</span>
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">PRP Orthobiologic Therapy</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+            <h3 class="strict-heading text-xl text-white mb-3">PRP Orthobiologic Therapy</h3>
+            <p class="strict-paragraph text-slate-300 text-sm leading-relaxed mb-4 flex-grow">
               Injecting concentrated platelet-rich plasma extracted from your own blood directly into damaged cartilage, tendons, or ligaments to accelerate deep cellular recovery.
             </p>
-            <span class="text-xs text-slate-500 dark:text-slate-400">Suitable for: Chronic tendonitis, early osteoarthritis</span>
+            <span class="text-xs text-slate-400">Suitable for: Chronic tendonitis, early osteoarthritis</span>
           </div>
 
           <!-- Treatment 2 -->
-          <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col">
+          <div class="p-8 rounded-2xl bg-slate-800/80 border border-slate-700/50 hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 flex flex-col group">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <i class="fa-solid fa-bolt text-2xl animate-pulse"></i>
+            </div>
             <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Pain Relief</span>
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Targeted Electrotherapy</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+            <h3 class="strict-heading text-xl text-white mb-3">Targeted Electrotherapy</h3>
+            <p class="strict-paragraph text-slate-300 text-sm leading-relaxed mb-4 flex-grow">
               Using TENS and NMES electrical muscle stimulation devices to interrupt localized pain channels, stimulate nerve fibers, and prevent muscle atrophy.
             </p>
-            <span class="text-xs text-slate-500 dark:text-slate-400">Suitable for: Post-surgical quadriceps reactivation</span>
+            <span class="text-xs text-slate-400">Suitable for: Post-surgical quadriceps reactivation</span>
           </div>
 
           <!-- Treatment 3 -->
-          <div class="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col">
+          <div class="p-8 rounded-2xl bg-slate-800/80 border border-slate-700/50 hover:border-medical-cyan/50 hover:shadow-xl transition-all duration-300 flex flex-col group">
+            <div class="w-14 h-14 rounded-2xl bg-medical-cyan/15 text-medical-cyan flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <i class="fa-solid fa-shoe-prints text-2xl"></i>
+            </div>
             <span class="text-xs font-semibold text-medical-cyan uppercase tracking-wider strict-subheading block mb-2">Biomechanical Support</span>
-            <h3 class="strict-heading text-xl text-medical-navy dark:text-white mb-3">Custom Orthotic Design</h3>
-            <p class="strict-paragraph text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-grow">
+            <h3 class="strict-heading text-xl text-white mb-3">Custom Orthotic Design</h3>
+            <p class="strict-paragraph text-slate-300 text-sm leading-relaxed mb-4 flex-grow">
               Generating custom foot insoles based on dynamic 3D scanning and pressure metrics to support arch structures and minimize knee impact rotation during runs.
             </p>
-            <span class="text-xs text-slate-500 dark:text-slate-400">Suitable for: Plantar fasciitis, runner's knee, shin splints</span>
+            <span class="text-xs text-slate-400">Suitable for: Plantar fasciitis, runner's knee, shin splints</span>
           </div>
 
         </div>
